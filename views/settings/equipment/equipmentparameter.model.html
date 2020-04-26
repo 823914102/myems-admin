@@ -57,7 +57,7 @@
                 <div class="col-sm-8">
                     <ui-select ng-model="equipmentparameter.numerator_meter.uuid" name="equipmentparameter.numerator_meter_uuid" theme="bootstrap" required>
                         <ui-select-match allow-clear="false" placeholder="{{'COMMON.PLACEHOLDER' | translate}}">{{$select.selected.name}}</ui-select-match>
-                        <ui-select-choices repeat="meter.uuid as meter in meters | filter: $select.search">
+                        <ui-select-choices repeat="meter.uuid as meter in mergedmeters | filter: $select.search">
                             <div ng-bind-html="meter.name | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>
@@ -69,7 +69,7 @@
                 <div class="col-sm-8">
                     <ui-select ng-model="equipmentparameter.denominator_meter.uuid" name="equipmentparameter.denominator_meter_uuid" theme="bootstrap" required>
                         <ui-select-match allow-clear="false" placeholder="{{'COMMON.PLACEHOLDER' | translate}}">{{$select.selected.name}}</ui-select-match>
-                        <ui-select-choices repeat="meter.uuid as meter in meters  | filter: $select.search">
+                        <ui-select-choices repeat="meter.uuid as meter in mergedmeters  | filter: $select.search">
                             <div ng-bind-html="meter.name | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>
