@@ -61,6 +61,15 @@ $scope.getAllTenantTypes = function() {
 	    tenant.tenant_type_id=tenant.tenant_type.id;
 			tenant.cost_center_id=tenant.cost_center.id;
 			tenant.contact_id=tenant.contact.id;
+			if (angular.isDefined(tenant.is_input_counted) == false) {
+				tenant.is_input_counted = false;
+			}
+			if (angular.isDefined(tenant.is_key_tenant) == false) {
+				tenant.is_key_tenant = false;
+			}
+			if (angular.isDefined(tenant.is_in_lease) == false) {
+				tenant.is_in_lease = false;
+			}
 			TenantService.addTenant(tenant, function(error, status) {
 				if (angular.isDefined(status) && status == 201) {
 
@@ -128,6 +137,15 @@ $scope.getAllTenantTypes = function() {
 	    modifiedTenant.tenant_type_id=modifiedTenant.tenant_type.id;
 			modifiedTenant.cost_center_id=modifiedTenant.cost_center.id;
 			modifiedTenant.contact_id=modifiedTenant.contact.id;
+			if (angular.isDefined(tenant.is_input_counted) == false) {
+				tenant.is_input_counted = false;
+			}
+			if (angular.isDefined(tenant.is_key_tenant) == false) {
+				tenant.is_key_tenant = false;
+			}
+			if (angular.isDefined(tenant.is_in_lease) == false) {
+				tenant.is_in_lease = false;
+			}
 			TenantService.editTenant(modifiedTenant, function(error, status) {
 				if (angular.isDefined(status) && status == 200) {
 					var templateName = "COMMON.TENANT";
