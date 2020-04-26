@@ -3,6 +3,11 @@
 app.controller('EquipmentParameterController', function($scope,$common ,$timeout,$uibModal, $translate,	MeterService, VirtualMeterService, OfflineMeterService,	EquipmentParameterService, EquipmentService, PointService, toaster,SweetAlert) {
     $scope.currentEquipment = {selected:undefined};
     $scope.is_show_add_parameter = false;
+    $scope.equipments = [];
+    $scope.meters = [];
+    $scope.offlinemeters = [];
+    $scope.virtualmeters = [];
+    $scope.mergedMeters = [];
 
 	  $scope.getAllEquipments = function() {
 		EquipmentService.getAllEquipments(function(error, data) {
@@ -40,9 +45,7 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 				params: function() {
 					return {
             points: angular.copy($scope.points),
-            meters: angular.copy($scope.meters),
-            offlinemeters: angular.copy($scope.offlinemeters),
-            virtualmeters: angular.copy($scope.virtualmeters),
+            mergedmeters: angular.copy($scope.mergedmeters),
 					};
 				}
 			}
@@ -114,9 +117,7 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 					return {
 						equipmentparameter: angular.copy(equipmentparameter),
             points: angular.copy($scope.points),
-            meters: angular.copy($scope.meters),
-            offlinemeters: angular.copy($scope.offlinemeters),
-            virtualmeters: angular.copy($scope.virtualmeters),
+            mergedmeters: angular.copy($scope.mergedmeters),
 					};
 				}
 			}
@@ -260,19 +261,19 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 		}
 	};
 
-	$scope.changeMeterType=function(){
-		switch($scope.currentMeterType){
-			case 'meters':
-				$scope.currentmeters=$scope.meters;
-				break;
-			case 'virtualmeters':
-				$scope.currentmeters=$scope.virtualmeters;
-				break;
-			case  'offlinemeters':
-				$scope.currentmeters=$scope.offlinemeters;
-				break;
-		}
-	};
+	// $scope.changeMeterType=function(){
+	// 	switch($scope.currentMeterType){
+	// 		case 'meters':
+	// 			$scope.currentmeters=$scope.meters;
+	// 			break;
+	// 		case 'virtualmeters':
+	// 			$scope.currentmeters=$scope.virtualmeters;
+	// 			break;
+	// 		case  'offlinemeters':
+	// 			$scope.currentmeters=$scope.offlinemeters;
+	// 			break;
+	// 	}
+	// };
 
 	$scope.showEquipmentParameterType = function(type) {
     if (type == 'constant') {
@@ -305,10 +306,10 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 		MeterService.getAllMeters(function(error, data) {
 			if (!error) {
 				$scope.meters = data;
-				$scope.currentMeterType="meters";
-				$timeout(function(){
-					$scope.changeMeterType();
-				},1000);
+				// $scope.currentMeterType="meters";
+				// $timeout(function(){
+				// 	$scope.changeMeterType();
+				// },1000);
 			} else {
 				$scope.meters = [];
 			}
@@ -338,6 +339,54 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 
 	};
 
+  $scope.getMergedMeters = function() {
+    $scope.mergedmeters = [];
+    $scope.meters = [];
+    $scope.offlinemeters = [];
+    $scope.virtualmeters = [];
+    MeterService.getAllMeters(function(error, data) {
+			if (!error) {
+				$scope.meters = data;
+        for(var i = 0; i < $scope.meters.length; i++) {
+            var mergedmeter = {"uuid":  $scope.meters[i].uuid, "name": "meter/"+$scope.meters[i].name};
+            $scope.mergedmeters.push(mergedmeter);
+       }
+				// $scope.currentMeterType="meters";
+				// $timeout(function(){
+				// 	$scope.changeMeterType();
+				// },1000);
+			} else {
+				$scope.meters = [];
+			}
+		});
+
+    OfflineMeterService.getAllOfflineMeters(function(error, data) {
+			if (!error) {
+				$scope.offlinemeters = data;
+        for(var i = 0; i < $scope.offlinemeters.length; i++) {
+            var mergedmeter = {"uuid":  $scope.offlinemeters[i].uuid, "name": "offlinemeter/"+$scope.offlinemeters[i].name};
+            $scope.mergedmeters.push(mergedmeter);
+       }
+			} else {
+				$scope.offlinemeters = [];
+			}
+		});
+
+    VirtualMeterService.getAllVirtualMeters(function(error, data) {
+			if (!error) {
+				$scope.virtualmeters = data;
+        for(var i = 0; i < $scope.virtualmeters.length; i++) {
+            var mergedmeter = {"uuid":  $scope.virtualmeters[i].uuid, "name": "virtualmeter/"+$scope.virtualmeters[i].name};
+            $scope.mergedmeters.push(mergedmeter);
+       }
+			} else {
+				$scope.virtualmeters = [];
+			}
+		});
+
+    console.log($scope.mergedmeters);
+	};
+
   $scope.getAllPoints = function() {
   	PointService.getAllPoints(function(error, data) {
   		if (!error) {
@@ -355,9 +404,10 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
   };
 
 	$scope.getAllEquipments();
-	$scope.getAllMeters();
-	$scope.getAllVirtualMeters();
-	$scope.getAllOfflineMeters();
+	// $scope.getAllMeters();
+	// $scope.getAllVirtualMeters();
+	// $scope.getAllOfflineMeters();
+  $scope.getMergedMeters();
   $scope.getAllPoints();
 });
 
@@ -370,9 +420,7 @@ app.controller('ModalAddEquipmentParameterCtrl', function($scope, $uibModalInsta
   };
 	$scope.is_disabled = false;
   $scope.points = params.points;
-  $scope.meters = params.meters;
-  $scope.offlinemeters = params.offlinemeters;
-  $scope.virtualmeters = params.virtualmeters;
+  $scope.mergedmeters = params.mergedmeters;
 	$scope.ok = function() {
 
 		$uibModalInstance.close($scope.equipmentparameter);
@@ -387,9 +435,7 @@ app.controller('ModalEditEquipmentParameterCtrl', function($scope, $uibModalInst
 	$scope.operation = "EQUIPMENT.EDIT_PARAMETER";
 	$scope.equipmentparameter = params.equipmentparameter;
   $scope.points = params.points;
-  $scope.meters = params.meters;
-  $scope.offlinemeters = params.offlinemeters;
-  $scope.virtualmeters = params.virtualmeters;
+  $scope.mergedmeters = params.mergedmeters;
   $scope.is_disabled = true;
 	$scope.ok = function() {
 		$uibModalInstance.close($scope.equipmentparameter);
