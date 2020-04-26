@@ -134,7 +134,7 @@ $scope.getAllEnergyItems = function() {
 		modalInstance.result.then(function(modifiedMeter) {
 			modifiedMeter.energy_category_id = modifiedMeter.energy_category.id;
 			modifiedMeter.cost_center_id = modifiedMeter.cost_center.id;
-			if(angular.isDefined(meter.energy_item)) {
+			if (modifiedMeter.energy_item != null && modifiedMeter.energy_item.id != null ) {
 				modifiedMeter.energy_item_id = modifiedMeter.energy_item.id;
 			} else {
 				modifiedMeter.energy_item_id = undefined;

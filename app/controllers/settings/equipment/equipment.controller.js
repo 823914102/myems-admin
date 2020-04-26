@@ -98,7 +98,7 @@ app.controller('EquipmentController', function($scope,$common, $translate, $uibM
 						body: popBody,
 						showCloseButton: true,
 					});
-					$scope.getSpacesBySpaceID($scope.currentSpace);
+					$scope.getAllEquipments();
 				} else {
 					var templateName = "COMMON.EQUIPMENT";
 					templateName = $translate.instant(templateName);
