@@ -168,7 +168,7 @@ function config($translateProvider) {
                     EMAIL_SERVER: 'Email Server Settings',
                     GSM_MODEM: 'GSM Modem Settings',
                     CONTACT: 'Contacts',
-                    HELPFILE: 'Help Files Settings'
+                    HELPFILE: 'Knowledge Settings'
                 },
                 USERSETTING: {
                     USERSETTING: 'Users & Privileges',
@@ -196,7 +196,7 @@ function config($translateProvider) {
                 TITLE: 'Energy Management System',
             },
             SETTING: {
-                HELPFILE:'Help File',
+                HELPFILE:'Knowledge File',
                 ID: 'ID',
                 ACTION: 'Action',
                 ADD: 'Add',
@@ -650,7 +650,7 @@ function config($translateProvider) {
                 BAUD_RATE: 'Baud Rate',
                 FROM_ADDR: 'From Address',
                 HOST: 'Host',
-                HELP_FILE_LIST: 'Help File List',
+                HELP_FILE_LIST: 'Knowledge File List',
                 UPLOAD_NAME: 'User',
                 USER_NAME: 'User Name',
 
@@ -1019,7 +1019,7 @@ function config($translateProvider) {
                 SPACE_AND_VIRTUAL_METER_RELATIONSHIP_NOT_FOUND: 'Space and Virtual Meter Relationship Not Found',
                 GSM_CONFIG_NOT_FOUND: 'GSM Config Not Found',
                 GROUP_NOT_FOUND: 'Group Not Found',
-                HELP_FILE_NOT_FOUND: 'Help File Not Found',
+                HELP_FILE_NOT_FOUND: 'Knowledge File Not Found',
                 INVALID_: 'Invalid ',
                 INVALID_TENANT_ID: 'Invalid Tenant ID',
                 INVALID_ADVANCE_REPORT_FILE_ID: 'Invalid Advance Report File ID',
@@ -1039,7 +1039,7 @@ function config($translateProvider) {
                 INVALID_SPACE_ID: 'Invalid Space ID',
                 INVALID_GSM_CONFIG_ID: 'Invalid GSM Config ID',
                 INVALID_GROUP_ID: 'Invalid Group ID',
-                INVALID_HELP_FILE_ID: 'Invalid Help File ID',
+                INVALID_HELP_FILE_ID: 'Invalid Knowledge File ID',
                 INVALID_ID: 'Invalid ID',
                 INVALID_LINE_ID: 'Invalid Line ID',
                 INVALID_MESSAGE_ID: 'Invalid Message ID',
@@ -1347,7 +1347,7 @@ function config($translateProvider) {
                     EMAIL_SERVER: '邮件服务器设置',
                     GSM_MODEM: '短信模块设置',
                     CONTACT: '联系人管理',
-                    HELPFILE: '帮助文件管理'
+                    HELPFILE: '知识库管理'
                 },
                 USERSETTING: {
                     USERSETTING: '用户权限管理',
@@ -1375,7 +1375,7 @@ function config($translateProvider) {
                 TITLE: '能 源 管 理 系 统',
             },
             SETTING: {
-                HELPFILE:'帮助文件',
+                HELPFILE:'知识库文件',
                 ID: 'ID',
                 ACTION: '操作',
                 ADD: '添加',
@@ -1854,7 +1854,7 @@ function config($translateProvider) {
                 BAUD_RATE: '波特率',
                 FROM_ADDR: '发件人地址',
                 HOST: '服务器',
-                HELP_FILE_LIST: '帮助文件列表',
+                HELP_FILE_LIST: '知识库文件列表',
                 UPLOAD_NAME: '上传人',
                 USER_NAME: '用户名',
 
@@ -2226,7 +2226,7 @@ function config($translateProvider) {
                 SPACE_AND_VIRTUAL_METER_RELATIONSHIP_NOT_FOUND: '未找到空间和虚拟表关系',
                 GSM_CONFIG_NOT_FOUND: '未找到GSM配置',
                 GROUP_NOT_FOUND: '未找到用户组',
-                HELP_FILE_NOT_FOUND: '未找到帮助文件',
+                HELP_FILE_NOT_FOUND: '未找到知识库文件',
                 INVALID_: '无效',
                 INVALID_TENANT_ID: '无效的租户ID',
                 INVALID_ADVANCE_REPORT_FILE_ID: '无效的高级报表文件ID',
@@ -2245,7 +2245,7 @@ function config($translateProvider) {
                 INVALID_SPACE_ID: '无效的空间ID',
                 INVALID_GSM_CONFIG_ID: '无效的GSM配置ID',
                 INVALID_GROUP_ID: '无效的用户组ID',
-                INVALID_HELP_FILE_ID: '无效的帮助文件ID',
+                INVALID_HELP_FILE_ID: '无效的知识库文件ID',
                 INVALID_ID: '无效的ID',
                 INVALID_MESSAGE_ID: '无效的消息ID',
                 INVALID_METER_ID: '无效的计量表ID',
