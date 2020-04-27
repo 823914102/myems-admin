@@ -800,11 +800,11 @@ app
                             ]
                         }
                     })
-                    .state('settings.helpfile', {
-                        url: "/helpfile",
-                        templateUrl: "views/settings/helpfile/helpfile.html",
+                    .state('settings.knowledgefile', {
+                        url: "/knowledgefile",
+                        templateUrl: "views/settings/knowledgefile/knowledgefile.html",
                         data: {
-                            pageTitle: 'MENU.SETTINGS.HELPFILE',
+                            pageTitle: 'MENU.SETTINGS.KNOWLEDGEFILE',
                         },
                         resolve: {
                             deps: [
@@ -826,8 +826,8 @@ app
                                                 serie: true,
                                                 files: [
                                                     //'app/directives/mathjax.directive.js',
-                                                    'app/services/settings/helpfile/helpfile.service.js',
-                                                    'app/controllers/settings/helpfile/helpfile.controller.js'
+                                                    'app/services/settings/knowledgefile/knowledgefile.service.js',
+                                                    'app/controllers/settings/knowledgefile/knowledgefile.controller.js'
                                                 ]
                                             }]);
                                         }
