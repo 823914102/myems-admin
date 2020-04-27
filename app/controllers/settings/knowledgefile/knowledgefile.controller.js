@@ -1,20 +1,20 @@
 'use strict';
 
-app.controller('HelpFileController', function ($scope, $common, $cookies,  $translate, $uibModal, $interval, HelpFileService, toaster, SweetAlert) {
+app.controller('KnowledgeFileController', function ($scope, $common, $cookies,  $translate, $uibModal, $interval, KnowledgeFileService, toaster, SweetAlert) {
 
-    $scope.getAllHelpFiles = function () {
-        HelpFileService.getAllHelpFiles(function (error, data) {
+    $scope.getAllKnowledgeFiles = function () {
+        KnowledgeFileService.getAllKnowledgeFiles(function (error, data) {
             if (!error) {
-                $scope.helpfiles = data;
+                $scope.knowledgefiles = data;
             } else {
-                $scope.helpfiles = [];
+                $scope.knowledgefiles = [];
             }
         });
 
     };
 
     $scope.dzOptions = {
-        url: getAPI() + 'helpfiles',
+        url: getAPI() + 'knowledgefiles',
         acceptedFiles: '.xlsx,.xls,.pdf,.docx,.doc,.dwg,.jpg,.png,.csv',
         dictDefaultMessage: 'Click(or Drop) to add files',
         maxFilesize: '100',
@@ -43,7 +43,7 @@ app.controller('HelpFileController', function ($scope, $common, $cookies,  $tran
                 showCloseButton: true,
             });
 
-            $scope.getAllHelpFiles();
+            $scope.getAllKnowledgeFiles();
         },
         'error': function (file, xhr) {
             //console.warn('File failed to upload from dropzone', file, xhr);
@@ -65,15 +65,15 @@ app.controller('HelpFileController', function ($scope, $common, $cookies,  $tran
         }
     };
 
-    $scope.downloadHelpfile = function (helpfile) {
-        var name = helpfile.file_name+'.'+helpfile.file_type;
-        var url = "helpfiles/" + helpfile.id + "/download";
+    $scope.downloadKnowledgefile = function (knowledgefile) {
+        var name = knowledgefile.file_name+'.'+knowledgefile.file_type;
+        var url = "knowledgefiles/" + knowledgefile.id + "/download";
         saveAs(getAPI() + url, name);
 
     };
 
 
-    $scope.deleteHelpFile = function (helpfile) {
+    $scope.deleteKnowledgeFile = function (knowledgefile) {
         SweetAlert.swal({
                 title: $translate.instant($common.sweet.title),
                 text: $translate.instant($common.sweet.text),
@@ -87,9 +87,9 @@ app.controller('HelpFileController', function ($scope, $common, $cookies,  $tran
             },
             function (isConfirm) {
                 if (isConfirm) {
-                    HelpFileService.deleteHelpFile(helpfile, function (error, status) {
+                    KnowledgeFileService.deleteKnowledgeFile(knowledgefile, function (error, status) {
                         if (angular.isDefined(status) && status == 204) {
-                            var templateName = "SETTING.HELPFILE";
+                            var templateName = "SETTING.KNOWLEDGEFILE";
                             templateName = $translate.instant(templateName);
 
                             var popType = 'TOASTER.SUCCESS';
@@ -106,7 +106,7 @@ app.controller('HelpFileController', function ($scope, $common, $cookies,  $tran
                                 body: popBody,
                                 showCloseButton: true,
                             });
-                            $scope.getAllHelpFiles();
+                            $scope.getAllKnowledgeFiles();
                         } else if (angular.isDefined(status) && status == 400) {
                             var popType = 'TOASTER.ERROR';
                             var popTitle = error.title;
@@ -124,7 +124,7 @@ app.controller('HelpFileController', function ($scope, $common, $cookies,  $tran
                                 showCloseButton: true,
                             });
                         } else {
-                            var templateName = "SETTING.HELPFILE";
+                            var templateName = "SETTING.KNOWLEDGEFILE";
                             templateName = $translate.instant(templateName);
 
                             var popType = 'TOASTER.ERROR';
@@ -147,16 +147,16 @@ app.controller('HelpFileController', function ($scope, $common, $cookies,  $tran
             });
     };
 
-    $scope.getAllHelpFiles();
+    $scope.getAllKnowledgeFiles();
     $interval.cancel();
 
     $scope.$on('$destroy', function () {
         // Make sure that the interval is destroyed too
-        if (angular.isDefined($scope.refeshhelpfiles)) {
-            $interval.cancel($scope.refeshhelpfiles);
-            $scope.refeshhelpfiles = undefined;
+        if (angular.isDefined($scope.refeshknowledgefiles)) {
+            $interval.cancel($scope.refeshknowledgefiles);
+            $scope.refeshknowledgefiles = undefined;
         }
     });
-    $scope.refeshhelpfiles = $interval($scope.getAllHelpFiles, 1000 * 8);
+    $scope.refeshknowledgefiles = $interval($scope.getAllKnowledgeFiles, 1000 * 8);
 
 });
