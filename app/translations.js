@@ -712,6 +712,8 @@ function config($translateProvider) {
                 SOURCE_NODE: 'Source Node',
                 TARGET_NODE: 'Target Node',
                 METER: 'Meter',
+                PREVIEW: 'Preview',
+                N_S_PREVIEW: ' Preview',
             },
             EQUIPMENT: {
                 ADD_EQUIPMENT: 'Add Equipment',
@@ -1940,6 +1942,8 @@ function config($translateProvider) {
                 SOURCE_NODE: '源节点',
                 TARGET_NODE: '目标节点',
                 METER: '计量表',
+                PREVIEW: '预览',
+                N_S_PREVIEW: '预览',
             },
             EQUIPMENT: {
                 ADD_EQUIPMENT: '添加设备',
