@@ -142,6 +142,41 @@
             </div>
           </div>
           </uib-tab>
+          <uib-tab heading="{{'ENERGY_FLOW_DIAGRAM.PREVIEW' | translate}}">
+            <div class="panel-body" ng-controller="EnergyFlowDiagramPreviewController">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="panel panel-info">
+                    <div class="panel-heading">
+                      {{'COMMON.ENERGY_FLOW_DIAGRAM' | translate}}
+                    </div>
+                    <div class="panel-body" >
+                      <form role="form">
+                        <div class="form-group no-margin"><label>{{'ENERGY_FLOW_DIAGRAM.SELECT_ENERGY_FLOW_DIAGRAM' | translate}}</label>
+                          <ui-select  on-select="changeEnergyFlowDiagram($item,$model)" ng-model="currentEnergyFlowDiagram.selected" theme="bootstrap">
+                            <ui-select-match placeholder="{{'COMMON.PLACEHOLDER' | translate}}">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="energyflowdiagram.id as energyflowdiagram in energyflowdiagrams | filter: $select.search">
+                              <div ng-bind-html="energyflowdiagram.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-9">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      {{currentEnergyFlowDiagram.name}}{{'ENERGY_FLOW_DIAGRAM.N_S_PREVIEW' | translate}}
+                    </div>
+                    <div class="panel-body" >
+											<highchart class="chart" config="energyFlowChart"></highchart>
+                  </div>
+                </div>
+                </div>
+            </div>
+          </div>
+          </uib-tab>
 
 		    </uib-tabset>
 	</div>
