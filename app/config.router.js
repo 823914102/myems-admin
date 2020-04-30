@@ -710,6 +710,44 @@ app
                             ]
                         }
                     })
+                    .state('settings.energyflowdiagram', {
+                        url: "/energyflowdiagram",
+                        templateUrl: "views/settings/energyflowdiagram/energyflowdiagram.html",
+                        data: {
+                            pageTitle: 'MENU.SETTINGS.ENERGY_FLOW_DIAGRAM'
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'toaster']).then(
+                                        function() {
+                                            return $ocLazyLoad.load([{
+                                                files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
+                                            }, {
+                                                name: 'oitozero.ngSweetAlert',
+                                                files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
+                                            }, {
+                                                serie: true,
+                                                files: [
+                                                    'app/services/settings/energyflowdiagram/energyflowdiagram.service.js',
+                                                    'app/services/settings/energyflowdiagram/energyflowdiagramnode.service.js',
+                                                    'app/services/settings/energyflowdiagram/energyflowdiagramlink.service.js',
+                                                    'app/services/settings/meter/meter.service.js',
+                                                    'app/services/settings/meter/offline-meter.service.js',
+                                                    'app/services/settings/meter/virtual-meter.service.js',
+                                                    'app/controllers/settings/energyflowdiagram/energyflowdiagram.controller.js',
+                                                    'app/controllers/settings/energyflowdiagram/energyflowdiagramnode.controller.js',
+                                                    'app/controllers/settings/energyflowdiagram/energyflowdiagramlink.controller.js',
+                                                    'app/controllers/settings/energyflowdiagram/energyflowdiagrampreview.controller.js',
+                                                ]
+                                            }]);
+                                        }
+                                    );
+                                }
+                            ]
+                        }
+                    })
                     .state('settings.contact', {
                         url: "/contact",
                         templateUrl: "views/settings/contact/contact.html",

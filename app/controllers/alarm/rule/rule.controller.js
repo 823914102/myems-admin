@@ -242,6 +242,9 @@ app.controller('ModalAddRuleCtrl', function($scope, $uibModalInstance, params) {
 	$scope.rule={};
 	$scope.rule.is_enabled=true;
 	$scope.rule.channel='email';
+	$scope.rule.mute_start_datetime=moment();
+  $scope.rule.mute_end_datetime=moment();
+
 	$scope.rule.expression=JSON.stringify(params.expression);
 	$scope.dtOptions = {
 		locale:{

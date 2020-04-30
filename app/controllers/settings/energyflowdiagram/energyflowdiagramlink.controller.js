@@ -1,70 +1,88 @@
 'use strict';
 
-app.controller('EquipmentParameterController', function($scope,$common ,$timeout,$uibModal, $translate,	MeterService, VirtualMeterService, OfflineMeterService,	EquipmentParameterService, EquipmentService, PointService, toaster,SweetAlert) {
-    $scope.currentEquipment = {selected:undefined};
-    $scope.is_show_add_parameter = false;
-    $scope.equipments = [];
+app.controller('EnergyFlowDiagramLinkController', function($scope,$common ,$timeout,$uibModal, $translate,	MeterService, VirtualMeterService, OfflineMeterService,	EnergyFlowDiagramLinkService, EnergyFlowDiagramService, EnergyFlowDiagramNodeService, toaster,SweetAlert) {
+    $scope.currentEnergyFlowDiagram = {selected:undefined};
+    $scope.is_show_add_link = false;
+    $scope.energyflowdiagrams = [];
+    $scope.energyflowdiagramlinks = [];
+    $scope.energyflowdiagramnodes = [];
     $scope.meters = [];
     $scope.offlinemeters = [];
     $scope.virtualmeters = [];
     $scope.mergedMeters = [];
 
-	  $scope.getAllEquipments = function() {
-		EquipmentService.getAllEquipments(function(error, data) {
+	  $scope.getAllEnergyFlowDiagrams = function() {
+		EnergyFlowDiagramService.getAllEnergyFlowDiagrams(function(error, data) {
 			if (!error) {
-				$scope.equipments = data;
+				$scope.energyflowdiagrams = data;
 				} else {
-				$scope.equipments = [];
+				$scope.energyflowdiagrams = [];
 			 }
 		});
 	};
 
-	$scope.changeEquipment=function(item,model){
-		$scope.currentEquipment=item;
-		$scope.currentEquipment.selected=model;
-    $scope.is_show_add_parameter = true;
-		$scope.getParametersByEquipmentID($scope.currentEquipment.id);
+	$scope.changeEnergyFlowDiagram=function(item,model){
+		$scope.currentEnergyFlowDiagram=item;
+		$scope.currentEnergyFlowDiagram.selected=model;
+    $scope.is_show_add_link = true;
+		$scope.getLinksByEnergyFlowDiagramID($scope.currentEnergyFlowDiagram.id);
+    $scope.getNodesByEnergyFlowDiagramID($scope.currentEnergyFlowDiagram.id);
 	};
 
-	$scope.getParametersByEquipmentID = function(id) {
-		$scope.equipmentparameters=[];
-			EquipmentParameterService.getParametersByEquipmentID(id, function(error, data) {
+	$scope.getLinksByEnergyFlowDiagramID = function(id) {
+
+			EnergyFlowDiagramLinkService.getLinksByEnergyFlowDiagramID(id, function(error, data) {
 				if (!error) {
-					$scope.equipmentparameters=data;
-				}
+					$scope.energyflowdiagramlinks=data;
+          $scope.showEnergyFlowDiagramMeter()
+				} else {
+          	$scope.energyflowdiagramlinks = [];
+        }
 			});
 	};
 
-	$scope.addEquipmentParameter = function() {
+	$scope.getNodesByEnergyFlowDiagramID = function(id) {
+
+			EnergyFlowDiagramNodeService.getNodesByEnergyFlowDiagramID(id, function(error, data) {
+				if (!error) {
+					$scope.energyflowdiagramnodes=data;
+          console.log($scope.energyflowdiagramnodes);
+				} else {
+          $scope.energyflowdiagramnodes = [];
+        }
+			});
+	};
+
+	$scope.addEnergyFlowDiagramLink = function() {
 
 		var modalInstance = $uibModal.open({
-			templateUrl: 'views/settings/equipment/equipmentparameter.model.html',
-			controller: 'ModalAddEquipmentParameterCtrl',
+			templateUrl: 'views/settings/energyflowdiagram/energyflowdiagramlink.model.html',
+			controller: 'ModalAddEnergyFlowDiagramLinkCtrl',
 			windowClass: "animated fadeIn",
 			resolve: {
 				params: function() {
 					return {
-            points: angular.copy($scope.points),
+            energyflowdiagramnodes: angular.copy($scope.energyflowdiagramnodes),
             mergedmeters: angular.copy($scope.mergedmeters),
 					};
 				}
 			}
 		});
-		modalInstance.result.then(function(equipmentparameter) {
-        var equipmentid = $scope.currentEquipment.id;
-        if (equipmentparameter.point != null) {
-            equipmentparameter.point_id = equipmentparameter.point.id;
+		modalInstance.result.then(function(energyflowdiagramlink) {
+        var energyflowdiagramid = $scope.currentEnergyFlowDiagram.id;
+        if (energyflowdiagramlink.source_node != null) {
+            energyflowdiagramlink.source_node_id = energyflowdiagramlink.source_node.id;
         }
-        if (equipmentparameter.numerator_meter != null) {
-            equipmentparameter.numerator_meter_uuid = equipmentparameter.numerator_meter.uuid;
+        if (energyflowdiagramlink.target_node != null) {
+            energyflowdiagramlink.target_node_id = energyflowdiagramlink.target_node.id;
         }
-        if (equipmentparameter.denominator_meter != null) {
-            equipmentparameter.denominator_meter_uuid = equipmentparameter.denominator_meter.uuid;
+        if (energyflowdiagramlink.meter != null) {
+            energyflowdiagramlink.meter_uuid = energyflowdiagramlink.meter.uuid;
         }
 
-			EquipmentParameterService.addEquipmentParameter(equipmentid, equipmentparameter, function(error, status) {
+			EnergyFlowDiagramLinkService.addEnergyFlowDiagramLink(energyflowdiagramid, energyflowdiagramlink, function(error, status) {
 				if (angular.isDefined(status) && status == 201) {
-					var templateName = "EQUIPMENT.PARAMETER";
+					var templateName = "ENERGY_FLOW_DIAGRAM.LINK";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -81,9 +99,9 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 						body: popBody,
 						showCloseButton: true,
 					});
-					$scope.getParametersByEquipmentID($scope.currentEquipment.id);
+					$scope.getLinksByEnergyFlowDiagramID($scope.currentEnergyFlowDiagram.id);
 				} else {
-					var templateName = "EQUIPMENT.PARAMETER";
+					var templateName = "ENERGY_FLOW_DIAGRAM.LINK";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -107,35 +125,35 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 		});
 	};
 
-	$scope.editEquipmentParameter = function(equipmentparameter) {
+	$scope.editEnergyFlowDiagramLink = function(energyflowdiagramlink) {
 		var modalInstance = $uibModal.open({
-			templateUrl: 'views/settings/equipment/equipmentparameter.model.html',
-			controller: 'ModalEditEquipmentParameterCtrl',
+			templateUrl: 'views/settings/energyflowdiagram/energyflowdiagramlink.model.html',
+			controller: 'ModalEditEnergyFlowDiagramLinkCtrl',
   		windowClass: "animated fadeIn",
 			resolve: {
 				params: function() {
 					return {
-						equipmentparameter: angular.copy(equipmentparameter),
-            points: angular.copy($scope.points),
+						energyflowdiagramlink: angular.copy(energyflowdiagramlink),
+            energyflowdiagramnodes: angular.copy($scope.energyflowdiagramnodes),
             mergedmeters: angular.copy($scope.mergedmeters),
 					};
 				}
 			}
 		});
 
-		modalInstance.result.then(function(modifiedEquipmentParameter) {
-      if (modifiedEquipmentParameter.point != null) {
-	        modifiedEquipmentParameter.point_id = modifiedEquipmentParameter.point.id;
+		modalInstance.result.then(function(modifiedEnergyFlowDiagramLink) {
+      if (modifiedEnergyFlowDiagramLink.source_node != null) {
+	        modifiedEnergyFlowDiagramLink.source_node_id = modifiedEnergyFlowDiagramLink.source_node.id;
       }
-      if (modifiedEquipmentParameter.numerator_meter != null) {
-	        modifiedEquipmentParameter.numerator_meter_uuid = modifiedEquipmentParameter.numerator_meter.uuid;
+      if (modifiedEnergyFlowDiagramLink.target_node != null) {
+	        modifiedEnergyFlowDiagramLink.target_node_id = modifiedEnergyFlowDiagramLink.target_node.id;
       }
-      if (modifiedEquipmentParameter.denominator_meter != null) {
-	        modifiedEquipmentParameter.denominator_meter_uuid = modifiedEquipmentParameter.denominator_meter.uuid;
+      if (modifiedEnergyFlowDiagramLink.meter != null) {
+	        modifiedEnergyFlowDiagramLink.meter_uuid = modifiedEnergyFlowDiagramLink.meter.uuid;
       }
-			EquipmentParameterService.editEquipmentParameter($scope.currentEquipment.id, modifiedEquipmentParameter, function(error, status) {
+			EnergyFlowDiagramLinkService.editEnergyFlowDiagramLink($scope.currentEnergyFlowDiagram.id, modifiedEnergyFlowDiagramLink, function(error, status) {
 				if (angular.isDefined(status) && status == 200) {
-					var templateName = "EQUIPMENT.PARAMETER";
+					var templateName = "ENERGY_FLOW_DIAGRAM.LINK";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -152,9 +170,9 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 						body: popBody,
 						showCloseButton: true,
 					});
-					$scope.getParametersByEquipmentID($scope.currentEquipment.id);
+					$scope.getLinksByEnergyFlowDiagramID($scope.currentEnergyFlowDiagram.id);
 				} else {
-					var templateName = "EQUIPMENT.PARAMETER";
+					var templateName = "ENERGY_FLOW_DIAGRAM.LINK";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -178,7 +196,7 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 		});
 	};
 
-	$scope.deleteEquipmentParameter = function(equipmentparameter) {
+	$scope.deleteEnergyFlowDiagramLink = function(energyflowdiagramlink) {
 		SweetAlert.swal({
 				title: $translate.instant($common.sweet.title),
 				text: $translate.instant($common.sweet.text),
@@ -192,9 +210,9 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 			},
 			function(isConfirm) {
 				if (isConfirm) {
-					EquipmentParameterService.deleteEquipmentParameter($scope.currentEquipment.id, equipmentparameter.id, function(error, status) {
+					EnergyFlowDiagramLinkService.deleteEnergyFlowDiagramLink($scope.currentEnergyFlowDiagram.id, energyflowdiagramlink.id, function(error, status) {
 						if (angular.isDefined(status) && status == 204) {
-							var templateName = "EQUIPMENT.PARAMETER";
+							var templateName = "ENERGY_FLOW_DIAGRAM.LINK";
               templateName = $translate.instant(templateName);
 
               var popType = 'TOASTER.SUCCESS';
@@ -211,7 +229,7 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
                   body: popBody,
                   showCloseButton: true,
               });
-							$scope.getParametersByEquipmentID($scope.currentEquipment.id);
+							$scope.getLinksByEnergyFlowDiagramID($scope.currentEnergyFlowDiagram.id);
 						} else if (angular.isDefined(status) && status == 400) {
 							var popType = 'TOASTER.ERROR';
               var popTitle = error.title;
@@ -228,7 +246,7 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
                   showCloseButton: true,
               });
 						} else {
-							var templateName = "EQUIPMENT.PARAMETER";
+							var templateName = "ENERGY_FLOW_DIAGRAM.LINK";
               templateName = $translate.instant(templateName);
 
               var popType = 'TOASTER.ERROR';
@@ -275,30 +293,12 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 	// 	}
 	// };
 
-	$scope.showEquipmentParameterType = function(type) {
-    if (type == 'constant') {
-        return 'EQUIPMENT.CONSTANT';
-    } else if (type == 'point' ) {
-        return 'EQUIPMENT.POINT';
-    } else if (type == 'fraction') {
-		    return 'EQUIPMENT.FRACTION';
-    }
-	};
+  $scope.showEnergyFlowDiagramMeter = function(energyflowdiagramlink) {
 
-  $scope.showEquipmentParameterNumerator = function(equipmentparameter) {
-      if (equipmentparameter.numerator_meter == null) {
+      if (energyflowdiagramlink == null || energyflowdiagramlink.meter == null) {
         return '-';
       } else {
-        return '(' + equipmentparameter.numerator_meter.type + ')' + equipmentparameter.numerator_meter.name;
-      }
-  };
-
-
-  $scope.showEquipmentParameterDenominator = function(equipmentparameter) {
-      if (equipmentparameter.denominator_meter == null) {
-        return '-';
-      } else {
-        return '(' + equipmentparameter.denominator_meter.type + ')' + equipmentparameter.denominator_meter.name;
+        return '(' + energyflowdiagramlink.meter.type + ')' + energyflowdiagramlink.meter.name;
       }
   };
 
@@ -346,44 +346,25 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 				$scope.virtualmeters = [];
 			}
 		});
-
-    console.log($scope.mergedmeters);
 	};
 
-  $scope.getAllPoints = function() {
-  	PointService.getAllPoints(function(error, data) {
-  		if (!error) {
-        // if (data.length > 0) {
-        //   for (var i = 0; i < data.length; i++) {
-        //     data[i].name = data[i].data_source.name + "/" + data[i].name ;
-        //   }
-        // }
-  			$scope.points = data;
-  		} else {
-  			$scope.points = [];
-  		}
-  	});
-
-  };
-
-	$scope.getAllEquipments();
+  $scope.getAllEnergyFlowDiagrams();
   $scope.getMergedMeters();
-  $scope.getAllPoints();
 });
 
+app.controller('ModalAddEnergyFlowDiagramLinkCtrl', function($scope, $uibModalInstance, params) {
 
-app.controller('ModalAddEquipmentParameterCtrl', function($scope, $uibModalInstance, params) {
-
-	$scope.operation = "EQUIPMENT.ADD_PARAMETER";
-	$scope.equipmentparameter = {
-      parameter_type : "constant",
+	$scope.operation = "ENERGY_FLOW_DIAGRAM.ADD_LINK";
+  $scope.energyflowdiagramlink = {
+    source_node: {id: null, name: null},
+    target_node: {id: null, name: null},
+    meter: {id: null, uuid: null, name: null, type: null},
   };
-	$scope.is_disabled = false;
-  $scope.points = params.points;
+  $scope.energyflowdiagramnodes = params.energyflowdiagramnodes;
   $scope.mergedmeters = params.mergedmeters;
 	$scope.ok = function() {
 
-		$uibModalInstance.close($scope.equipmentparameter);
+		$uibModalInstance.close($scope.energyflowdiagramlink);
 	};
 
 	$scope.cancel = function() {
@@ -391,14 +372,13 @@ app.controller('ModalAddEquipmentParameterCtrl', function($scope, $uibModalInsta
 	};
 });
 
-app.controller('ModalEditEquipmentParameterCtrl', function($scope, $uibModalInstance, params) {
-	$scope.operation = "EQUIPMENT.EDIT_PARAMETER";
-	$scope.equipmentparameter = params.equipmentparameter;
-  $scope.points = params.points;
+app.controller('ModalEditEnergyFlowDiagramLinkCtrl', function($scope, $uibModalInstance, params) {
+	$scope.operation = "ENERGY_FLOW_DIAGRAM.EDIT_LINK";
+	$scope.energyflowdiagramlink = params.energyflowdiagramlink;
+  $scope.energyflowdiagramnodes = params.energyflowdiagramnodes;
   $scope.mergedmeters = params.mergedmeters;
-  $scope.is_disabled = true;
 	$scope.ok = function() {
-		$uibModalInstance.close($scope.equipmentparameter);
+		$uibModalInstance.close($scope.energyflowdiagramlink);
 	};
 
 	$scope.cancel = function() {
