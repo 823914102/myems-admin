@@ -748,6 +748,43 @@ app
                             ]
                         }
                     })
+                    .state('settings.distributionsystem', {
+                        url: "/distributionsystem",
+                        templateUrl: "views/settings/distributionsystem/distributionsystem.html",
+                        data: {
+                            pageTitle: 'MENU.SETTINGS.DISTRIBUTION_SYSTEM'
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'toaster']).then(
+                                        function() {
+                                            return $ocLazyLoad.load([{
+                                                files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
+                                            }, {
+                                                name: 'oitozero.ngSweetAlert',
+                                                files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
+                                            }, {
+                                                serie: true,
+                                                files: [
+                                                    'app/services/settings/distributionsystem/distributionsystem.service.js',
+                                                    'app/services/settings/distributionsystem/distributioncircuit.service.js',
+                                                    'app/services/settings/distributionsystem/distributioncircuitpoint.service.js',
+                                                    'app/services/settings/datasource/datasource.service.js',
+                                                    'app/services/settings/datasource/point.service.js',
+                                                    'app/controllers/settings/distributionsystem/distributionsystem.controller.js',
+                                                    'app/controllers/settings/distributionsystem/distributioncircuit.controller.js',
+                                                    'app/controllers/settings/distributionsystem/distributioncircuitpoint.controller.js',
+                                                    'app/controllers/settings/distributionsystem/distributionsystempreview.controller.js',
+                                                ]
+                                            }]);
+                                        }
+                                    );
+                                }
+                            ]
+                        }
+                    })
                     .state('settings.contact', {
                         url: "/contact",
                         templateUrl: "views/settings/contact/contact.html",
