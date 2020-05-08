@@ -203,6 +203,9 @@ app.controller('EquipmentMeterController', function($scope,$common ,$timeout,$ui
 	$scope.getAllVirtualMeters();
 	$scope.getAllOfflineMeters();
 
+  $scope.$on('handleBroadcastEquipmentChanged', function(event) {
+    $scope.getAllEquipments();
+  });
 });
 
 app.controller('ModalEditEquipmentMeterCtrl', function ($scope, $uibModalInstance) {

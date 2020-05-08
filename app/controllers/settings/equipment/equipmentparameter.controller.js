@@ -369,6 +369,10 @@ app.controller('EquipmentParameterController', function($scope,$common ,$timeout
 	$scope.getAllEquipments();
   $scope.getMergedMeters();
   $scope.getAllPoints();
+
+  $scope.$on('handleBroadcastEquipmentChanged', function(event) {
+    $scope.getAllEquipments();
+  });
 });
 
 
