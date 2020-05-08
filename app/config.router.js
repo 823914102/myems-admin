@@ -506,12 +506,14 @@ app
                                                 files: [
                                                     'app/services/settings/space/space.service.js',
                                                     'app/services/settings/equipment/equipment.service.js',
+                                                    'app/services/settings/costcenter/costcenter.service.js',
                                                     'app/services/settings/datasource/point.service.js',
                                                     'app/services/settings/meter/meter.service.js',
                                                     'app/services/settings/meter/offline-meter.service.js',
                                                     'app/services/settings/meter/virtual-meter.service.js',
                                                     'app/services/settings/equipment/equipmentmeter.service.js',
                                                     'app/services/settings/equipment/equipmentparameter.service.js',
+                                                    'app/controllers/settings/equipment/equipment.master.controller.js',
                                                     'app/controllers/settings/equipment/equipment.controller.js',
                                                     'app/controllers/settings/equipment/equipmentmeter.controller.js',
                                                     'app/controllers/settings/equipment/equipmentparameter.controller.js'

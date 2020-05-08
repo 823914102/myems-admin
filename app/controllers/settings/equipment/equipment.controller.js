@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('EquipmentController', function($scope,$common, $translate, $uibModal, EquipmentService,toaster,SweetAlert) {
+app.controller('EquipmentController', function($scope,$common, $translate, $uibModal, EquipmentService, CostCenterService, toaster,SweetAlert) {
 
 	$scope.getAllEquipments = function() {
 		EquipmentService.getAllEquipments(function(error, data) {
@@ -12,13 +12,30 @@ app.controller('EquipmentController', function($scope,$common, $translate, $uibM
 		});
 	};
 
+	$scope.getAllCostCenters = function() {
+		CostCenterService.getAllCostCenters(function(error, data) {
+			if (!error) {
+				$scope.costcenters = data;
+			} else {
+				$scope.costcenters = [];
+			}
+		});
+	};
 	$scope.addEquipment = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl: 'views/settings/equipment/equipment.model.html',
 			controller: 'ModalAddEquipmentCtrl',
 			windowClass: "animated fadeIn",
+			resolve: {
+				params: function() {
+					return {
+						costcenters: angular.copy($scope.costcenters),
+					};
+				}
+			}
 		});
 		modalInstance.result.then(function(equipment) {
+		  equipment.cost_center_id = equipment.cost_center.id;
 			EquipmentService.addEquipment(equipment, function(error, status) {
 				if (angular.isDefined(status) && status == 201) {
 					var templateName = "COMMON.EQUIPMENT";
@@ -39,6 +56,7 @@ app.controller('EquipmentController', function($scope,$common, $translate, $uibM
 						showCloseButton: true,
 					});
 					$scope.getAllEquipments();
+					$scope.$emit('handleEmitEquipmentChanged');
 				} else {
 					var templateName = "COMMON.EQUIPMENT";
 					templateName = $translate.instant(templateName);
@@ -72,13 +90,15 @@ app.controller('EquipmentController', function($scope,$common, $translate, $uibM
 			resolve: {
 				params: function() {
 					return {
-						equipment: angular.copy(equipment)
+						equipment: angular.copy(equipment),
+						costcenters: angular.copy($scope.costcenters),
 					};
 				}
 			}
 		});
 
 		modalInstance.result.then(function(modifiedEquipment) {
+		  modifiedEquipment.cost_center_id = modifiedEquipment.cost_center.id;
 			EquipmentService.editEquipment(modifiedEquipment, function(error, status) {
 				if (angular.isDefined(status) && status == 200) {
 					var templateName = "COMMON.EQUIPMENT";
@@ -99,6 +119,7 @@ app.controller('EquipmentController', function($scope,$common, $translate, $uibM
 						showCloseButton: true,
 					});
 					$scope.getAllEquipments();
+					$scope.$emit('handleEmitEquipmentChanged');
 				} else {
 					var templateName = "COMMON.EQUIPMENT";
 					templateName = $translate.instant(templateName);
@@ -157,6 +178,7 @@ app.controller('EquipmentController', function($scope,$common, $translate, $uibM
                         showCloseButton: true,
                     });
 							      $scope.getAllEquipments();
+										$scope.$emit('handleEmitEquipmentChanged');
 		            	} else {
 		            		var templateName = "COMMON.EQUIPMENT";
                     templateName = $translate.instant(templateName);
@@ -180,11 +202,13 @@ app.controller('EquipmentController', function($scope,$common, $translate, $uibM
 		        }
 		    });
 	};
+	$scope.getAllCostCenters();
 	$scope.getAllEquipments();
 });
 
-app.controller("ModalAddEquipmentCtrl", function(  $scope,  $uibModalInstance) {
+app.controller("ModalAddEquipmentCtrl", function(  $scope,  $uibModalInstance, params) {
   $scope.operation = "EQUIPMENT.ADD_EQUIPMENT";
+	$scope.costcenters = params.costcenters;
   $scope.disabled = false;
   $scope.equipment = {
     is_input_counted: false,
@@ -201,6 +225,7 @@ app.controller("ModalAddEquipmentCtrl", function(  $scope,  $uibModalInstance) {
 
 app.controller("ModalEditEquipmentCtrl", function($scope, $uibModalInstance,  params) {
   $scope.operation = "EQUIPMENT.EDIT_EQUIPMENT";
+	$scope.costcenters = params.costcenters;
   $scope.disabled = true;
   $scope.equipment = params.equipment;
 
