@@ -1,8 +1,8 @@
 'use strict';
 
-app.controller('CategoryController', function($scope,$common, $translate,$uibModal, CategoryService,toaster,SweetAlert) {
-	
-	
+app.controller('EnergyCategoryController', function($scope,$common, $translate,$uibModal, CategoryService,toaster,SweetAlert) {
+
+
 	$scope.getAllCategories = function() {
 		CategoryService.getAllCategories(function(error, data) {
 			if (!error) {
@@ -11,7 +11,7 @@ app.controller('CategoryController', function($scope,$common, $translate,$uibMod
 				$scope.categories = [];
 			}
 		});
-		
+
 	};
 
 	$scope.addCategory = function() {
@@ -49,8 +49,8 @@ app.controller('CategoryController', function($scope,$common, $translate,$uibMod
 						showCloseButton: true,
 					});
 
-
 					$scope.getAllCategories();
+					$scope.$emit('handleEmitEnergyCategoryChanged');
 				} else {
 					var templateName = "SETTING.CATEGORY";
 					templateName = $translate.instant(templateName);
@@ -112,10 +112,10 @@ app.controller('CategoryController', function($scope,$common, $translate,$uibMod
 						showCloseButton: true,
 					});
 
-
-	                $scope.getAllCategories();
-	            }else{
-	                var templateName = "SETTING.CATEGORY";
+          $scope.getAllCategories();
+					$scope.$emit('handleEmitEnergyCategoryChanged');
+      }else{
+          var templateName = "SETTING.CATEGORY";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -155,23 +155,24 @@ app.controller('CategoryController', function($scope,$common, $translate,$uibMod
 		            CategoryService.deleteCategory(category, function(error, status) {
 		            	if (angular.isDefined(status) && status == 204) {
 		            		var templateName = "SETTING.CATEGORY";
-                            templateName = $translate.instant(templateName);
+                    templateName = $translate.instant(templateName);
 
-                            var popType = 'TOASTER.SUCCESS';
-                            var popTitle = $common.toaster.success_title;
-                            var popBody = $common.toaster.success_delete_body;
+                    var popType = 'TOASTER.SUCCESS';
+                    var popTitle = $common.toaster.success_title;
+                    var popBody = $common.toaster.success_delete_body;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody, {template: templateName});
+                    popType = $translate.instant(popType);
+                    popTitle = $translate.instant(popTitle);
+                    popBody = $translate.instant(popBody, {template: templateName});
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
+                    toaster.pop({
+                        type: popType,
+                        title: popTitle,
+                        body: popBody,
+                        showCloseButton: true,
+                    });
 		            		$scope.getAllCategories();
+										$scope.$emit('handleEmitEnergyCategoryChanged');
 		            	} else {
 		            		var templateName = "SETTING.CATEGORY";
                             templateName = $translate.instant(templateName);
@@ -192,12 +193,11 @@ app.controller('CategoryController', function($scope,$common, $translate,$uibMod
                             });
 		            	}
 		            });
-		        } 
+		        }
 		    });
 	};
-	
+
 	$scope.getAllCategories();
-	
 
 });
 

@@ -700,7 +700,8 @@ app
                                                 serie: true,
                                                 files: [
                                                     'app/services/settings/category/category.service.js',
-                                                    'app/controllers/settings/category/category.controller.js',
+                                                    'app/controllers/settings/category/energycategory.master.controller.js',
+                                                    'app/controllers/settings/category/energycategory.controller.js',
                                                     'app/services/settings/category/energyitem.service.js',
                                                     'app/controllers/settings/category/energyitem.controller.js'
                                                 ]
