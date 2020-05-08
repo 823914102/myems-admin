@@ -2,8 +2,6 @@
 
 app.controller('MeterPointController', function ($scope, $common, $uibModal, $timeout, $translate,
                                                  MeterService,
-                                                 VirtualMeterService,
-                                                 OfflineMeterService,
                                                  DataSourceService,
                                                  PointService,
                                                  MeterPointService,
@@ -66,27 +64,6 @@ app.controller('MeterPointController', function ($scope, $common, $uibModal, $ti
             }
         });
 
-    };
-
-    $scope.getAllOfflineMeters = function () {
-        OfflineMeterService.getAllOfflineMeters(function (error, data) {
-            if (!error) {
-                $scope.offlinemeters = data;
-            } else {
-                $scope.offlinemeters = [];
-            }
-        });
-
-    };
-
-    $scope.getAllVirtualMeters = function () {
-        VirtualMeterService.getAllVirtualMeters(function (error, data) {
-            if (!error) {
-                $scope.virtualmeters = data;
-            } else {
-                $scope.virtualmeters = [];
-            }
-        });
     };
 
     $scope.pairPoint = function (dragEl, dropEl) {
@@ -176,6 +153,8 @@ app.controller('MeterPointController', function ($scope, $common, $uibModal, $ti
 
     $scope.getAllDataSources();
     $scope.getAllMeters();
-    $scope.getAllVirtualMeters();
-    $scope.getAllOfflineMeters();
+
+  	$scope.$on('handleBroadcastMeterChanged', function(event) {
+      $scope.getAllMeters();
+  	});
 });

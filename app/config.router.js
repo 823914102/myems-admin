@@ -560,6 +560,7 @@ app
                                                     'app/services/settings/meter/meterpoint.service.js',
                                                     'app/services/settings/datasource/datasource.service.js',
                                                     'app/services/settings/datasource/point.service.js',
+                                                    'app/controllers/settings/meter/meter.master.controller.js',
                                                     'app/controllers/settings/meter/meter.controller.js',
                                                     'app/controllers/settings/meter/offline-meter.controller.js',
                                                     'app/controllers/settings/meter/offline-meter-file.controller.js',
