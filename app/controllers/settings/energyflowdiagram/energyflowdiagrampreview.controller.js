@@ -41,12 +41,17 @@ app.controller('EnergyFlowDiagramPreviewController', function($scope,$common, $t
       data.series[0].name =  ($scope.currentEnergyFlowDiagram != null) ? $scope.currentEnergyFlowDiagram.name: null;
       data.series[0].data = [];
       var  links = $scope.currentEnergyFlowDiagram.links;
-      for (var i=0;i < links.length; i++) {
-        data.series[0].data.push([links[i].source_node.name, links[i].target_node.name, Math.floor(Math.random() * 100)]);
+      if (links != null) {
+        for (var i=0;i < links.length; i++) {
+          data.series[0].data.push([links[i].source_node.name, links[i].target_node.name, Math.floor(Math.random() * 100)]);
+        }
       }
-      console.log(data);
       $scope.energyFlowChart = data;
     };
     $scope.getAllEnergyFlowDiagrams();
+
+    $scope.$on('handleBroadcastEnergyFlowDiagramChanged', function(event) {
+      $scope.getAllEnergyFlowDiagrams();
+    });
 
 });

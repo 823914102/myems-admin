@@ -228,14 +228,17 @@ app.controller('EnergyFlowDiagramNodeController', function($scope,$common, $tran
   	};
 
   	$scope.getAllEnergyFlowDiagrams();
-    // $scope.getNodesByEnergyFlowDiagramID();
+
+    $scope.$on('handleBroadcastEnergyFlowDiagramChanged', function(event) {
+      $scope.getAllEnergyFlowDiagrams();
+    });
   });
 
 
   app.controller('ModalAddEnergyFlowDiagramNodeCtrl', function($scope, $uibModalInstance, params) {
 
   	$scope.operation = "ENERGY_FLOW_DIAGRAM.ADD_NODE";
-  
+
   	$scope.ok = function() {
 
   		$uibModalInstance.close($scope.energyflowdiagramnode);

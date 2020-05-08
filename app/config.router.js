@@ -736,6 +736,7 @@ app
                                                     'app/services/settings/meter/meter.service.js',
                                                     'app/services/settings/meter/offline-meter.service.js',
                                                     'app/services/settings/meter/virtual-meter.service.js',
+                                                    'app/controllers/settings/energyflowdiagram/energyflowdiagram.master.controller.js',
                                                     'app/controllers/settings/energyflowdiagram/energyflowdiagram.controller.js',
                                                     'app/controllers/settings/energyflowdiagram/energyflowdiagramnode.controller.js',
                                                     'app/controllers/settings/energyflowdiagram/energyflowdiagramlink.controller.js',
