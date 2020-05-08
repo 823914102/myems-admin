@@ -635,6 +635,7 @@ app
                                                     'app/services/settings/costcenter/costcentertariff.service.js',
                                                     'app/services/settings/tariff/tariff.service.js',
                                                     'app/services/settings/costcenter/cost-file.service.js',
+                                                    'app/controllers/settings/costcenter/costcenter.master.controller.js',
                                                     'app/controllers/settings/costcenter/costcenter.controller.js',
                                                     'app/controllers/settings/costcenter/costcentertariff.controller.js',
                                                     'app/controllers/settings/costcenter/cost-file.controller.js'

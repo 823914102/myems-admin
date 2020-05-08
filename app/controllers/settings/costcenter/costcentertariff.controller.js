@@ -143,4 +143,8 @@ app.controller('CostCenterTariffController', function ($scope,  $translate,$comm
     $scope.getAllCostCenters();
     $scope.getAllTariffs();
 
+  	$scope.$on('handleBroadcastCostCenterChanged', function(event) {
+  		$scope.getAllCostCenters();
+  	});
+
 });

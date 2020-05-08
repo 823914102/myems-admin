@@ -1,8 +1,7 @@
 'use strict';
 
 app.controller('CostCenterController', function($scope,$common, $translate,$uibModal, CostCenterService,toaster,SweetAlert) {
-	
-	
+
 	$scope.getAllCostCenters = function() {
 		CostCenterService.getAllCostCenters(function(error, data) {
 			if (!error) {
@@ -11,7 +10,6 @@ app.controller('CostCenterController', function($scope,$common, $translate,$uibM
 				$scope.costcenters = [];
 			}
 		});
-		
 	};
 
 	$scope.addCostCenter = function() {
@@ -23,7 +21,7 @@ app.controller('CostCenterController', function($scope,$common, $translate,$uibM
 		modalInstance.result.then(function(costcenter) {
 			CostCenterService.addCostCenter(costcenter, function(error, status) {
 				if (angular.isDefined(status) && status == 201) {
-					var templateName = "FDD.RULE";
+					var templateName = "SETTING.COSTCENTER";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -41,10 +39,10 @@ app.controller('CostCenterController', function($scope,$common, $translate,$uibM
 						showCloseButton: true,
 					});
 
-
 					$scope.getAllCostCenters();
+					$scope.$emit('handleEmitCostCenterChanged');
 				} else {
-					var templateName = "FDD.RULE";
+					var templateName = "SETTING.COSTCENTER";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'SETTING.COSTCENTER';
@@ -86,43 +84,44 @@ app.controller('CostCenterController', function($scope,$common, $translate,$uibM
 		modalInstance.result.then(function (modifiedCostCenter) {
 	        CostCenterService.editCostCenter(modifiedCostCenter,function(error,status){
 	            if(angular.isDefined(status) && status==200){
-	                var templateName = "FDD.RULE";
-					templateName = $translate.instant(templateName);
+								var templateName = "SETTING.COSTCENTER";
+								templateName = $translate.instant(templateName);
 
-					var popType = 'TOASTER.SUCCESS';
-					var popTitle = $common.toaster.success_title;
-					var popBody = $common.toaster.success_update_body;
+								var popType = 'TOASTER.SUCCESS';
+								var popTitle = $common.toaster.success_title;
+								var popBody = $common.toaster.success_update_body;
 
-					popType = $translate.instant(popType);
-					popTitle = $translate.instant(popTitle);
-					popBody = $translate.instant(popBody,{template: templateName});
+								popType = $translate.instant(popType);
+								popTitle = $translate.instant(popTitle);
+								popBody = $translate.instant(popBody,{template: templateName});
 
-					toaster.pop({
-						type: popType,
-						title: popTitle,
-						body: popBody,
-						showCloseButton: true,
-					});
-	                $scope.getAllCostCenters();
-	            }else{
-	                var templateName = "FDD.RULE";
-					templateName = $translate.instant(templateName);
+								toaster.pop({
+									type: popType,
+									title: popTitle,
+									body: popBody,
+									showCloseButton: true,
+								});
+			          $scope.getAllCostCenters();
+								$scope.$emit('handleEmitCostCenterChanged');
+		      }else{
+		          var templateName = "SETTING.COSTCENTER";
+							templateName = $translate.instant(templateName);
 
-					var popType = 'SETTING.COSTCENTER';
-					var popTitle = $common.toaster.error_title;
-					var popBody = $common.toaster.error_update_body;
+							var popType = 'SETTING.COSTCENTER';
+							var popTitle = $common.toaster.error_title;
+							var popBody = $common.toaster.error_update_body;
 
-					popType = $translate.instant(popType);
-					popTitle = $translate.instant(popTitle);
-					popBody = $translate.instant(popBody,{template: templateName});
+							popType = $translate.instant(popType);
+							popTitle = $translate.instant(popTitle);
+							popBody = $translate.instant(popBody,{template: templateName});
 
-					toaster.pop({
-						type: popType,
-						title: popTitle,
-						body: popBody,
-						showCloseButton: true,
-					});
-	            }
+							toaster.pop({
+								type: popType,
+								title: popTitle,
+								body: popBody,
+								showCloseButton: true,
+							});
+						}
 	        });
 		}, function () {
 	        //do nothing;
@@ -144,66 +143,66 @@ app.controller('CostCenterController', function($scope,$common, $translate,$uibM
 		        if (isConfirm) {
 		            CostCenterService.deleteCostCenter(costcenter, function(error, status) {
 		            	if (angular.isDefined(status) && status == 204) {
-		            		var templateName = "FDD.RULE";
-                            templateName = $translate.instant(templateName);
+		            		var templateName = "SETTING.COSTCENTER";
+                    templateName = $translate.instant(templateName);
 
-                            var popType = 'TOASTER.SUCCESS';
-                            var popTitle = $common.toaster.success_title;
-                            var popBody = $common.toaster.success_delete_body;
+                    var popType = 'TOASTER.SUCCESS';
+                    var popTitle = $common.toaster.success_title;
+                    var popBody = $common.toaster.success_delete_body;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody, {template: templateName});
+                    popType = $translate.instant(popType);
+                    popTitle = $translate.instant(popTitle);
+                    popBody = $translate.instant(popBody, {template: templateName});
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
+                    toaster.pop({
+                        type: popType,
+                        title: popTitle,
+                        body: popBody,
+                        showCloseButton: true,
+                    });
 		            		$scope.getAllCostCenters();
+										$scope.$emit('handleEmitCostCenterChanged');
 		            	} else if (angular.isDefined(status) && status == 400) {
-							var popType = 'SETTING.COSTCENTER';
-                            var popTitle = error.title;
-                            var popBody = error.description;
+										var popType = 'SETTING.COSTCENTER';
+			              var popTitle = error.title;
+			              var popBody = error.description;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody);
+			              popType = $translate.instant(popType);
+			              popTitle = $translate.instant(popTitle);
+			              popBody = $translate.instant(popBody);
 
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
-						}else {
-		            		var templateName = "FDD.RULE";
-                            templateName = $translate.instant(templateName);
+			              toaster.pop({
+			                  type: popType,
+			                  title: popTitle,
+			                  body: popBody,
+			                  showCloseButton: true,
+			              });
+									} else {
+		            		var templateName = "SETTING.COSTCENTER";
+                    templateName = $translate.instant(templateName);
 
-                            var popType = 'SETTING.COSTCENTER';
-                            var popTitle = $common.toaster.error_title;
-                            var popBody = $common.toaster.error_delete_body;
+                    var popType = 'SETTING.COSTCENTER';
+                    var popTitle = $common.toaster.error_title;
+                    var popBody = $common.toaster.error_delete_body;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody, {template: templateName});
+                    popType = $translate.instant(popType);
+                    popTitle = $translate.instant(popTitle);
+                    popBody = $translate.instant(popBody, {template: templateName});
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
+                    toaster.pop({
+                        type: popType,
+                        title: popTitle,
+                        body: popBody,
+                        showCloseButton: true,
+                    });
 		            	}
 		            });
-		        } 
+		        }
 		    });
 	};
-	
+
 	$scope.getAllCostCenters();
-	
 
 });
 
