@@ -13,16 +13,11 @@
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
-            <div class="form-group"><label class="col-sm-3 control-label">{{'SETTING.SERIAL_NUMBER' | translate}}</label>
+            <div class="form-group"><label class="col-sm-3 control-label">{{'COSTCENTER.EXTERNAL_ID' | translate}}</label>
 
-                <div class="col-sm-9"><input ng-model="costcenter.global_id" type="text" name="costcenterglobalid" class="form-control" required="">
-                <div class="m-t-xs" ng-show="form_costcenter.costcenterglobalid.$invalid && form_costcenter.costcenterglobalid.$dirty">
-                        <small class="text-danger" ng-show="form_costcenter.costcenterglobalid.$error.required">{{'SETTING.INPUT_SERIAL_NUMBER' | translate}}</small>
-                    </div>
+                <div class="col-sm-9"><input ng-model="costcenter.external_id" type="text" name="costcenterexternalid" class="form-control">
                 </div>
             </div>
-            
-            
         </form>
     </div>
     <div class="modal-footer">
@@ -30,4 +25,3 @@
         <button type="button" ng-disabled="form_costcenter.$invalid" class="btn btn-primary" ng-click="ok()">{{'SETTING.SAVE' | translate}}</button>
     </div>
 </div>
-
