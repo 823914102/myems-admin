@@ -99,6 +99,87 @@
             </div>
           </div>
           </uib-tab>
+
+          <uib-tab heading="{{'SETTING.BIND_POINT' | translate}}">
+              <div class="panel-body" ng-controller="DistributionCircuitPointController">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <div class="panel panel-info">
+                      <div class="panel-heading">
+                        {{'DISTRIBUTION_SYSTEM.DISTRIBUTION_CIRCUIT' | translate}}
+                      </div>
+                      <div class="panel-body" slim-scroll box-height="600px">
+                          <form role="form">
+                          <div class="form-group no-margin"><label>{{'DISTRIBUTION_SYSTEM.SELECT_DISTRIBUTION_CIRCUIT' | translate}}</label>
+                            <ui-select  on-select="changeDistributionCircuit($item,$model)" ng-model="currentDistributionCircuit.selected" theme="bootstrap">
+                              <ui-select-match placeholder="{{'COMMON.PLACEHOLDER' | translate}}">{{$select.selected.name}}</ui-select-match>
+                              <ui-select-choices repeat="distributioncircuit.id as distributioncircuit in distributioncircuits | filter: $select.search">
+                                <div ng-bind-html="distributioncircuit.name | highlight: $select.search"></div>
+                              </ui-select-choices>
+                            </ui-select>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        {{currentDistributionCircuit.name}}{{'SETTING.N_S_POINT' | translate}}
+                      </div>
+                      <div class="panel-body"
+                      x-hjc-drop-target="true"
+                      x-on-drop="pairPoint(dragEl,dropEl)"
+                      uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}" >
+                      <div class="btn btn-primary btn-rounded btn-block"
+                      title="DataSource:{{distributioncircuitpoint.data_source.name}}"
+                      ng-repeat="distributioncircuitpoint in distributioncircuitpoints"
+                      x-hjc-draggable="true"> {{distributioncircuitpoint.name}}</div>
+
+                    </div>
+                  </div>
+                  <div class="panel panel-danger">
+                    <div class="panel-heading">
+                      {{'SETTING.TRASH' | translate}}
+                    </div>
+                    <div class="panel-body trash" >
+                      <img class="trashcan"
+                      src="img/trashcan.jpg"
+                      x-hjc-drop-target="true"
+                      x-on-drop="deletePointPair(dragEl,dropEl)">
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-lg-4">
+                  <div class="panel panel-info">
+                    <div class="panel-heading">
+                      {{'SETTING.POINT_LIST' | translate}}
+                    </div>
+                    <div class="panel-body" slim-scroll box-height="600px"
+                    uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}">
+                      <form role="form">
+                        <div class="form-group no-margin"><label>{{'SETTING.SELECT_DATASOURCE' | translate}}</label>
+                            <ui-select on-select="changeDataSource($item, $model)" ng-model="currentDataSource" theme="bootstrap">
+                                <ui-select-match placeholder="{{'COMMON.PLACEHOLDER' | translate}}">{{$select.selected.name}}</ui-select-match>
+                                <ui-select-choices repeat="datasource.id as datasource in datasources | filter: $select.search">
+                                    <div ng-bind-html="datasource.name | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                      </form>
+                      <h5>{{'SETTING.POINT_LIST' | translate}}</h5>
+                      <div class="source btn btn-info btn-rounded btn-block"
+                      ng-repeat="point in points"
+                      x-hjc-draggable="true"> {{point.name}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </uib-tab>
           <uib-tab heading="{{'DISTRIBUTION_SYSTEM.PREVIEW' | translate}}">
             <div class="panel-body" ng-controller="DistributionSystemPreviewController">
               <div class="row">
@@ -127,7 +208,7 @@
                       {{currentDistributionSystem.name}}{{'DISTRIBUTION_SYSTEM.N_S_PREVIEW' | translate}}
                     </div>
                     <div class="panel-body" >
-                      <div style=" width = 100%; height=100%; overflow-y: scroll; overflow-x: scroll;" id="preview-svg"></div>
+                      <div style="height: 100%; width: 100%; zoom: 100%;" id="preview-svg"></div>
                   </div>
                 </div>
                 </div>
