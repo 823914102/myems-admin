@@ -68,6 +68,7 @@ app.controller('DistributionCircuitController', function($scope,$common, $transl
   						showCloseButton: true,
   					});
   					$scope.getDistributionCircuitsByDistributionSystemID($scope.currentDistributionSystem.id);
+            $scope.$emit('handleEmitDistributionCircuitChanged');
   				} else {
   					var templateName = "DISTRIBUTION_SYSTEM.DISTRIBUTION_CIRCUIT";
   					templateName = $translate.instant(templateName);
@@ -129,6 +130,7 @@ app.controller('DistributionCircuitController', function($scope,$common, $transl
   						showCloseButton: true,
   					});
   					$scope.getDistributionCircuitsByDistributionSystemID($scope.currentDistributionSystem.id);
+            $scope.$emit('handleEmitDistributionCircuitChanged');
   				} else {
   					var templateName = "DISTRIBUTION_SYSTEM.DISTRIBUTION_CIRCUIT";
   					templateName = $translate.instant(templateName);
@@ -188,6 +190,7 @@ app.controller('DistributionCircuitController', function($scope,$common, $transl
                     showCloseButton: true,
                 });
   							$scope.getDistributionCircuitsByDistributionSystemID($scope.currentDistributionSystem.id);
+                $scope.$emit('handleEmitDistributionCircuitChanged');
   						} else if (angular.isDefined(status) && status == 400) {
   							var popType = 'TOASTER.ERROR';
                 var popTitle = error.title;
@@ -228,6 +231,11 @@ app.controller('DistributionCircuitController', function($scope,$common, $transl
   	};
 
   	$scope.getAllDistributionSystems();
+
+    $scope.$on('handleBroadcastDistributionSystemChanged', function(event) {
+      $scope.getAllDistributionSystems();
+  	});
+
   });
 
 

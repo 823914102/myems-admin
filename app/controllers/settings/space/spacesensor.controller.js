@@ -147,4 +147,39 @@ app.controller('SpaceSensorController', function ($scope, $common, $uibModal, $t
 
     $scope.getAllSensors();
     $scope.getAllSpaces();
+
+    $scope.refreshSpaceTree = function() {
+      SpaceService.getAllSpaces(function(error, data) {
+        if (!error) {
+          $scope.spaces = data;
+        } else {
+          $scope.spaces = [];
+        }
+        //create space tree
+        var treedata = {'core': {'data': [], "multiple" : false,}, "plugins" : [ "wholerow" ]};
+        for(var i=0; i < $scope.spaces.length; i++) {
+            if ($scope.spaces[i].id == 1) {
+              var node = {"id": $scope.spaces[i].id.toString(),
+                                  "parent": '#',
+                                  "text": $scope.spaces[i].name,
+                                  "state": {  'opened' : true,  'selected' : false },
+                                 };
+            } else {
+                var node = {"id": $scope.spaces[i].id.toString(),
+                                    "parent": $scope.spaces[i].parent_space.id.toString(),
+                                    "text": $scope.spaces[i].name,
+                                   };
+            };
+            treedata['core']['data'].push(node);
+        }
+
+        angular.element(spacetreewithsensor).jstree(true).settings.core.data = treedata['core']['data'];
+        angular.element(spacetreewithsensor).jstree(true).refresh();
+      });
+    };
+
+  	$scope.$on('handleBroadcastSpaceChanged', function(event) {
+      $scope.spacesensors = [];
+      $scope.refreshSpaceTree();
+  	});
 });

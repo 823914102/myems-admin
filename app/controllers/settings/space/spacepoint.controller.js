@@ -7,31 +7,6 @@ app.controller('SpacePointController', function ($scope, $common, $uibModal, $ti
     $scope.datasources = [];
     $scope.points = [];
 
-
-    $scope.getAllDataSources = function () {
-        DataSourceService.getAllDataSources(function (error, data) {
-            if (!error) {
-                $scope.datasources = data;
-                if ($scope.datasources.length > 0) {
-                    $scope.currentDataSource = $scope.datasources[0].id;
-                    $scope.getPointsByDataSourceID($scope.currentDataSource);
-                }
-            } else {
-                $scope.datasources = [];
-            }
-        });
-    };
-
-    $scope.getPointsByDataSourceID = function (id) {
-        PointService.getPointsByDataSourceID(id, function (error, data) {
-            if (!error) {
-                $scope.points = data;
-            } else {
-                $scope.points = [];
-            }
-        });
-    };
-
     $scope.getAllSpaces = function() {
       SpaceService.getAllSpaces(function(error, data) {
         if (!error) {
@@ -64,6 +39,30 @@ app.controller('SpacePointController', function ($scope, $common, $uibModal, $ti
             $scope.getPointsBySpaceID($scope.currentSpaceID);
         });
       });
+    };
+
+    $scope.getAllDataSources = function () {
+        DataSourceService.getAllDataSources(function (error, data) {
+            if (!error) {
+                $scope.datasources = data;
+                if ($scope.datasources.length > 0) {
+                    $scope.currentDataSource = $scope.datasources[0].id;
+                    $scope.getPointsByDataSourceID($scope.currentDataSource);
+                }
+            } else {
+                $scope.datasources = [];
+            }
+        });
+    };
+
+    $scope.getPointsByDataSourceID = function (id) {
+        PointService.getPointsByDataSourceID(id, function (error, data) {
+            if (!error) {
+                $scope.points = data;
+            } else {
+                $scope.points = [];
+            }
+        });
     };
 
     $scope.getPointsBySpaceID = function (id) {
@@ -169,4 +168,39 @@ app.controller('SpacePointController', function ($scope, $common, $uibModal, $ti
 
     $scope.getAllDataSources();
     $scope.getAllSpaces();
+
+    $scope.refreshSpaceTree = function() {
+      SpaceService.getAllSpaces(function(error, data) {
+        if (!error) {
+          $scope.spaces = data;
+        } else {
+          $scope.spaces = [];
+        }
+        //create space tree
+        var treedata = {'core': {'data': [], "multiple" : false,}, "plugins" : [ "wholerow" ]};
+        for(var i=0; i < $scope.spaces.length; i++) {
+            if ($scope.spaces[i].id == 1) {
+              var node = {"id": $scope.spaces[i].id.toString(),
+                                  "parent": '#',
+                                  "text": $scope.spaces[i].name,
+                                  "state": {  'opened' : true,  'selected' : false },
+                                 };
+            } else {
+                var node = {"id": $scope.spaces[i].id.toString(),
+                                    "parent": $scope.spaces[i].parent_space.id.toString(),
+                                    "text": $scope.spaces[i].name,
+                                   };
+            };
+            treedata['core']['data'].push(node);
+        }
+
+        angular.element(spacetreewithpoint).jstree(true).settings.core.data = treedata['core']['data'];
+        angular.element(spacetreewithpoint).jstree(true).refresh();
+      });
+    };
+
+  	$scope.$on('handleBroadcastSpaceChanged', function(event) {
+      $scope.spacepoints = [];
+      $scope.refreshSpaceTree();
+  	});
 });

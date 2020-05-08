@@ -29,12 +29,12 @@ app.controller('SpaceMeterController', function($scope,$common ,$timeout, $trans
           };
           treedata['core']['data'].push(node);
       }
-    
+
       angular.element(spacetreewithmeter).jstree(treedata);
       //space tree selected changed event handler
       angular.element(spacetreewithmeter).on("changed.jstree", function (e, data) {
           $scope.currentSpaceID = parseInt(data.selected[0]);
-          console.log($scope.currentSpaceID);
+          $scope.spacemeters=[];
           $scope.getMetersBySpaceID($scope.currentSpaceID);
       });
     });
@@ -204,5 +204,40 @@ app.controller('SpaceMeterController', function($scope,$common ,$timeout, $trans
 	$scope.getAllMeters();
 	$scope.getAllVirtualMeters();
 	$scope.getAllOfflineMeters();
+
+  $scope.refreshSpaceTree = function() {
+    SpaceService.getAllSpaces(function(error, data) {
+      if (!error) {
+        $scope.spaces = data;
+      } else {
+        $scope.spaces = [];
+      }
+      //create space tree
+      var treedata = {'core': {'data': [], "multiple" : false,}, "plugins" : [ "wholerow" ]};
+      for(var i=0; i < $scope.spaces.length; i++) {
+          if ($scope.spaces[i].id == 1) {
+            var node = {"id": $scope.spaces[i].id.toString(),
+                                "parent": '#',
+                                "text": $scope.spaces[i].name,
+                                "state": {  'opened' : true,  'selected' : false },
+                               };
+          } else {
+              var node = {"id": $scope.spaces[i].id.toString(),
+                                  "parent": $scope.spaces[i].parent_space.id.toString(),
+                                  "text": $scope.spaces[i].name,
+                                 };
+          };
+          treedata['core']['data'].push(node);
+      }
+
+      angular.element(spacetreewithmeter).jstree(true).settings.core.data = treedata['core']['data'];
+      angular.element(spacetreewithmeter).jstree(true).refresh();
+    });
+  };
+
+	$scope.$on('handleBroadcastSpaceChanged', function(event) {
+    $scope.spacemeters = [];
+    $scope.refreshSpaceTree();
+	});
 
 });
