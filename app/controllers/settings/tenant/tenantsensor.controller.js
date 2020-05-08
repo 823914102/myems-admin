@@ -126,4 +126,8 @@ app.controller('TenantSensorController', function ($scope, $common, $uibModal, $
 
     $scope.getAllSensors();
     $scope.getAllTenants();
+
+  	$scope.$on('handleBroadcastTenantChanged', function(event) {
+      $scope.getAllTenants();
+  	});
 });

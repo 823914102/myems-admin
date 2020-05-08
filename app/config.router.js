@@ -470,7 +470,7 @@ app
                                                     'app/services/settings/datasource/datasource.service.js',
                                                     'app/services/settings/datasource/point.service.js',
                                                     'app/services/settings/sensor/sensor.service.js',
-                                                    'app/controllers/settings/tenant/tenantmaster.controller.js',
+                                                    'app/controllers/settings/tenant/tenant.master.controller.js',
                                                     'app/controllers/settings/tenant/tenant.controller.js',
                                                     'app/controllers/settings/tenant/tenantmeter.controller.js',
                                                     'app/controllers/settings/tenant/tenantpoint.controller.js',
