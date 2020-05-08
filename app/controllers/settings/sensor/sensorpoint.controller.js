@@ -151,4 +151,8 @@ app.controller('SensorPointController', function ($scope, $common, $uibModal, $t
 
     $scope.getAllDataSources();
     $scope.getAllSensors();
+
+  	$scope.$on('handleBroadcastSensorChanged', function(event) {
+      $scope.getAllSensors();
+  	});
 });

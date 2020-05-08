@@ -47,6 +47,7 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
 						showCloseButton: true,
 					});
 					$scope.getAllSensors();
+					$scope.$emit('handleEmitSensorChanged');
 				} else {
 					var templateName = "COMMON.SENSOR";
 					templateName = $translate.instant(templateName);
@@ -108,6 +109,7 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
 						showCloseButton: true,
 					});
 					$scope.getAllSensors();
+					$scope.$emit('handleEmitSensorChanged');
 				} else {
 					var templateName = "COMMON.SENSOR";
 					templateName = $translate.instant(templateName);
@@ -167,6 +169,7 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
                                 showCloseButton: true,
                             });
 							$scope.getAllSensors();
+							$scope.$emit('handleEmitSensorChanged');
 						} else if (angular.isDefined(status) && status == 400) {
 							var popType = 'TOASTER.ERROR';
               var popTitle = error.title;
