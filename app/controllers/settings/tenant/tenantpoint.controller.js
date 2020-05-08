@@ -147,4 +147,8 @@ app.controller('TenantPointController', function ($scope, $common, $uibModal, $t
 
     $scope.getAllDataSources();
     $scope.getAllTenants();
+
+  	$scope.$on('handleBroadcastTenantChanged', function(event) {
+      $scope.getAllTenants();
+  	});
 });

@@ -350,6 +350,10 @@ app.controller('EnergyFlowDiagramLinkController', function($scope,$common ,$time
 
   $scope.getAllEnergyFlowDiagrams();
   $scope.getMergedMeters();
+
+  $scope.$on('handleBroadcastEnergyFlowDiagramChanged', function(event) {
+    $scope.getAllEnergyFlowDiagrams();
+  });
 });
 
 app.controller('ModalAddEnergyFlowDiagramLinkCtrl', function($scope, $uibModalInstance, params) {

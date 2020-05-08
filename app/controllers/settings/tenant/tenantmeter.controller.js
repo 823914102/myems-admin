@@ -195,4 +195,8 @@ app.controller('TenantMeterController', function($scope,$common ,$timeout,$uibMo
 	$scope.getAllVirtualMeters();
 	$scope.getAllOfflineMeters();
 
+	$scope.$on('handleBroadcastTenantChanged', function(event) {
+    $scope.getAllTenants();
+	});
+
 });

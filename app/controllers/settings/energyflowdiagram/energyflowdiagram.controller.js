@@ -39,6 +39,7 @@ app.controller('EnergyFlowDiagramController', function($scope,$common, $translat
 						showCloseButton: true,
 					});
 					$scope.getAllEnergyFlowDiagrams();
+					$scope.$emit('handleEmitEnergyFlowDiagramChanged');
 				} else {
 					var templateName = "COMMON.ENERGY_FLOW_DIAGRAM";
 					templateName = $translate.instant(templateName);
@@ -99,6 +100,7 @@ app.controller('EnergyFlowDiagramController', function($scope,$common, $translat
 						showCloseButton: true,
 					});
 					$scope.getAllEnergyFlowDiagrams();
+					$scope.$emit('handleEmitEnergyFlowDiagramChanged');
 				} else {
 					var templateName = "COMMON.ENERGY_FLOW_DIAGRAM";
 					templateName = $translate.instant(templateName);
@@ -157,6 +159,7 @@ app.controller('EnergyFlowDiagramController', function($scope,$common, $translat
                         showCloseButton: true,
                     });
 							      $scope.getAllEnergyFlowDiagrams();
+										$scope.$emit('handleEmitEnergyFlowDiagramChanged');
 		            	} else {
 		            		var templateName = "COMMON.ENERGY_FLOW_DIAGRAM";
                     templateName = $translate.instant(templateName);
