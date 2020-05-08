@@ -210,6 +210,10 @@ app.controller('EnergyItemController', function($scope,$common, $translate,$uibM
 
 	$scope.getAllEnergyItems();
 	$scope.getAllCategories();
+
+	$scope.$on('handleBroadcastEnergyCategoryChanged', function(event) {
+		$scope.getAllCategories();
+	});
 });
 
 app.controller('ModalAddEnergyItemCtrl', function ($scope, $uibModalInstance,params) {
