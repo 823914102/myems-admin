@@ -151,4 +151,8 @@ app.controller('DistributionCircuitPointController', function ($scope, $common, 
 
     $scope.getAllDataSources();
     $scope.getAllDistributionCircuits();
+
+    $scope.$on('handleBroadcastDistributionCircuitChanged', function(event) {
+      $scope.getAllDistributionCircuits();
+  	});
 });

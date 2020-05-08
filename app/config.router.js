@@ -418,7 +418,7 @@ app
                                                     'app/controllers/settings/space/spacetenant.controller.js',
                                                     'app/controllers/settings/space/spacepoint.controller.js',
                                                     'app/controllers/settings/space/spacesensor.controller.js',
-                                                    'app/controllers/settings/space/spacemaster.controller.js'
+                                                    'app/controllers/settings/space/space.master.controller.js'
                                                 ]
                                             }]);
                                         }
@@ -773,6 +773,7 @@ app
                                                     'app/services/settings/distributionsystem/distributioncircuitpoint.service.js',
                                                     'app/services/settings/datasource/datasource.service.js',
                                                     'app/services/settings/datasource/point.service.js',
+                                                    'app/controllers/settings/distributionsystem/distributionsystem.master.controller.js',
                                                     'app/controllers/settings/distributionsystem/distributionsystem.controller.js',
                                                     'app/controllers/settings/distributionsystem/distributioncircuit.controller.js',
                                                     'app/controllers/settings/distributionsystem/distributioncircuitpoint.controller.js',

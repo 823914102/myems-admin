@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content">
+<div class="wrapper wrapper-content" ng-controller="DistributionSystemMasterController">
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -45,7 +45,7 @@
                         <div class="form-group no-margin"><label>{{'DISTRIBUTION_SYSTEM.SELECT_DISTRIBUTION_SYSTEM' | translate}}</label>
                           <ui-select  on-select="changeDistributionSystem($item,$model)" ng-model="currentDistributionSystem.selected" theme="bootstrap">
                             <ui-select-match placeholder="{{'COMMON.PLACEHOLDER' | translate}}">{{$select.selected.name}}</ui-select-match>
-                            <ui-select-choices repeat="distributionsystem.id as distributionsystem in distributionsystems | filter: $select.search">
+                            <ui-select-choices repeat="distributionsystem.id as distributionsystem in distributionsystems | filter: $select.search" >
                               <div ng-bind-html="distributionsystem.name | highlight: $select.search"></div>
                             </ui-select-choices>
                           </ui-select>
@@ -100,7 +100,7 @@
           </div>
           </uib-tab>
 
-          <uib-tab heading="{{'SETTING.BIND_POINT' | translate}}" select="tabBindPointSelected()>
+          <uib-tab heading="{{'SETTING.BIND_POINT' | translate}}" >
               <div class="panel-body" ng-controller="DistributionCircuitPointController">
                 <div class="row">
                   <div class="col-lg-3">

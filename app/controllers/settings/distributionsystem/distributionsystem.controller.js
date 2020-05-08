@@ -39,6 +39,7 @@ app.controller('DistributionSystemController', function($scope,$common, $transla
 						showCloseButton: true,
 					});
 					$scope.getAllDistributionSystems();
+					$scope.$emit('handleEmitDistributionSystemChanged');
 				} else {
 					var templateName = "DISTRIBUTION_SYSTEM.DISTRIBUTION_SYSTEM";
 					templateName = $translate.instant(templateName);
@@ -99,6 +100,7 @@ app.controller('DistributionSystemController', function($scope,$common, $transla
 						showCloseButton: true,
 					});
 					$scope.getAllDistributionSystems();
+					$scope.$emit('handleEmitDistributionSystemChanged');
 				} else {
 					var templateName = "DISTRIBUTION_SYSTEM.DISTRIBUTION_SYSTEM";
 					templateName = $translate.instant(templateName);
@@ -157,6 +159,7 @@ app.controller('DistributionSystemController', function($scope,$common, $transla
                         showCloseButton: true,
                     });
 							      $scope.getAllDistributionSystems();
+          					$scope.$emit('handleEmitDistributionSystemChanged');
 		            	} else {
 		            		var templateName = "DISTRIBUTION_SYSTEM.DISTRIBUTION_SYSTEM";
                     templateName = $translate.instant(templateName);

@@ -49,7 +49,7 @@ app.controller('SpaceController', function($scope,$common,$uibModal, SpaceServic
 					};
 					treedata['core']['data'].push(node);
 			}
-		
+
 			angular.element(spacetree).jstree(treedata);
       //space tree selected changed event handler
     	angular.element(spacetree).on("changed.jstree", function (e, data) {
