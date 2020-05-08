@@ -110,6 +110,7 @@ $scope.getAllEnergyItems = function() {
 						showCloseButton: true,
 					});
 					$scope.getAllVirtualMeters();
+					$scope.$emit('handleEmitVirtualMeterChanged');
 				} else {
 					var templateName = "SETTING.VIRTUAL_METER";
 					templateName = $translate.instant(templateName);
@@ -184,6 +185,7 @@ $scope.getAllEnergyItems = function() {
 						showCloseButton: true,
 					});
 					$scope.getAllVirtualMeters();
+					$scope.$emit('handleEmitVirtualMeterChanged');
 				} else {
 					var templateName = "SETTING.VIRTUAL_METER";
 					templateName = $translate.instant(templateName);
@@ -243,6 +245,7 @@ $scope.getAllEnergyItems = function() {
                   showCloseButton: true,
               });
 							$scope.getAllVirtualMeters();
+							$scope.$emit('handleEmitVirtualMeterChanged');
 						} else if (angular.isDefined(status) && status == 400) {
 							var popType = 'TOASTER.ERROR';
               var popTitle = error.title;
@@ -251,7 +254,6 @@ $scope.getAllEnergyItems = function() {
               popType = $translate.instant(popType);
               popTitle = $translate.instant(popTitle);
               popBody = $translate.instant(popBody);
-
 
               toaster.pop({
                   type: popType,
@@ -289,6 +291,18 @@ $scope.getAllEnergyItems = function() {
 	$scope.getAllCategories();
 	$scope.getAllEnergyItems();
 	$scope.getAllCostCenters();
+
+	$scope.$on('handleBroadcastMeterChanged', function(event) {
+		$scope.getAllMeters();
+	});
+
+	$scope.$on('handleBroadcastOfflineMeterChanged', function(event) {
+		$scope.getAllOfflineMeters();
+	});
+
+	$scope.$on('handleBroadcastVirtualMeterChanged', function(event) {
+		$scope.getAllVirtualMeters();
+	});
 
 });
 

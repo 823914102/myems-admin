@@ -87,6 +87,7 @@ app.controller('OfflineMeterController', function($scope, $common, $translate, $
 					});
 
 					$scope.getAllOfflineMeters();
+					$scope.$emit('handleEmitOfflineMeterChanged');
 				} else {
 					var templateName = "SETTING.OFFLINE_METER";
 					templateName = $translate.instant(templateName);
@@ -158,6 +159,7 @@ app.controller('OfflineMeterController', function($scope, $common, $translate, $
 						showCloseButton: true,
 					});
 					$scope.getAllOfflineMeters();
+					$scope.$emit('handleEmitOfflineMeterChanged');
 				} else {
 					var templateName = "SETTING.OFFLINE_METER";
 					templateName = $translate.instant(templateName);
@@ -200,57 +202,58 @@ app.controller('OfflineMeterController', function($scope, $common, $translate, $
 					OfflineMeterService.deleteOfflineMeter(offlinemeter, function(error, status) {
 						if (angular.isDefined(status) && status == 204) {
 							var templateName = "SETTING.OFFLINE_METER";
-                            templateName = $translate.instant(templateName);
+              templateName = $translate.instant(templateName);
 
-                            var popType = 'TOASTER.SUCCESS';
-                            var popTitle = $common.toaster.success_title;
-                            var popBody = $common.toaster.success_delete_body;
+              var popType = 'TOASTER.SUCCESS';
+              var popTitle = $common.toaster.success_title;
+              var popBody = $common.toaster.success_delete_body;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody, {template: templateName});
+              popType = $translate.instant(popType);
+              popTitle = $translate.instant(popTitle);
+              popBody = $translate.instant(popBody, {template: templateName});
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
+              toaster.pop({
+                  type: popType,
+                  title: popTitle,
+                  body: popBody,
+                  showCloseButton: true,
+              });
 							$scope.getAllOfflineMeters();
+							$scope.$emit('handleEmitOfflineMeterChanged');
 						} else if (angular.isDefined(status) && status == 400) {
 							var popType = 'TOASTER.ERROR';
-                            var popTitle = error.title;
-                            var popBody = error.description;
+              var popTitle = error.title;
+              var popBody = error.description;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody);
+              popType = $translate.instant(popType);
+              popTitle = $translate.instant(popTitle);
+              popBody = $translate.instant(popBody);
 
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
+              toaster.pop({
+                  type: popType,
+                  title: popTitle,
+                  body: popBody,
+                  showCloseButton: true,
+              });
 						} else {
 							var templateName = "SETTING.OFFLINE_METER";
-                            templateName = $translate.instant(templateName);
+              templateName = $translate.instant(templateName);
 
-                            var popType = 'TOASTER.ERROR';
-                            var popTitle = $common.toaster.error_title;
-                            var popBody = $common.toaster.error_delete_body;
+              var popType = 'TOASTER.ERROR';
+              var popTitle = $common.toaster.error_title;
+              var popBody = $common.toaster.error_delete_body;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody, {template: templateName});
+              popType = $translate.instant(popType);
+              popTitle = $translate.instant(popTitle);
+              popBody = $translate.instant(popBody, {template: templateName});
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
+              toaster.pop({
+                  type: popType,
+                  title: popTitle,
+                  body: popBody,
+                  showCloseButton: true,
+              });
 						}
 					});
 				}

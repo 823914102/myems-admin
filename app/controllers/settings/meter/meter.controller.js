@@ -88,6 +88,7 @@ $scope.getAllEnergyItems = function() {
 						showCloseButton: true,
 					});
 					$scope.getAllMeters();
+					$scope.$emit('handleEmitMeterChanged');
 				} else {
 					var templateName = "SETTING.METER";
 					templateName = $translate.instant(templateName);
@@ -159,6 +160,7 @@ $scope.getAllEnergyItems = function() {
 						showCloseButton: true,
 					});
 					$scope.getAllMeters();
+					$scope.$emit('handleEmitMeterChanged');
 				} else {
 					var templateName = "SETTING.METER";
 					templateName = $translate.instant(templateName);
@@ -201,23 +203,24 @@ $scope.getAllEnergyItems = function() {
 					MeterService.deleteMeter(meter, function(error, status) {
 						if (angular.isDefined(status) && status == 204) {
 							var templateName = "SETTING.METER";
-                            templateName = $translate.instant(templateName);
+              templateName = $translate.instant(templateName);
 
-                            var popType = 'TOASTER.SUCCESS';
-                            var popTitle = $common.toaster.success_title;
-                            var popBody = $common.toaster.success_delete_body;
+              var popType = 'TOASTER.SUCCESS';
+              var popTitle = $common.toaster.success_title;
+              var popBody = $common.toaster.success_delete_body;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody, {template: templateName});
+              popType = $translate.instant(popType);
+              popTitle = $translate.instant(popTitle);
+              popBody = $translate.instant(popBody, {template: templateName});
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
+              toaster.pop({
+                  type: popType,
+                  title: popTitle,
+                  body: popBody,
+                  showCloseButton: true,
+              });
 							$scope.getAllMeters();
+							$scope.$emit('handleEmitMeterChanged');
 						} else if (angular.isDefined(status) && status == 400) {
 							var popType = 'TOASTER.ERROR';
               var popTitle = error.title;
