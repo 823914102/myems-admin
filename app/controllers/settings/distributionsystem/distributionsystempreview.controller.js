@@ -33,7 +33,7 @@ app.controller('DistributionSystemPreviewController', function($scope,$common, $
 
     $scope.getAllDistributionSystems();
 
-  	$scope.$on('handleBroadcastSpaceChanged', function(event) {
+  	$scope.$on('handleBroadcastDistributionSystemChanged', function(event) {
       $scope.getAllDistributionSystems();
   	});
 
