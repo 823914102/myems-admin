@@ -29,10 +29,10 @@ app.controller('EnergyFlowDiagramPreviewController', function($scope,$common, $t
     $scope.changeEnergyFlowDiagram=function(item,model){
         $scope.currentEnergyFlowDiagram=item;
         $scope.currentEnergyFlowDiagram.selected=model;
-        $scope.getEnergyFlowChart();
+        $scope.refreshEnergyFlowChart();
     };
 
-    $scope.getEnergyFlowChart = function() {
+    $scope.refreshEnergyFlowChart = function() {
       var data = {title: {text:null}, accessibility:{point:{valueDescriptionFormat:null}}, series:[{keys:null, data:null, type:null, name:null }]};
       data.title.text = ($scope.currentEnergyFlowDiagram != null) ? $scope.currentEnergyFlowDiagram.name: null;
       data.accessibility.point.valueDescriptionFormat = '{index}. {point.from} to {point.to}, {point.weight}.';
@@ -52,6 +52,12 @@ app.controller('EnergyFlowDiagramPreviewController', function($scope,$common, $t
 
     $scope.$on('handleBroadcastEnergyFlowDiagramChanged', function(event) {
       $scope.getAllEnergyFlowDiagrams();
+      $scope.refreshEnergyFlowChart();
+    });
+
+    $scope.$on('handleBroadcastEnergyFlowDiagramLinkChanged', function(event) {
+      $scope.getAllEnergyFlowDiagrams();
+      $scope.refreshEnergyFlowChart();
     });
 
 });

@@ -100,6 +100,7 @@ app.controller('EnergyFlowDiagramLinkController', function($scope,$common ,$time
 						showCloseButton: true,
 					});
 					$scope.getLinksByEnergyFlowDiagramID($scope.currentEnergyFlowDiagram.id);
+          $scope.$emit('handleEmitEnergyFlowDiagramLinkChanged');
 				} else {
 					var templateName = "ENERGY_FLOW_DIAGRAM.LINK";
 					templateName = $translate.instant(templateName);
@@ -171,6 +172,7 @@ app.controller('EnergyFlowDiagramLinkController', function($scope,$common ,$time
 						showCloseButton: true,
 					});
 					$scope.getLinksByEnergyFlowDiagramID($scope.currentEnergyFlowDiagram.id);
+          $scope.$emit('handleEmitEnergyFlowDiagramLinkChanged');
 				} else {
 					var templateName = "ENERGY_FLOW_DIAGRAM.LINK";
 					templateName = $translate.instant(templateName);
@@ -230,6 +232,7 @@ app.controller('EnergyFlowDiagramLinkController', function($scope,$common ,$time
                   showCloseButton: true,
               });
 							$scope.getLinksByEnergyFlowDiagramID($scope.currentEnergyFlowDiagram.id);
+              $scope.$emit('handleEmitEnergyFlowDiagramLinkChanged');
 						} else if (angular.isDefined(status) && status == 400) {
 							var popType = 'TOASTER.ERROR';
               var popTitle = error.title;
@@ -353,6 +356,10 @@ app.controller('EnergyFlowDiagramLinkController', function($scope,$common ,$time
 
   $scope.$on('handleBroadcastEnergyFlowDiagramChanged', function(event) {
     $scope.getAllEnergyFlowDiagrams();
+  });
+
+  $scope.$on('handleBroadcastEnergyFlowDiagramNodeChanged', function(event) {
+    $scope.getNodesByEnergyFlowDiagramID($scope.currentEnergyFlowDiagram.id);
   });
 });
 
