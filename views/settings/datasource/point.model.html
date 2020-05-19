@@ -16,7 +16,7 @@
             <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.OBJECT_TYPE' | translate}}</label>
 
                 <div class="col-sm-8">
-                    <select ng-disabled="disable" name="pointobject_type"  ng-model="point.object_type" class="form-control m-b">
+                    <select name="pointobject_type"  ng-model="point.object_type" class="form-control m-b">
                                 <option value="ENERGY_VALUE">ENERGY VALUE</option>
                                 <option value="ANALOG_VALUE">ANALOG VALUE</option>
                                 <option value="DIGITAL_VALUE">DIGITAL VALUE</option>
@@ -39,9 +39,9 @@
             <div class="hr-line-dashed"></div>
             <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.HIGH_LIMIT' | translate}}</label>
 
-                <div class="col-sm-8"><input ng-model="point.hi_limit" type="text" name="pointhi_limit" class="form-control" required="">
-                    <div class="m-t-xs" ng-show="form_point.pointhi_limit.$invalid && form_point.pointhi_limit.$dirty">
-                        <small class="text-danger" ng-show="form_point.pointhi_limit.$error.required">{{'SETTING.INPUT_HIGH_LIMIT' | translate}}</small>
+                <div class="col-sm-8"><input ng-model="point.high_limit" type="text" name="pointhigh_limit" class="form-control" required="">
+                    <div class="m-t-xs" ng-show="form_point.pointhigh_limit.$invalid && form_point.pointhigh_limit.$dirty">
+                        <small class="text-danger" ng-show="form_point.pointhigh_limit.$error.required">{{'SETTING.INPUT_HIGH_LIMIT' | translate}}</small>
                     </div>
                 </div>
             </div>
@@ -57,14 +57,16 @@
             <div class="hr-line-dashed"></div>
             <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.RATIO' | translate}}</label>
 
-                <div class="col-sm-8"><input ng-model="point.ratio" type="text" name="pointratio" class="form-control">
-
+                <div class="col-sm-8"><input ng-model="point.ratio" type="text" name="pointratio" class="form-control"  required="">
+                  <div class="m-t-xs" ng-show="form_point.pointratio.$invalid && form_point.pointratio.$dirty">
+                      <small class="text-danger" ng-show="form_point.pointratio.$error.required">{{'SETTING.INPUT_RATIO' | translate}}</small>
+                  </div>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.ADDRESS' | translate}}</label>
 
-                <div class="col-sm-8"><textarea ng-disabled="disable" rows="3" ng-model="point.address" type="text" name="pointaddress" class="form-control" required=""></textarea>
+                <div class="col-sm-8"><textarea rows="3" ng-model="point.address" type="text" name="pointaddress" class="form-control" required=""></textarea>
                     <div class="m-t-xs" ng-show="form_point.pointaddress.$invalid && form_point.pointaddress.$dirty">
                         <small class="text-danger" ng-show="form_point.pointaddress.$error.required">{{'SETTING.INPUT_ADDRESS' | translate}}</small>
                     </div>

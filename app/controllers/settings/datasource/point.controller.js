@@ -240,7 +240,6 @@ app.controller('PointController', function($scope, $common, $uibModal, $timeout,
 app.controller('ModalAddPointCtrl', function($scope, $uibModalInstance) {
 
 	$scope.operation = "SETTING.ADD_POINT";
-	$scope.disable = false;
 	$scope.point = {};
 	$scope.point.object_type = "ENERGY_VALUE";
 	$scope.point.is_trend = true;
@@ -255,7 +254,6 @@ app.controller('ModalAddPointCtrl', function($scope, $uibModalInstance) {
 
 app.controller('ModalEditPointCtrl', function($scope, $uibModalInstance, params) {
 	$scope.operation = "SETTING.EDIT_POINT";
-	$scope.disable = true;
 	$scope.point = params.point;
 
 	$scope.ok = function() {
