@@ -37,8 +37,10 @@ $scope.getAllEnergyItems = function() {
 		MeterService.getAllMeters(function(error, data) {
 			if (!error) {
 				$scope.meters = data;
+				$scope.parentmeters = data;
 			} else {
 				$scope.meters = [];
+				$scope.parentmeters = [];
 			}
 		});
 
@@ -53,6 +55,7 @@ $scope.getAllEnergyItems = function() {
 				params: function() {
 					return {
 						meters: angular.copy($scope.meters),
+						parentmeters: angular.copy($scope.parentmeters),
 						categories: angular.copy($scope.categories),
 						costcenters: angular.copy($scope.costcenters),
 						energyitems: angular.copy($scope.energyitems),
@@ -62,12 +65,17 @@ $scope.getAllEnergyItems = function() {
 		});
 		modalInstance.result.then(function(meter) {
 			meter.energy_category_id = meter.energy_category.id;
+			meter.cost_center_id = meter.cost_center.id;
 			if(angular.isDefined(meter.energy_item)) {
 				meter.energy_item_id = meter.energy_item.id;
 			} else {
 				meter.energy_item_id = undefined;
 			}
-			meter.cost_center_id = meter.cost_center.id;
+			if(angular.isDefined(meter.parent_meter)) {
+				meter.parent_meter_id = meter.parent_meter.id;
+			} else {
+				meter.parent_meter_id = undefined;
+			}
 			MeterService.addMeter(meter, function(error, status) {
 				if (angular.isDefined(status) && status == 201) {
 					var templateName = "SETTING.METER";
@@ -124,6 +132,7 @@ $scope.getAllEnergyItems = function() {
 					return {
 						meter: angular.copy(meter),
 						meters: angular.copy($scope.meters),
+						parentmeters: angular.copy($scope.parentmeters),
 						categories: angular.copy($scope.categories),
 						costcenters: angular.copy($scope.costcenters),
 						energyitems: angular.copy($scope.energyitems),
@@ -139,6 +148,11 @@ $scope.getAllEnergyItems = function() {
 				modifiedMeter.energy_item_id = modifiedMeter.energy_item.id;
 			} else {
 				modifiedMeter.energy_item_id = undefined;
+			}
+			if (modifiedMeter.parent_meter != null && modifiedMeter.parent_meter.id != null ) {
+				modifiedMeter.parent_meter_id = modifiedMeter.parent_meter.id;
+			} else {
+				modifiedMeter.parent_meter_id = undefined;
 			}
 			MeterService.editMeter(modifiedMeter, function(error, status) {
 				if (angular.isDefined(status) && status == 200) {
@@ -273,6 +287,7 @@ app.controller('ModalAddMeterCtrl', function($scope, $uibModalInstance, params) 
 	$scope.categories = params.categories;
 	$scope.costcenters = params.costcenters;
 	$scope.energyitems = params.energyitems;
+	$scope.parentmeters = params.parentmeters;
 	$scope.meter = {
 		is_counted: false
 	};
@@ -289,6 +304,7 @@ app.controller('ModalEditMeterCtrl', function($scope, $uibModalInstance, params)
 	$scope.operation = "SETTING.EDIT_METER";
 	$scope.meter = params.meter;
 	$scope.meters = params.meters;
+	$scope.parentmeters = params.parentmeters;
 	$scope.categories = params.categories;
 	$scope.costcenters = params.costcenters;
 	$scope.energyitems = params.energyitems;

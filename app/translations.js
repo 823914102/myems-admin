@@ -822,6 +822,8 @@ function config($translateProvider) {
               LOCATION:'Location',
               INPUT_LOCATION:'Input Location',
               DESCRIPTION:'Description',
+              PARENT_METER:'Parent Meter',
+              SELECT_PARENT_METER:'Select Parent Meter',
               INPUT_DESCRIPTION:'Input Description',
             },
             SENSOR: {
@@ -2093,6 +2095,8 @@ function config($translateProvider) {
               INPUT_LOCATION:'输入位置',
               DESCRIPTION:'描述',
               INPUT_DESCRIPTION:'输入描述',
+              PARENT_METER:'上级计量表',
+              SELECT_PARENT_METER:'选择上级计量表',
             },
             SENSOR: {
               ADD_SENSOR: '添加传感器',
