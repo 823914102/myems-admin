@@ -86,7 +86,7 @@ $scope.getAllEnergyItems = function() {
             var node = {"id": $scope.meters[i].id.toString(),
                                 "parent": '#',
                                 "text": $scope.meters[i].name,
-                                "state": {  'opened' : true,  'selected' : true },
+                                "state": {  'opened' : true,  'selected' : false },
                                };
           } else {
               var node = {"id": $scope.meters[i].id.toString(),
