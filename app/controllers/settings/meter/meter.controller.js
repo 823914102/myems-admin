@@ -37,12 +37,80 @@ $scope.getAllEnergyItems = function() {
 		MeterService.getAllMeters(function(error, data) {
 			if (!error) {
 				$scope.meters = data;
+				$scope.parentmeters = data;
 			} else {
 				$scope.meters = [];
+				$scope.parentmeters = [];
 			}
+			//create meter tree
+			var treedata = {'core': {'data': [], "multiple" : false,}, "plugins" : [ "wholerow" ]};
+			for(var i=0; i < $scope.meters.length; i++) {
+					if ($scope.meters[i].parent_meter == null) {
+						var node = {"id": $scope.meters[i].id.toString(),
+																"parent": '#',
+																"text": $scope.meters[i].name,
+																"state": {  'opened' : true,  'selected' : false },
+															 };
+					} else {
+							var node = {"id": $scope.meters[i].id.toString(),
+																	"parent": $scope.meters[i].parent_meter.id.toString(),
+																	"text": $scope.meters[i].name,
+																 };
+					};
+					treedata['core']['data'].push(node);
+			}
+
+			angular.element(metertree).jstree(treedata);
+      //meter tree selected changed event handler
+    	angular.element(metertree).on("changed.jstree", function (e, data) {
+    	  $scope.currentMeterID = parseInt(data.selected[0]);
+        $scope.getMeterChildren($scope.currentMeterID);
+    	});
 		});
 
 	};
+
+  $scope.refreshMeterTree = function() {
+		MeterService.getAllMeters(function(error, data) {
+			if (!error) {
+				$scope.meters = data;
+				$scope.parentmeters = data;
+			} else {
+				$scope.meters = [];
+				$scope.parentmeters = [];
+			}
+      //create meter tree
+      var treedata = {'core': {'data': [], "multiple" : false,}, "plugins" : [ "wholerow" ]};
+      for(var i=0; i < $scope.meters.length; i++) {
+          if ($scope.meters[i].parent_meter == null) {
+            var node = {"id": $scope.meters[i].id.toString(),
+                                "parent": '#',
+                                "text": $scope.meters[i].name,
+                                "state": {  'opened' : true,  'selected' : true },
+                               };
+          } else {
+              var node = {"id": $scope.meters[i].id.toString(),
+                                  "parent": $scope.meters[i].parent_meter.id.toString(),
+                                  "text": $scope.meters[i].name,
+                                 };
+          };
+          treedata['core']['data'].push(node);
+      }
+      var metertree = document.getElementById("metertree");
+      angular.element(metertree).jstree(true).settings.core.data = treedata['core']['data'];
+      angular.element(metertree).jstree(true).refresh();
+    });
+  };
+
+  $scope.getMeterChildren = function(meterid) {
+    MeterService.getMeterChildren(meterid, function(error, data) {
+      if (!error) {
+        $scope.currentMeterChildren = data;
+      } else {
+        $scope.currentMeterChildren = [];
+      }
+    });
+  };
 
 	$scope.addMeter = function() {
 		var modalInstance = $uibModal.open({
@@ -53,6 +121,7 @@ $scope.getAllEnergyItems = function() {
 				params: function() {
 					return {
 						meters: angular.copy($scope.meters),
+						parentmeters: angular.copy($scope.parentmeters),
 						categories: angular.copy($scope.categories),
 						costcenters: angular.copy($scope.costcenters),
 						energyitems: angular.copy($scope.energyitems),
@@ -62,12 +131,17 @@ $scope.getAllEnergyItems = function() {
 		});
 		modalInstance.result.then(function(meter) {
 			meter.energy_category_id = meter.energy_category.id;
+			meter.cost_center_id = meter.cost_center.id;
 			if(angular.isDefined(meter.energy_item)) {
 				meter.energy_item_id = meter.energy_item.id;
 			} else {
 				meter.energy_item_id = undefined;
 			}
-			meter.cost_center_id = meter.cost_center.id;
+			if(angular.isDefined(meter.parent_meter)) {
+				meter.parent_meter_id = meter.parent_meter.id;
+			} else {
+				meter.parent_meter_id = undefined;
+			}
 			MeterService.addMeter(meter, function(error, status) {
 				if (angular.isDefined(status) && status == 201) {
 					var templateName = "SETTING.METER";
@@ -124,6 +198,7 @@ $scope.getAllEnergyItems = function() {
 					return {
 						meter: angular.copy(meter),
 						meters: angular.copy($scope.meters),
+						parentmeters: angular.copy($scope.parentmeters),
 						categories: angular.copy($scope.categories),
 						costcenters: angular.copy($scope.costcenters),
 						energyitems: angular.copy($scope.energyitems),
@@ -139,6 +214,11 @@ $scope.getAllEnergyItems = function() {
 				modifiedMeter.energy_item_id = modifiedMeter.energy_item.id;
 			} else {
 				modifiedMeter.energy_item_id = undefined;
+			}
+			if (modifiedMeter.parent_meter != null && modifiedMeter.parent_meter.id != null ) {
+				modifiedMeter.parent_meter_id = modifiedMeter.parent_meter.id;
+			} else {
+				modifiedMeter.parent_meter_id = undefined;
 			}
 			MeterService.editMeter(modifiedMeter, function(error, status) {
 				if (angular.isDefined(status) && status == 200) {
@@ -265,6 +345,10 @@ $scope.getAllEnergyItems = function() {
 	$scope.getAllCostCenters();
   $scope.getAllEnergyItems();
 
+	$scope.$on('handleBroadcastMeterChanged', function(event) {
+		$scope.refreshMeterTree();
+	});
+
 });
 
 app.controller('ModalAddMeterCtrl', function($scope, $uibModalInstance, params) {
@@ -273,6 +357,7 @@ app.controller('ModalAddMeterCtrl', function($scope, $uibModalInstance, params) 
 	$scope.categories = params.categories;
 	$scope.costcenters = params.costcenters;
 	$scope.energyitems = params.energyitems;
+	$scope.parentmeters = params.parentmeters;
 	$scope.meter = {
 		is_counted: false
 	};
@@ -289,6 +374,7 @@ app.controller('ModalEditMeterCtrl', function($scope, $uibModalInstance, params)
 	$scope.operation = "SETTING.EDIT_METER";
 	$scope.meter = params.meter;
 	$scope.meters = params.meters;
+	$scope.parentmeters = params.parentmeters;
 	$scope.categories = params.categories;
 	$scope.costcenters = params.costcenters;
 	$scope.energyitems = params.energyitems;
