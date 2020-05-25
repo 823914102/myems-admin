@@ -822,9 +822,11 @@ function config($translateProvider) {
               LOCATION:'Location',
               INPUT_LOCATION:'Input Location',
               DESCRIPTION:'Description',
+              INPUT_DESCRIPTION:'Input Description',
               PARENT_METER:'Parent Meter',
               SELECT_PARENT_METER:'Select Parent Meter',
-              INPUT_DESCRIPTION:'Input Description',
+              TREE_VIEW: 'Tree View',
+              CHILD_METERS: 'Child Meters',
             },
             SENSOR: {
               ADD_SENSOR: 'Add Sensor',
@@ -2097,6 +2099,8 @@ function config($translateProvider) {
               INPUT_DESCRIPTION:'输入描述',
               PARENT_METER:'上级计量表',
               SELECT_PARENT_METER:'选择上级计量表',
+              TREE_VIEW: '树视图',
+              CHILD_METERS: '下级计量表',
             },
             SENSOR: {
               ADD_SENSOR: '添加传感器',

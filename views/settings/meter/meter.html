@@ -47,6 +47,7 @@
 								</table>
 							</div>
 						</uib-tab>
+
 						<uib-tab heading="{{'SETTING.BIND_POINT' | translate}}">
 								<div class="panel-body" ng-controller="MeterPointController">
 									<div class="row">
@@ -126,6 +127,62 @@
 									</div>
 								</div>
 							</div>
+						</uib-tab>
+
+						<uib-tab heading="{{'METER.TREE_VIEW' | translate}}">
+							<div class="panel-body" ng-controller="MeterController">
+								<div class="row">
+									<div class="col-lg-3">
+											<div class="panel panel-info">
+												<div class="panel-heading">
+													{{'SETTING.SELECT_METER' | translate}}
+												</div>
+												<div class="panel-body" style="overflow: auto; max-height: 700px;">
+													<div id="metertree" ></div>
+												</div>
+											</div>
+											</div>
+											<div class="col-lg-9">
+												<div class="panel panel-info">
+													<div class="panel-heading">
+														{{'METER.CHILD_METERS' | translate}}
+													</div>
+													<div class="panel-body">
+																<table class="table table-bordered table-hover" >
+																	<thead>
+																		<tr>
+																			<th class="text-center">{{'SETTING.ID' | translate}}</th>
+																			<th class="text-center">{{'SETTING.NAME' | translate}}</th>
+																			<th class="text-center">{{'SETTING.CATEGORY' | translate}}</th>
+																			<th class="text-center">{{'SETTING.ENERGY_ITEM' | translate}}</th>
+																			<th class="text-center">{{'SETTING.IS_INPUT_COUNTED' | translate}}</th>
+																			<th class="text-center">{{'METER.MAX_HOURLY_VALUE' | translate}}</th>
+																			<th class="text-center">{{'SETTING.COSTCENTER' | translate}}</th>
+																			<th class="text-center">{{'METER.PARENT_METER' | translate}}</th>
+																			<th class="text-center">{{'METER.LOCATION' | translate}}</th>
+																			<th class="text-center">{{'METER.DESCRIPTION' | translate}}</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr ng-repeat="meter in currentMeterChildren">
+																			<td class="text-center">{{ meter.id }}</td>
+																			<td class="text-center">{{ meter.name }}</td>
+																			<td class="text-center">{{ meter.energy_category.name }}</td>
+																			<td class="text-center">{{ meter.energy_item.name }}</td>
+																			<td class="text-center">{{ meter.is_counted==false?'SETTING.NO':'SETTING.YES' | translate }}</td>
+																			<td class="text-center">{{ meter.max_hourly_value }}</td>
+																			<td class="text-center">{{meter.cost_center.name}}</td>
+																			<td class="text-center">{{meter.parent_meter.name}}</td>
+																			<td class="text-center">{{meter.location}}</td>
+																			<td class="text-center">{{meter.description}}</td>
+																		</tr>
+																	</tbody>
+																</table>
+													</div>
+												</div>
+												</div>
+											</div>
+							 </div>
 						</uib-tab>
 
 						<uib-tab heading="{{'SETTING.VIRTUAL_METER' | translate}}">
