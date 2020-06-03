@@ -394,6 +394,61 @@
 						</div>
 					</uib-tab>
 
+					<uib-tab heading="{{'SPACE.BIND_STORE' | translate}}">
+						<div class="panel-body" ng-controller="SpaceStoreController">
+							<div class="row">
+								<div class="col-lg-3">
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											{{'SETTING.SELECT_SPACE' | translate}}
+										</div>
+										<div class="panel-body" style="overflow: auto; max-height: 700px;">
+											<div id="spacetreewithstore"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											{{currentSpace.name}}{{'SPACE.N_S_STORE' | translate}}
+										</div>
+										<div class="panel-body"
+											x-hjc-drop-target="true"
+											x-on-drop="pairStore(dragEl,dropEl)"
+											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}" >
+											<div class="btn btn-primary btn-rounded btn-block"
+											title="{{spacestore.name}}"
+											ng-repeat="spacestore in spacestores"
+											x-hjc-draggable="true"> {{spacestore.name}}</div>
+									</div>
+									</div>
+									<div class="panel panel-danger">
+										<div class="panel-heading">
+											{{'SETTING.TRASH' | translate}}
+										</div>
+										<div class="panel-body trash">
+											<img class="trashcan" src="img/trashcan.jpg" x-hjc-drop-target="true"
+												x-on-drop="deleteStorePair(dragEl,dropEl)">
+										</div>
+
+									</div>
+								</div>
+
+								<div class="col-lg-3">
+									<!-- according panel-->
+									<div class="panel panel-primary">
+										<div class="panel-heading"> {{'SPACE.STORE_LIST' | translate}}	</div>
+										<div class="panel-body" uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}" slim-scroll box-height="600px">
+											<div class="source btn btn-info btn-rounded btn-block" 	ng-repeat="store in stores" x-hjc-draggable="true">
+													 {{store.name}}
+										  </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</uib-tab>
+
 				</uib-tabset>
 			</div>
 		</div>
