@@ -110,6 +110,7 @@ app
                                                     files: [
                                                         'app/services/settings/space/space.service.js',
                                                         'app/services/settings/tenant/tenant.service.js',
+                                                        'app/services/settings/store/store.service.js',
                                                         'app/services/settings/equipment/equipment.service.js',
                                                         'app/services/settings/meter/meter.service.js',
                                                         'app/services/alarm/rule.service.js',
@@ -406,16 +407,19 @@ app
                                                     'app/services/settings/meter/offline-meter.service.js',
                                                     'app/services/settings/equipment/equipment.service.js',
                                                     'app/services/settings/tenant/tenant.service.js',
+                                                    'app/services/settings/store/store.service.js',
                                                     'app/services/settings/sensor/sensor.service.js',
                                                     'app/services/settings/space/spacemeter.service.js',
                                                     'app/services/settings/space/spaceequipment.service.js',
                                                     'app/services/settings/space/spacetenant.service.js',
+                                                    'app/services/settings/space/spacestore.service.js',
                                                     'app/services/settings/space/spacepoint.service.js',
                                                     'app/services/settings/space/spacesensor.service.js',
                                                     'app/controllers/settings/space/space.controller.js',
                                                     'app/controllers/settings/space/spacemeter.controller.js',
                                                     'app/controllers/settings/space/spaceequipment.controller.js',
                                                     'app/controllers/settings/space/spacetenant.controller.js',
+                                                    'app/controllers/settings/space/spacestore.controller.js',
                                                     'app/controllers/settings/space/spacepoint.controller.js',
                                                     'app/controllers/settings/space/spacesensor.controller.js',
                                                     'app/controllers/settings/space/space.master.controller.js'
@@ -475,6 +479,62 @@ app
                                                     'app/controllers/settings/tenant/tenantmeter.controller.js',
                                                     'app/controllers/settings/tenant/tenantpoint.controller.js',
                                                     'app/controllers/settings/tenant/tenantsensor.controller.js',
+                                                ]
+                                            }]);
+                                        }
+                                    );
+                                }
+                            ]
+                        }
+
+                    })
+                    .state('settings.store', {
+                        url: "/store",
+                        templateUrl: "views/settings/store/store.html",
+                        data: {
+                            pageTitle: 'MENU.SETTINGS.STORE',
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
+                                        function() {
+                                            return $ocLazyLoad.load([{
+                                                serie: true,
+                                                files: ['js/daterangepicker/daterangepicker.min.js', 'js/daterangepicker/daterangepicker.min.css']
+                                            }, {
+                                                name: 'daterangepicker',
+                                                files: ['js/daterangepicker/angular-daterangepicker.min.js']
+                                            }, {
+                                                files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
+                                            }, {
+                                                name: 'oitozero.ngSweetAlert',
+                                                files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
+                                            }, {
+                                                name: 'daterangepicker',
+                                                files: ['js/daterangepicker/angular-daterangepicker.min.js']
+                                            }, {
+                                                serie: true,
+                                                files: [
+                                                    'app/services/settings/store/store.service.js',
+                                                    'app/services/settings/store/storetype.service.js',
+                                                    'app/services/settings/meter/meter.service.js',
+                                                    'app/services/settings/meter/virtual-meter.service.js',
+                                                    'app/services/settings/meter/offline-meter.service.js',
+                                                    'app/services/settings/costcenter/costcenter.service.js',
+                                                    'app/services/settings/contact/contact.service.js',
+                                                    'app/services/settings/store/storemeter.service.js',
+                                                    'app/services/settings/store/storepoint.service.js',
+                                                    'app/services/settings/store/storesensor.service.js',
+                                                    'app/services/settings/datasource/datasource.service.js',
+                                                    'app/services/settings/datasource/point.service.js',
+                                                    'app/services/settings/sensor/sensor.service.js',
+                                                    'app/controllers/settings/store/store.master.controller.js',
+                                                    'app/controllers/settings/store/store.controller.js',
+                                                    'app/controllers/settings/store/storemeter.controller.js',
+                                                    'app/controllers/settings/store/storepoint.controller.js',
+                                                    'app/controllers/settings/store/storesensor.controller.js',
                                                 ]
                                             }]);
                                         }
