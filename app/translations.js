@@ -1512,7 +1512,7 @@ function config($translateProvider) {
 
                 EDIT_SPACE: '编辑空间',
                 EDIT_TENANT: '编辑租户',
-                EDIT_TENANT: '编辑门店',
+                EDIT_STORE: '编辑门店',
                 EDIT_METER: '编辑计量表',
                 EDIT_VIRTUAL_METER: '编辑虚拟表',
                 EDIT_OFFLINE_METER: '编辑离线表',
