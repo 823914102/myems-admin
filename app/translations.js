@@ -2100,7 +2100,7 @@ function config($translateProvider) {
                 EQUIPMENT_LIST: '设备列表',
                 BIND_TENANT: '绑定租户',
                 N_S_TENANT: '绑定的租户',
-                STORE_LIST: '门店列表',
+                TENANT_LIST: '租户列表',
                 BIND_STORE: '绑定门店',
                 N_S_STORE: '绑定的门店',
                 STORE_LIST: '门店列表',
