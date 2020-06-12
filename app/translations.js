@@ -143,11 +143,11 @@ function config($translateProvider) {
 
                 FDD: {
                     FDD: 'FDD',
-                    ALARMROLE: 'Rule List',
-                    MESSAGEALARM: 'SMS Alarm List',
-                    EMAILALARM: 'Email Alarm List',
-                    WEBALARM: 'Web Alarm List',
-                    WECHATALARM: 'WeChat Alarm List',
+                    ALARMROLE: 'Rule',
+                    MESSAGEALARM: 'SMS Alarm',
+                    EMAILALARM: 'Email Alarm',
+                    WEBALARM: 'Web Alarm',
+                    WECHATALARM: 'WeChat Alarm',
                 },
                 VERIFICATION: {
                     VERIFICATION: 'Data Verification',
@@ -157,6 +157,7 @@ function config($translateProvider) {
                     GATEWAY: 'Gateway',
                 },
                 SETTINGS: {
+                    BASIC: 'Basic Settings',
                     SETTINGS: 'System Settings',
                     SPACE: 'Space Settings',
                     TENANT: 'Tenant Settings',
@@ -1411,12 +1412,12 @@ function config($translateProvider) {
                     STEAM_BOILER:'蒸汽锅炉',
                 } ,
                 FDD: {
-                    FDD: '能效故障诊断',
-                    ALARMROLE: '报警规则',
-                    MESSAGEALARM: '短信报警列表',
-                    EMAILALARM: '邮件报警列表',
-                    WEBALARM: '网页报警列表',
-                    WECHATALARM: '微信报警列表',
+                    FDD: '故障诊断',
+                    ALARMROLE: '规则',
+                    MESSAGEALARM: '短信报警',
+                    EMAILALARM: '邮件报警',
+                    WEBALARM: '网页报警',
+                    WECHATALARM: '微信报警',
                 },
                 VERIFICATION: {
                     VERIFICATION: '数据校验',
@@ -1426,6 +1427,7 @@ function config($translateProvider) {
                     GATEWAY: '网关',
                 },
                 SETTINGS: {
+                    BASIC: '基本设置',
                     SETTINGS: '系统管理',
                     SPACE: '空间管理',
                     TENANT: '租户管理',
@@ -1447,7 +1449,7 @@ function config($translateProvider) {
                     KNOWLEDGEFILE: '知识库管理'
                 },
                 USERSETTING: {
-                    USERSETTING: '用户权限管理',
+                    USERSETTING: '用户与权限',
                     USER: '用户设置',
                     PRIVILEGE: '权限设置'
                 }
