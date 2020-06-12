@@ -107,43 +107,41 @@ app.controller('EnergyItemController', function($scope,$common, $translate,$uibM
 	        EnergyItemService.editEnergyItem(modifiedEnergyItem,function(error,status){
 	            if(angular.isDefined(status) && status==200){
 	            	var templateName = "SETTING.ENERGY_ITEM";
-					templateName = $translate.instant(templateName);
+								templateName = $translate.instant(templateName);
 
-					var popType = 'TOASTER.SUCCESS';
-					var popTitle = $common.toaster.success_title;
-					var popBody = $common.toaster.success_update_body;
+								var popType = 'TOASTER.SUCCESS';
+								var popTitle = $common.toaster.success_title;
+								var popBody = $common.toaster.success_update_body;
 
-					popType = $translate.instant(popType);
-					popTitle = $translate.instant(popTitle);
-					popBody = $translate.instant(popBody,{template: templateName});
+								popType = $translate.instant(popType);
+								popTitle = $translate.instant(popTitle);
+								popBody = $translate.instant(popBody,{template: templateName});
 
-					toaster.pop({
-						type: popType,
-						title: popTitle,
-						body: popBody,
-						showCloseButton: true,
-					});
-
-
+								toaster.pop({
+									type: popType,
+									title: popTitle,
+									body: popBody,
+									showCloseButton: true,
+								});
 	                $scope.getAllEnergyItems();
 	            }else{
 	                var templateName = "SETTING.ENERGY_ITEM";
-					templateName = $translate.instant(templateName);
+									templateName = $translate.instant(templateName);
 
-					var popType = 'TOASTER.ERROR';
-					var popTitle = $common.toaster.error_title;
-					var popBody = $common.toaster.error_update_body;
+									var popType = 'TOASTER.ERROR';
+									var popTitle = $common.toaster.error_title;
+									var popBody = $common.toaster.error_update_body;
 
-					popType = $translate.instant(popType);
-					popTitle = $translate.instant(popTitle);
-					popBody = $translate.instant(popBody,{template: templateName});
+									popType = $translate.instant(popType);
+									popTitle = $translate.instant(popTitle);
+									popBody = $translate.instant(popBody,{template: templateName});
 
-					toaster.pop({
-						type: popType,
-						title: popTitle,
-						body: popBody,
-						showCloseButton: true,
-					});
+									toaster.pop({
+										type: popType,
+										title: popTitle,
+										body: popBody,
+										showCloseButton: true,
+									});
 	            }
 	        });
 		}, function () {
@@ -167,41 +165,41 @@ app.controller('EnergyItemController', function($scope,$common, $translate,$uibM
 		            EnergyItemService.deleteEnergyItem(energyItem, function(error, status) {
 		            	if (angular.isDefined(status) && status == 204) {
 		            		var templateName = "SETTING.ENERGY_ITEM";
-                            templateName = $translate.instant(templateName);
+                    templateName = $translate.instant(templateName);
 
-                            var popType = 'TOASTER.SUCCESS';
-                            var popTitle = $common.toaster.success_title;
-                            var popBody = $common.toaster.success_delete_body;
+                    var popType = 'TOASTER.SUCCESS';
+                    var popTitle = $common.toaster.success_title;
+                    var popBody = $common.toaster.success_delete_body;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody, {template: templateName});
+                    popType = $translate.instant(popType);
+                    popTitle = $translate.instant(popTitle);
+                    popBody = $translate.instant(popBody, {template: templateName});
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
+                    toaster.pop({
+                        type: popType,
+                        title: popTitle,
+                        body: popBody,
+                        showCloseButton: true,
+                    });
 		            		$scope.getAllEnergyItems();
 		            	} else {
 		            		var templateName = "SETTING.ENERGY_ITEM";
-                            templateName = $translate.instant(templateName);
+                    templateName = $translate.instant(templateName);
 
-                            var popType = 'TOASTER.ERROR';
-                            var popTitle = $common.toaster.error_title;
-                            var popBody = $common.toaster.error_delete_body;
+                    var popType = 'TOASTER.ERROR';
+                    var popTitle = $common.toaster.error_title;
+                    var popBody = $common.toaster.error_delete_body;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody, {template: templateName});
+                    popType = $translate.instant(popType);
+                    popTitle = $translate.instant(popTitle);
+                    popBody = $translate.instant(popBody, {template: templateName});
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
+                    toaster.pop({
+                        type: popType,
+                        title: popTitle,
+                        body: popBody,
+                        showCloseButton: true,
+                    });
 		            	}
 		            });
 		        }
