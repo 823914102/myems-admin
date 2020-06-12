@@ -17,8 +17,6 @@
 													<th >{{'FDD.IS_ENABLED' | translate}}</th>
 													<th >{{'FDD.EXPRESSION' | translate}}</th>
 													<th >{{'FDD.MESSAGE' | translate}}</th>
-													<th >{{'FDD.MUTE_START_DATETIME' | translate}}</th>
-													<th >{{'FDD.MUTE_END_DATETIME' | translate}}</th>
 													<th >{{'SETTING.ACTION' | translate}}</th>
 
 												</tr>
@@ -31,8 +29,6 @@
 													<td >{{ rule.is_enabled==true?'SETTING.ON':'SETTING.OFF' | translate}}</td>
 													<td > {{'FDD.DES_EXPRESSION' | translate}} </td>
 													<td class="col-lg-5 col-md-5">{{ rule.message }}</td>
-													<td class="text-center">{{ rule.mute_start_datetime  | date:'yyyy-MM-ddTHH:mm:ss' }}</td>
-													<td class="text-center">{{ rule.mute_end_datetime  | date:'yyyy-MM-ddTHH:mm:ss' }}</td>
 													<td class="text-center">
 														<a class="btn btn-primary btn-rounded btn-xs" ng-click="editRule(rule)" >{{'SETTING.EDIT' | translate}}</a>
 														<a ng-click="deleteRule(rule)" class="btn btn-danger btn-rounded btn-xs" >{{'SETTING.DELETE' | translate}}</a>

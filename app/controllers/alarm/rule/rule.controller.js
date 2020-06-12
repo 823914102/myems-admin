@@ -1,8 +1,6 @@
 'use strict';
 
-app.controller('RuleController', function($scope, $common, $uibModal, $translate,
-	RuleService,
-	toaster, SweetAlert) {
+app.controller('RuleController', function($scope, $common, $uibModal, $translate, RuleService, toaster, SweetAlert) {
 
 	$scope.initExpression = [{
 		"spaceid": 1,
@@ -242,22 +240,10 @@ app.controller('ModalAddRuleCtrl', function($scope, $uibModalInstance, params) {
 	$scope.rule={};
 	$scope.rule.is_enabled=true;
 	$scope.rule.channel='email';
-	$scope.rule.mute_start_datetime=moment();
-  $scope.rule.mute_end_datetime=moment();
+	$scope.rule = {mute_start_datetime:moment(), mute_end_datetime:moment()};
 
 	$scope.rule.expression=JSON.stringify(params.expression);
-	$scope.dtOptions = {
-		locale:{
-			format: 'YYYY-MM-DD HH:mm:ss',
-			applyLabel: "确定",
-			cancelLabel: "取消",
-			customRangeLabel: "自定义",
-		},
-		timePicker: true,
-		timePicker24Hour: true,
-		timePickerIncrement: 15,
-		singleDatePicker: true,
-	};
+
 	$scope.ok = function() {
 		$uibModalInstance.close($scope.rule);
 	};
@@ -271,21 +257,8 @@ app.controller('ModalEditRuleCtrl', function($scope, $uibModalInstance, params) 
 	$scope.operation = "FDD.EDIT_RULE";
 	$scope.rule = params.rule;
 	$scope.rule.is_enabled = params.rule.is_enabled;
-	$scope.dtOptions = {
-		locale:{
-			format: 'YYYY-MM-DD HH:mm:ss',
-			applyLabel: "确定",
-			cancelLabel: "取消",
-			customRangeLabel: "自定义",
-		},
-		timePicker: true,
-		timePicker24Hour: true,
-		timePickerIncrement: 15,
-		singleDatePicker: true,
-	};
+
 	$scope.ok = function() {
-		$scope.rule.mute_start_datetime = moment($scope.rule.mute_start_datetime).format().slice(0,19);
-		$scope.rule.mute_end_datetime = moment($scope.rule.mute_end_datetime).format().slice(0,19);
 		$uibModalInstance.close($scope.rule);
 	};
 
