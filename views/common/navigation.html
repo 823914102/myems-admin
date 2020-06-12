@@ -32,10 +32,10 @@
                     <li ui-sref-active="active"><a ui-sref="settings.knowledgefile">{{ 'MENU.SETTINGS.KNOWLEDGEFILE' | translate }}</a></li>
                 </ul>
             </li>
-            <li ng-class="{active: $state.includes('alarm')}">
+            <li ng-show="isAdminCookie()" ng-class="{active: $state.includes('alarm')}">
                 <a href=""><i class="fa fa-bell-o"></i> <span class="nav-label">{{ 'MENU.FDD.FDD' | translate }} </span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('alarm')}">
-                    <li ng-show="isAdminCookie()" ui-sref-active="active"><a ui-sref="alarm.rule">{{ 'MENU.FDD.ALARMROLE' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="alarm.rule">{{ 'MENU.FDD.ALARMROLE' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="alarm.textmessage">{{ 'MENU.FDD.MESSAGEALARM' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="alarm.emailmessage">{{ 'MENU.FDD.EMAILALARM' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="alarm.webmessage">{{ 'MENU.FDD.WEBALARM' | translate }}</a></li>
