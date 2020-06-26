@@ -732,6 +732,7 @@ app
                                                 files: [
                                                     'app/services/settings/datasource/datasource.service.js',
                                                     'app/services/settings/datasource/point.service.js',
+                                                    'app/services/settings/gateway/gateway.service.js',
                                                     'app/controllers/settings/datasource/datasource.master.controller.js',
                                                     'app/controllers/settings/datasource/datasource.controller.js',
                                                     'app/controllers/settings/datasource/point.controller.js'
@@ -905,6 +906,43 @@ app
                                                 files: [
                                                     'app/services/settings/emailserver/emailserver.service.js',
                                                     'app/controllers/settings/emailserver/emailserver.controller.js'
+                                                ]
+                                            }]);
+                                        }
+                                    );
+                                }
+                            ]
+                        }
+                    })
+
+                    .state('settings.gateway', {
+                        url: "/gateway",
+                        templateUrl: "views/settings/gateway/gateway.html",
+                        data: {
+                            pageTitle: 'MENU.SETTINGS.GATEWAY',
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
+                                        function() {
+                                            return $ocLazyLoad.load([{
+                                                files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
+                                            }, {
+                                                name: 'ui.footable',
+                                                files: ['js/plugins/footable/angular-footable.js']
+                                            }, {
+                                                files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
+                                            }, {
+                                                name: 'oitozero.ngSweetAlert',
+                                                files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
+                                            }, {
+                                                serie: true,
+                                                files: [
+                                                    'app/services/settings/gateway/gateway.service.js',
+                                                    'app/controllers/settings/gateway/gateway.master.controller.js',
+                                                    'app/controllers/settings/gateway/gateway.controller.js',
                                                 ]
                                             }]);
                                         }

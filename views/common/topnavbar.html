@@ -52,12 +52,12 @@
                         <li >
                             <div class="dropdown-messages-box">
                                 <div class="text-center">
-                                    <strong>{{cur_user.display_name}}</strong>. <br>
-                                    {{cur_user.email}}.<br>
+                                    <strong>{{cur_user.display_name}}</strong> <br>
+                                    {{cur_user.email}}<br>
                                 </div>
                             </div>
                         </li>
-                        <li ng-hide="cur_user.name.toLowerCase()==='administrator'">
+                        <li>
                             <span class="divider"></span>
                             <div class="text-center link-block">
                                 <a ng-click="changePwd()">

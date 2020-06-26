@@ -152,7 +152,7 @@ app.controller('LoginController', function($rootScope,
 		modalInstance.result.then(function(modifiedUser) {
 			UserService.changePassword(modifiedUser, function(error, status) {
 				if (angular.isDefined(status) && status == 200) {
-					var templateName = "SETTING.USER_PASSWORD";
+					var templateName = "TOASTER.USER_PASSWORD";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -172,7 +172,7 @@ app.controller('LoginController', function($rootScope,
 
 					$scope.$emit('handleEmitLineChanged');
 				} else {
-					var templateName = "SETTING.USER_PASSWORD";
+					var templateName = "TOASTER.USER_PASSWORD";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';

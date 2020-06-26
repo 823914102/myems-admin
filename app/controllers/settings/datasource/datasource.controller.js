@@ -1,8 +1,6 @@
 'use strict';
 
-app.controller('DataSourceController', function($scope, $uibModal, $timeout, $common, $translate,
-	DataSourceService,
-	toaster, SweetAlert) {
+app.controller('DataSourceController', function($scope, $uibModal, $timeout, $common, $translate, DataSourceService, GatewayService, toaster, SweetAlert) {
 
 	$scope.getAllDataSources = function() {
 		DataSourceService.getAllDataSources(function(error, data) {
@@ -16,16 +14,35 @@ app.controller('DataSourceController', function($scope, $uibModal, $timeout, $co
 	};
 
 
+	$scope.getAllGateways = function() {
+		GatewayService.getAllGateways(function(error, data) {
+			if (!error) {
+				$scope.gateways = data;
+			} else {
+				$scope.gateways = [];
+			}
+		});
+
+	};
+
 	$scope.addDataSource = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl: 'views/settings/datasource/datasource.model.html',
 			controller: 'ModalAddDataSourceCtrl',
 			windowClass: "animated fadeIn",
+			resolve: {
+				params: function() {
+					return {
+						gateways: angular.copy($scope.gateways),
+					};
+				}
+			}
 		});
 		modalInstance.result.then(function(datasource) {
+			datasource.gateway_id = datasource.gateway.id;
 			DataSourceService.addDataSource(datasource, function(error, status) {
 				if (angular.isDefined(status) && status == 201) {
-					var templateName = "SETTING.DATASOURCE";
+					var templateName = "DATA_SOURCE.DATA_SOURCE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -46,7 +63,7 @@ app.controller('DataSourceController', function($scope, $uibModal, $timeout, $co
 
 					$scope.$emit("handleEmitDataSourceChanged");
 				} else {
-					var templateName = "SETTING.DATASOURCE";
+					var templateName = "DATA_SOURCE.DATA_SOURCE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -78,16 +95,18 @@ app.controller('DataSourceController', function($scope, $uibModal, $timeout, $co
 			resolve: {
 				params: function() {
 					return {
-						datasource: angular.copy(datasource)
+						datasource: angular.copy(datasource),
+						gateways: angular.copy($scope.gateways),
 					};
 				}
 			}
 		});
 
 		modalInstance.result.then(function(modifiedDataSource) {
+			modifiedDataSource.gateway_id = modifiedDataSource.gateway.id;
 			DataSourceService.editDataSource(modifiedDataSource, function(error, status) {
 				if (angular.isDefined(status) && status == 200) {
-					var templateName = "SETTING.DATASOURCE";
+					var templateName = "DATA_SOURCE.DATA_SOURCE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -106,7 +125,7 @@ app.controller('DataSourceController', function($scope, $uibModal, $timeout, $co
 					});
 					$scope.$emit("handleEmitDataSourceChanged");
 				} else {
-					var templateName = "SETTING.DATASOURCE";
+					var templateName = "DATA_SOURCE.DATA_SOURCE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -146,7 +165,7 @@ app.controller('DataSourceController', function($scope, $uibModal, $timeout, $co
 				if (isConfirm) {
 					DataSourceService.deleteDataSource(datasource, function(error, status) {
 						if (angular.isDefined(status) && status == 204) {
-							var templateName = "SETTING.DATASOURCE";
+							var templateName = "DATA_SOURCE.DATA_SOURCE";
                             templateName = $translate.instant(templateName);
 
                             var popType = 'TOASTER.SUCCESS';
@@ -182,7 +201,7 @@ app.controller('DataSourceController', function($scope, $uibModal, $timeout, $co
 	                  showCloseButton: true,
 	              });
 						} else {
-							 var templateName = "SETTING.DATASOURCE";
+							 var templateName = "DATA_SOURCE.DATA_SOURCE";
               templateName = $translate.instant(templateName);
 
               var popType = 'TOASTER.ERROR';
@@ -208,6 +227,7 @@ app.controller('DataSourceController', function($scope, $uibModal, $timeout, $co
 
 
 	$scope.getAllDataSources();
+	$scope.getAllGateways();
 	$scope.$on("handleBroadcastDataSourceChanged", function(event) {
 		$scope.getAllDataSources();
 	});
@@ -215,9 +235,10 @@ app.controller('DataSourceController', function($scope, $uibModal, $timeout, $co
 });
 
 
-app.controller('ModalAddDataSourceCtrl', function($scope, $uibModalInstance) {
+app.controller('ModalAddDataSourceCtrl', function($scope, $uibModalInstance, params) {
 
-	$scope.operation = "SETTING.ADD_DATASOURCE";
+	$scope.operation = "DATA_SOURCE.ADD_DATA_SOURCE";
+	$scope.gateways = params.gateways;
 	$scope.disable = false;
 	$scope.ok = function() {
 		$uibModalInstance.close($scope.datasource);
@@ -229,7 +250,8 @@ app.controller('ModalAddDataSourceCtrl', function($scope, $uibModalInstance) {
 });
 
 app.controller('ModalEditDataSourceCtrl', function($scope, $uibModalInstance, params) {
-	$scope.operation = "SETTING.EDIT_DATASOURCE";
+	$scope.operation = "DATA_SOURCE.EDIT_DATA_SOURCE";
+	$scope.gateways = params.gateways;
 	$scope.disable = false;
 	$scope.datasource = params.datasource;
 
