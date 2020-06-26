@@ -521,7 +521,10 @@ function config($translateProvider) {
             },
             GATEWAY: {
                 GATEWAY: 'Gateway',
+                TOKEN: 'Token',
                 SELECT_GATEWAY: 'Select Gateway',
+                ADD_GATEWAY: 'Add Gateway',
+                EDIT_GATEWAY: 'Edit Gateway',
             },
             SPACE: {
                 PARENT_SPACE:'Parent Space',
@@ -1535,7 +1538,10 @@ function config($translateProvider) {
             },
             GATEWAY: {
                 GATEWAY: '网关',
+                TOKEN: 'Token',
                 SELECT_GATEWAY: '选择网关',
+                ADD_GATEWAY: '添加网关',
+                EDIT_GATEWAY: '编辑网关',
             },
             SPACE: {
                 PARENT_SPACE:'上级',

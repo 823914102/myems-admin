@@ -1,35 +1,35 @@
 'use strict';
 
-app.controller('SensorController', function($scope,  $translate,$common, $uibModal, SensorService, toaster, SweetAlert) {
+app.controller('GatewayController', function($scope,  $translate,$common, $uibModal, GatewayService, toaster, SweetAlert) {
 
-	$scope.getAllSensors = function() {
-		SensorService.getAllSensors(function(error, data) {
+	$scope.getAllGateways = function() {
+		GatewayService.getAllGateways(function(error, data) {
 			if (!error) {
-				$scope.sensors = data;
+				$scope.gateways = data;
 			} else {
-				$scope.sensors = [];
+				$scope.gateways = [];
 			}
 		});
 
 	};
 
-	$scope.addSensor = function() {
+	$scope.addGateway = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl: 'views/settings/sensor/sensor.model.html',
-			controller: 'ModalAddSensorCtrl',
+			templateUrl: 'views/settings/gateway/gateway.model.html',
+			controller: 'ModalAddGatewayCtrl',
 			windowClass: "animated fadeIn",
 			resolve: {
 				params: function() {
 					return {
-						sensors: angular.copy($scope.sensors),
+						gateways: angular.copy($scope.gateways),
 					};
 				}
 			}
 		});
-		modalInstance.result.then(function(sensor) {
-			SensorService.addSensor(sensor, function(error, status) {
+		modalInstance.result.then(function(gateway) {
+			GatewayService.addGateway(gateway, function(error, status) {
 				if (angular.isDefined(status) && status == 201) {
-					var templateName = "COMMON.SENSOR";
+					var templateName = "GATEWAY.GATEWAY";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -46,10 +46,10 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
 						body: popBody,
 						showCloseButton: true,
 					});
-					$scope.getAllSensors();
-					$scope.$emit('handleEmitSensorChanged');
+					$scope.getAllGateways();
+					$scope.$emit('handleEmitGatewayChanged');
 				} else {
-					var templateName = "COMMON.SENSOR";
+					var templateName = "GATEWAY.GATEWAY";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -73,25 +73,25 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
 		});
 	};
 
-	$scope.editSensor = function(sensor) {
+	$scope.editGateway = function(gateway) {
 		var modalInstance = $uibModal.open({
 			windowClass: "animated fadeIn",
-			templateUrl: 'views/settings/sensor/sensor.model.html',
-			controller: 'ModalEditSensorCtrl',
+			templateUrl: 'views/settings/gateway/gateway.model.html',
+			controller: 'ModalEditGatewayCtrl',
 			resolve: {
 				params: function() {
 					return {
-						sensor: angular.copy(sensor),
-						sensors: angular.copy($scope.sensors),
+						gateway: angular.copy(gateway),
+						gateways: angular.copy($scope.gateways),
 					};
 				}
 			}
 		});
 
-		modalInstance.result.then(function(modifiedSensor) {
-			SensorService.editSensor(modifiedSensor, function(error, status) {
+		modalInstance.result.then(function(modifiedGateway) {
+			GatewayService.editGateway(modifiedGateway, function(error, status) {
 				if (angular.isDefined(status) && status == 200) {
-					var templateName = "COMMON.SENSOR";
+					var templateName = "GATEWAY.GATEWAY";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -108,10 +108,10 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
 						body: popBody,
 						showCloseButton: true,
 					});
-					$scope.getAllSensors();
-					$scope.$emit('handleEmitSensorChanged');
+					$scope.getAllGateways();
+					$scope.$emit('handleEmitGatewayChanged');
 				} else {
-					var templateName = "COMMON.SENSOR";
+					var templateName = "GATEWAY.GATEWAY";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -135,7 +135,7 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
 		});
 	};
 
-	$scope.deleteSensor = function(sensor) {
+	$scope.deleteGateway = function(gateway) {
 		SweetAlert.swal({
 				title: $translate.instant($common.sweet.title),
 				text: $translate.instant($common.sweet.text),
@@ -149,9 +149,9 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
 			},
 			function(isConfirm) {
 				if (isConfirm) {
-					SensorService.deleteSensor(sensor, function(error, status) {
+					GatewayService.deleteGateway(gateway, function(error, status) {
 						if (angular.isDefined(status) && status == 204) {
-							var templateName = "COMMON.SENSOR";
+							var templateName = "GATEWAY.GATEWAY";
                             templateName = $translate.instant(templateName);
 
                             var popType = 'TOASTER.SUCCESS';
@@ -168,8 +168,8 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
                                 body: popBody,
                                 showCloseButton: true,
                             });
-							$scope.getAllSensors();
-							$scope.$emit('handleEmitSensorChanged');
+							$scope.getAllGateways();
+							$scope.$emit('handleEmitGatewayChanged');
 						} else if (angular.isDefined(status) && status == 400) {
 							var popType = 'TOASTER.ERROR';
 							var popTitle = error.title;
@@ -186,7 +186,7 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
 								showCloseButton: true,
 							});
 						} else {
-							var templateName = "COMMON.SENSOR";
+							var templateName = "GATEWAY.GATEWAY";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.ERROR';
@@ -209,14 +209,14 @@ app.controller('SensorController', function($scope,  $translate,$common, $uibMod
 			});
 	};
 
-	$scope.getAllSensors();
+	$scope.getAllGateways();
 });
 
-app.controller('ModalAddSensorCtrl', function($scope, $uibModalInstance, params) {
+app.controller('ModalAddGatewayCtrl', function($scope, $uibModalInstance, params) {
 
-	$scope.operation = "SENSOR.ADD_SENSOR";
+	$scope.operation = "GATEWAY.ADD_GATEWAY";
 	$scope.ok = function() {
-		$uibModalInstance.close($scope.sensor);
+		$uibModalInstance.close($scope.gateway);
 	};
 
 	$scope.cancel = function() {
@@ -224,12 +224,12 @@ app.controller('ModalAddSensorCtrl', function($scope, $uibModalInstance, params)
 	};
 });
 
-app.controller('ModalEditSensorCtrl', function($scope, $uibModalInstance, params) {
-	$scope.operation = "SENSOR.EDIT_SENSOR";
-	$scope.sensor = params.sensor;
-	$scope.sensors = params.sensors;
+app.controller('ModalEditGatewayCtrl', function($scope, $uibModalInstance, params) {
+	$scope.operation = "GATEWAY.EDIT_GATEWAY";
+	$scope.gateway = params.gateway;
+	$scope.gateways = params.gateways;
 	$scope.ok = function() {
-		$uibModalInstance.close($scope.sensor);
+		$uibModalInstance.close($scope.gateway);
 	};
 
 	$scope.cancel = function() {
