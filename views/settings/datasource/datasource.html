@@ -5,16 +5,17 @@
 				<div class="tabs-container">
 
 					<uib-tabset>
-						<uib-tab heading="{{'SETTING.DATASOURCE' | translate}}">
+						<uib-tab heading="{{'DATA_SOURCE.DATA_SOURCE' | translate}}">
 							<div class="panel-body" ng-controller="DataSourceController">
-								<a ng-click="addDataSource()" class="btn btn-primary btn-rounded  btn-outline" href=""><i class="fa fa-plus-circle"></i> {{'SETTING.ADD_DATASOURCE' | translate}}</a>
+								<a ng-click="addDataSource()" class="btn btn-primary btn-rounded  btn-outline" href=""><i class="fa fa-plus-circle"></i> {{'DATA_SOURCE.ADD_DATA_SOURCE' | translate}}</a>
 								<table class="table table-bordered table-hover" >
 									<thead>
 										<tr>
 											<th class="text-center">{{'SETTING.ID' | translate}}</th>
 											<th class="text-center">{{'SETTING.NAME' | translate}}</th>
-											<th class="text-center">{{'SETTING.PROTOCOL' | translate}}</th>
-											<th class="text-center">{{'SETTING.CONNECTION' | translate}}</th>
+											<th class="text-center">{{'GATEWAY.GATEWAY' | translate}}</th>
+											<th class="text-center">{{'DATA_SOURCE.PROTOCOL' | translate}}</th>
+											<th class="text-center">{{'DATA_SOURCE.CONNECTION' | translate}}</th>
 											<th class="text-center">{{'SETTING.ACTION' | translate}}</th>
 										</tr>
 									</thead>
@@ -22,6 +23,7 @@
 										<tr ng-repeat="datasource in datasources">
 											<td class="text-center">{{ datasource.id }}</td>
 											<td class="text-center">{{ datasource.name }}</td>
+											<td class="text-center">{{ datasource.gateway.name }}</td>
 											<td class="text-center">{{ datasource.protocol }}</td>
 											<td class="text-center">{{ datasource.connection }}</td>
 											<td class="text-center">
@@ -36,7 +38,7 @@
 						<uib-tab heading="{{'SETTING.POINT' | translate}}">
 							<div class="panel-body" ng-controller="PointController">
 								<form method="get" class="form-horizontal">
-									<div class="form-group"><label class="col-sm-2 control-label">{{'SETTING.SELECT_DATASOURCE' | translate}}:</label>
+									<div class="form-group"><label class="col-sm-2 control-label">{{'DATA_SOURCE.SELECT_DATA_SOURCE' | translate}}:</label>
 										<div class="col-sm-3">
 											<ui-select on-select="changeDataSource($item, $model)" ng-model="currentDataSource" theme="bootstrap">
 												<ui-select-match placeholder="{{'COMMON.PLACEHOLDER' | translate}}">{{$select.selected.name}}</ui-select-match>

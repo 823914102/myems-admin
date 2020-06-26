@@ -111,7 +111,7 @@
 											<div class="panel-body" slim-scroll box-height="600px"
 											uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}">
 												<form role="form">
-													<div class="form-group no-margin"><label>{{'SETTING.SELECT_DATASOURCE' | translate}}</label>
+													<div class="form-group no-margin"><label>{{'DATA_SOURCE.SELECT_DATA_SOURCE' | translate}}</label>
 													    <ui-select on-select="changeDataSource($item, $model)" ng-model="currentDataSource" theme="bootstrap">
 													        <ui-select-match placeholder="{{'COMMON.PLACEHOLDER' | translate}}">{{$select.selected.name}}</ui-select-match>
 													        <ui-select-choices repeat="datasource.id as datasource in datasources | filter: $select.search">
