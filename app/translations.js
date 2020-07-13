@@ -1303,7 +1303,7 @@ function config($translateProvider) {
                 INPUT_ADDRESS: '请输入地址',
                 INPUT_SERIAL_NUMBER: '请输入序列号',
                 INPUT_KGCE: '请输入标准煤系数',
-                INPUT_KGCO2E: '请输入CO2系数',
+                INPUT_KGCO2E: '请输入二氧化碳排放系数',
                 INPUT_TAG: '请输入标签',
                 INPUT_DESCRIPTION: '请输入描述',
                 INPUT_HOST: '请输入服务器',
@@ -1371,7 +1371,7 @@ function config($translateProvider) {
                 ADDRESS: '地址',
                 IS_TREND: '保存趋势',
                 KGCE: '标准煤系数',
-                KGCO2E: 'CO2系数',
+                KGCO2E: '二氧化碳排放系数',
 
                 START_DATETIME: '起始时间',
                 START_TIME: '开始时间',
