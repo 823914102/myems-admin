@@ -1336,7 +1336,7 @@ function config($translateProvider) {
                 METER_TYPE: '计量表类型',
                 METER_NAME: '计量表名',
                 METER_STATUS: '计量表状态',
-                TRASH: '垃圾桶',
+                TRASH: '回收桶',
                 DRAG_TO_BIND: '请拖拽完成绑定',
                 DRAG_TO_UNBIND: '请拖拽至回收桶解除绑定',
                 FINANCIAL_COST: '财务分摊成本录入',
