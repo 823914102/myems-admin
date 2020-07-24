@@ -142,7 +142,7 @@ function config($translateProvider) {
                 } ,
 
                 FDD: {
-                    FDD: 'Fault Detection & Diagnosis',
+                    FDD: 'FDD',
                     ALARMROLE: 'Rule',
                     MESSAGEALARM: 'SMS Alarm',
                     EMAILALARM: 'Email Alarm',
