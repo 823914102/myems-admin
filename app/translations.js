@@ -142,7 +142,7 @@ function config($translateProvider) {
                 } ,
 
                 FDD: {
-                    FDD: 'FDD',
+                    FDD: 'Fault Detection & Diagnosis',
                     ALARMROLE: 'Rule',
                     MESSAGEALARM: 'SMS Alarm',
                     EMAILALARM: 'Email Alarm',
@@ -1151,7 +1151,7 @@ function config($translateProvider) {
                     STEAM_BOILER:'蒸汽锅炉',
                 } ,
                 FDD: {
-                    FDD: '故障诊断',
+                    FDD: '故障检测与诊断',
                     ALARMROLE: '规则',
                     MESSAGEALARM: '短信报警',
                     EMAILALARM: '邮件报警',
