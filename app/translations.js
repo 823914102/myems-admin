@@ -143,7 +143,7 @@ function config($translateProvider) {
 
                 FDD: {
                     FDD: 'FDD',
-                    ALARMROLE: 'Rule',
+                    ALARMROLE: 'Rule Settings',
                     MESSAGEALARM: 'SMS Alarm',
                     EMAILALARM: 'Email Alarm',
                     WEBALARM: 'Web Alarm',
@@ -1095,7 +1095,7 @@ function config($translateProvider) {
             },
             FDD: {
                ID: 'ID',
-                RULE: '规则',
+                RULE: '规则管理',
                 EMAIL_MESSAGE: '邮件信息',
                 TEXT_MESSAGE: '短信信息',
                 WEB_MESSAGE: '网页信息',
