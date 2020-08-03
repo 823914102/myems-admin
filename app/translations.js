@@ -16,7 +16,6 @@ function config($translateProvider) {
                 EXECUTE: 'Execute',
                 PLACEHOLDER: 'Please select or search...',
                 SPACE: 'Space',
-                DEVICE: 'Equipment',
                 TENANT: 'TENANT',
                 STORE: 'STORE',
                 EQUIPMENT: 'Equipment',
@@ -143,7 +142,7 @@ function config($translateProvider) {
 
                 FDD: {
                     FDD: 'FDD',
-                    ALARMROLE: 'Rule',
+                    ALARMROLE: 'Rule Settings',
                     MESSAGEALARM: 'SMS Alarm',
                     EMAILALARM: 'Email Alarm',
                     WEBALARM: 'Web Alarm',
@@ -1151,7 +1150,7 @@ function config($translateProvider) {
                     STEAM_BOILER:'蒸汽锅炉',
                 } ,
                 FDD: {
-                    FDD: '故障诊断',
+                    FDD: '故障检测与诊断',
                     ALARMROLE: '规则',
                     MESSAGEALARM: '短信报警',
                     EMAILALARM: '邮件报警',
