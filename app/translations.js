@@ -16,7 +16,6 @@ function config($translateProvider) {
                 EXECUTE: 'Execute',
                 PLACEHOLDER: 'Please select or search...',
                 SPACE: 'Space',
-                DEVICE: 'Equipment',
                 TENANT: 'TENANT',
                 STORE: 'STORE',
                 EQUIPMENT: 'Equipment',
@@ -1095,7 +1094,7 @@ function config($translateProvider) {
             },
             FDD: {
                ID: 'ID',
-                RULE: '规则管理',
+                RULE: '规则',
                 EMAIL_MESSAGE: '邮件信息',
                 TEXT_MESSAGE: '短信信息',
                 WEB_MESSAGE: '网页信息',

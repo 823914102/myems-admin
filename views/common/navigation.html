@@ -14,22 +14,22 @@
             <li ng-show="isAdminCookie()" ng-class="{active: $state.includes('settings')}">
                 <a href=""><i class="fa fa-gears"></i> <span class="nav-label">{{ 'MENU.SETTINGS.SETTINGS' | translate }}</span>  <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('settings')}">
+                    <li ui-sref-active="active"><a ui-sref="settings.category">{{ 'MENU.SETTINGS.CATEGORY' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="settings.costcenter">{{ 'MENU.SETTINGS.COSTCENTER' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="settings.tariff">{{ 'MENU.SETTINGS.TARIFF' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="settings.contact">{{ 'MENU.SETTINGS.CONTACT' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="settings.gateway">{{ 'MENU.SETTINGS.GATEWAY' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="settings.datasource">{{ 'MENU.SETTINGS.DATASOURCE' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="settings.meter">{{ 'MENU.SETTINGS.METER' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="settings.sensor">{{ 'MENU.SETTINGS.SENSOR' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="settings.equipment">{{ 'MENU.SETTINGS.EQUIPMENT' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="settings.space">{{ 'MENU.SETTINGS.SPACE' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="settings.tenant">{{ 'MENU.SETTINGS.TENANT' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="settings.store">{{ 'MENU.SETTINGS.STORE' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="settings.equipment">{{ 'MENU.SETTINGS.EQUIPMENT' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="settings.meter">{{ 'MENU.SETTINGS.METER' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="settings.sensor">{{ 'MENU.SETTINGS.SENSOR' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="settings.gateway">{{ 'MENU.SETTINGS.GATEWAY' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="settings.datasource">{{ 'MENU.SETTINGS.DATASOURCE' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="settings.category">{{ 'MENU.SETTINGS.CATEGORY' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="settings.energyflowdiagram">{{ 'MENU.SETTINGS.ENERGY_FLOW_DIAGRAM' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="settings.distributionsystem">{{ 'MENU.SETTINGS.DISTRIBUTION_SYSTEM' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="settings.costcenter">{{ 'MENU.SETTINGS.COSTCENTER' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="settings.tariff">{{ 'MENU.SETTINGS.TARIFF' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="settings.emailserver">{{ 'MENU.SETTINGS.EMAIL_SERVER' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="settings.gsmmodem">{{ 'MENU.SETTINGS.GSM_MODEM' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="settings.contact">{{ 'MENU.SETTINGS.CONTACT' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="settings.knowledgefile">{{ 'MENU.SETTINGS.KNOWLEDGEFILE' | translate }}</a></li>
                 </ul>
             </li>
