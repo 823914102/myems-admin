@@ -80,7 +80,7 @@ app
                         url: "/rule",
                         templateUrl: "views/alarm/rule.html",
                         data: {
-                            pageTitle: 'MENU.FDD.ALARMROLE'
+                            pageTitle: 'MENU.FDD.RULE'
                         },
                         resolve: {
                             deps: [
