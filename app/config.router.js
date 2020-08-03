@@ -9,9 +9,9 @@
 app
     .run([
         '$rootScope', '$state', '$stateParams',
-        function($rootScope, $state, $stateParams) {
+        function ($rootScope, $state, $stateParams) {
             $rootScope.$state = $state;
-            $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+            $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
                 $rootScope.$emit('handleStateChange', toState.data.pageTitle);
             });
         }
@@ -19,7 +19,7 @@ app
     .config(
         [
             '$stateProvider', '$urlRouterProvider',
-            function($stateProvider, $urlRouterProvider) {
+            function ($stateProvider, $urlRouterProvider) {
 
                 $urlRouterProvider.otherwise("login/login");
 
@@ -31,9 +31,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 serie: true,
                                                 files: [
@@ -57,9 +57,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 serie: true,
                                                 files: [
@@ -85,33 +85,34 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
-                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'daterangepicker','toaster']).then(
-                                        function() {
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'daterangepicker', 'toaster']).then(
+                                        function () {
                                             return $ocLazyLoad.load(
                                                 [{
                                                     files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                                 }, {
                                                     name: 'oitozero.ngSweetAlert',
                                                     files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
-                                                },{
+                                                }, {
                                                     serie: true,
                                                     files: ['js/daterangepicker/daterangepicker.min.js', 'js/daterangepicker/daterangepicker.min.css']
                                                 }, {
                                                     name: 'daterangepicker',
                                                     files: ['js/daterangepicker/angular-daterangepicker.min.js']
-                                                },{
+                                                }, {
                                                     files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
                                                 }, {
                                                     name: 'ui.footable',
                                                     files: ['js/plugins/footable/angular-footable.js']
-                                                },{
+                                                }, {
                                                     serie: true,
                                                     files: [
                                                         'app/services/settings/space/space.service.js',
                                                         'app/services/settings/tenant/tenant.service.js',
                                                         'app/services/settings/store/store.service.js',
                                                         'app/services/settings/equipment/equipment.service.js',
+                                                        'app/services/settings/combinedequipment/combinedequipment.service.js',
                                                         'app/services/settings/meter/meter.service.js',
                                                         'app/services/alarm/rule.service.js',
                                                         'app/controllers/alarm/rule/rule.controller.js'
@@ -132,27 +133,27 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
-                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'daterangepicker','toaster']).then(
-                                        function() {
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'daterangepicker', 'toaster']).then(
+                                        function () {
                                             return $ocLazyLoad.load(
                                                 [{
                                                     files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                                 }, {
                                                     name: 'oitozero.ngSweetAlert',
                                                     files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
-                                                },{
+                                                }, {
                                                     serie: true,
                                                     files: ['js/daterangepicker/daterangepicker.min.js', 'js/daterangepicker/daterangepicker.min.css']
                                                 }, {
                                                     name: 'daterangepicker',
                                                     files: ['js/daterangepicker/angular-daterangepicker.min.js']
-                                                },{
+                                                }, {
                                                     files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
                                                 }, {
                                                     name: 'ui.footable',
                                                     files: ['js/plugins/footable/angular-footable.js']
-                                                },{
+                                                }, {
                                                     serie: true,
                                                     files: [
                                                         'app/services/alarm/textmessageanalysis.service.js',
@@ -176,27 +177,27 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
-                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'daterangepicker','toaster']).then(
-                                        function() {
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'daterangepicker', 'toaster']).then(
+                                        function () {
                                             return $ocLazyLoad.load(
                                                 [{
                                                     files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                                 }, {
                                                     name: 'oitozero.ngSweetAlert',
                                                     files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
-                                                },{
+                                                }, {
                                                     serie: true,
                                                     files: ['js/daterangepicker/daterangepicker.min.js', 'js/daterangepicker/daterangepicker.min.css']
                                                 }, {
                                                     name: 'daterangepicker',
                                                     files: ['js/daterangepicker/angular-daterangepicker.min.js']
-                                                },{
+                                                }, {
                                                     files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
                                                 }, {
                                                     name: 'ui.footable',
                                                     files: ['js/plugins/footable/angular-footable.js']
-                                                },{
+                                                }, {
                                                     serie: true,
                                                     files: [
                                                         'app/services/alarm/emailmessageanalysis.service.js',
@@ -220,27 +221,27 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
-                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'daterangepicker','toaster']).then(
-                                        function() {
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'daterangepicker', 'toaster']).then(
+                                        function () {
                                             return $ocLazyLoad.load(
                                                 [{
                                                     files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                                 }, {
                                                     name: 'oitozero.ngSweetAlert',
                                                     files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
-                                                },{
+                                                }, {
                                                     serie: true,
                                                     files: ['js/daterangepicker/daterangepicker.min.js', 'js/daterangepicker/daterangepicker.min.css']
                                                 }, {
                                                     name: 'daterangepicker',
                                                     files: ['js/daterangepicker/angular-daterangepicker.min.js']
-                                                },{
+                                                }, {
                                                     files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
                                                 }, {
                                                     name: 'ui.footable',
                                                     files: ['js/plugins/footable/angular-footable.js']
-                                                },{
+                                                }, {
                                                     serie: true,
                                                     files: [
                                                         'app/services/alarm/webmessageanalysis.service.js',
@@ -264,27 +265,27 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
-                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'daterangepicker','toaster']).then(
-                                        function() {
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'daterangepicker', 'toaster']).then(
+                                        function () {
                                             return $ocLazyLoad.load(
                                                 [{
                                                     files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                                 }, {
                                                     name: 'oitozero.ngSweetAlert',
                                                     files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
-                                                },{
+                                                }, {
                                                     serie: true,
                                                     files: ['js/daterangepicker/daterangepicker.min.js', 'js/daterangepicker/daterangepicker.min.css']
                                                 }, {
                                                     name: 'daterangepicker',
                                                     files: ['js/daterangepicker/angular-daterangepicker.min.js']
-                                                },{
+                                                }, {
                                                     files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
                                                 }, {
                                                     name: 'ui.footable',
                                                     files: ['js/plugins/footable/angular-footable.js']
-                                                },{
+                                                }, {
                                                     serie: true,
                                                     files: [
                                                         'app/services/alarm/wechatmessageanalysis.service.js',
@@ -306,9 +307,35 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['toaster']).then(
-                                        function() {
+                                        function () {
+                                            return $ocLazyLoad.load([{
+                                                serie: true,
+                                                files: [
+                                                    'app/services/login/login.service.js',
+                                                    'app/services/alarm/webmessageanalysis.service.js',
+                                                    'app/services/users/user/user.service.js',
+                                                    'app/controllers/users/user/user.controller.js',
+                                                    'app/controllers/login/login.controller.js'
+                                                ]
+                                            }]);
+                                        }
+                                    );
+                                }
+                            ]
+                        }
+                    })
+                    .state('combinedequipment', {
+                        abstract: true,
+                        url: "/combinedequipment",
+                        templateUrl: "views/common/content.html",
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['toaster']).then(
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 serie: true,
                                                 files: [
@@ -332,9 +359,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 serie: true,
                                                 files: [
@@ -358,9 +385,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 serie: true,
                                                 files: [
@@ -386,9 +413,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -406,6 +433,7 @@ app
                                                     'app/services/settings/meter/virtual-meter.service.js',
                                                     'app/services/settings/meter/offline-meter.service.js',
                                                     'app/services/settings/equipment/equipment.service.js',
+                                                    'app/services/settings/combinedequipment/combinedequipment.service.js',
                                                     'app/services/settings/tenant/tenant.service.js',
                                                     'app/services/settings/store/store.service.js',
                                                     'app/services/settings/sensor/sensor.service.js',
@@ -441,9 +469,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 serie: true,
                                                 files: ['js/daterangepicker/daterangepicker.min.js', 'js/daterangepicker/daterangepicker.min.css']
@@ -497,9 +525,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 serie: true,
                                                 files: ['js/daterangepicker/daterangepicker.min.js', 'js/daterangepicker/daterangepicker.min.css']
@@ -553,9 +581,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -585,6 +613,47 @@ app
                             ]
                         }
                     })
+                    .state('settings.combinedequipment', {
+                        url: "/combinedequipment",
+                        templateUrl: "views/settings/combinedequipment/combinedequipment.html",
+                        data: {
+                            pageTitle: 'MENU.SETTINGS.COMBINEDEQUIPMENT'
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'toaster']).then(
+                                        function () {
+                                            return $ocLazyLoad.load([{
+                                                files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
+                                            }, {
+                                                name: 'oitozero.ngSweetAlert',
+                                                files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
+                                            }, {
+                                                serie: true,
+                                                files: [
+                                                    'app/services/settings/space/space.service.js',
+                                                    'app/services/settings/combinedequipment/combinedequipment.service.js',
+                                                    'app/services/settings/costcenter/costcenter.service.js',
+                                                    'app/services/settings/datasource/point.service.js',
+                                                    'app/services/settings/meter/meter.service.js',
+                                                    'app/services/settings/meter/offline-meter.service.js',
+                                                    'app/services/settings/meter/virtual-meter.service.js',
+                                                    'app/services/settings/combinedequipment/combinedequipmentmeter.service.js',
+                                                    'app/services/settings/combinedequipment/combinedequipmentparameter.service.js',
+                                                    'app/controllers/settings/combinedequipment/combinedequipment.master.controller.js',
+                                                    'app/controllers/settings/combinedequipment/combinedequipment.controller.js',
+                                                    'app/controllers/settings/combinedequipment/combinedequipmentmeter.controller.js',
+                                                    'app/controllers/settings/combinedequipment/combinedequipmentparameter.controller.js'
+                                                ]
+                                            }]);
+                                        }
+                                    );
+                                }
+                            ]
+                        }
+                    })
                     .state('settings.meter', {
                         url: "/meter",
                         templateUrl: "views/settings/meter/meter.html",
@@ -594,9 +663,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
                                             }, {
@@ -643,9 +712,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
                                             }, {
@@ -683,9 +752,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -719,9 +788,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -753,9 +822,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -786,9 +855,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -825,9 +894,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.checkbox', 'ui.select', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -863,9 +932,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -893,9 +962,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -924,9 +993,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
                                             }, {
@@ -960,9 +1029,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -990,9 +1059,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/footable/footable.all.min.js', 'css/plugins/footable/footable.core.css']
                                             }, {
@@ -1022,14 +1091,14 @@ app
                         url: "/tariff",
                         templateUrl: "views/settings/tariff/tariff.html",
                         data: {
-                            pageTitle:  'MENU.SETTINGS.TARIFF'
+                            pageTitle: 'MENU.SETTINGS.TARIFF'
                         },
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 serie: true,
                                                 files: ['js/daterangepicker/daterangepicker.min.js', 'js/daterangepicker/daterangepicker.min.css']
@@ -1068,9 +1137,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 serie: true,
                                                 files: [
@@ -1098,9 +1167,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -1131,9 +1200,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['ui.select', 'toaster', 'integralui']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                                             }, {
@@ -1167,9 +1236,9 @@ app
                         resolve: {
                             deps: [
                                 '$ocLazyLoad',
-                                function($ocLazyLoad) {
+                                function ($ocLazyLoad) {
                                     return $ocLazyLoad.load(['toaster']).then(
-                                        function() {
+                                        function () {
                                             return $ocLazyLoad.load([{
                                                 serie: true,
                                                 files: [
