@@ -217,6 +217,62 @@
 						</div>
 					</uib-tab>
 
+					<uib-tab heading="{{'SPACE.BIND_COMBINED_EQUIPMENT' | translate}}">
+						<div class="panel-body" ng-controller="SpaceCombinedEquipmentController">
+							<div class="row">
+								<div class="col-lg-3">
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											{{'SETTING.SELECT_SPACE' | translate}}
+										</div>
+										<div class="panel-body" style="overflow: auto; max-height: 700px;">
+											<div id="spacetreewithcombinedequipment"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											{{currentSpace.name}}{{'SPACE.N_S_COMBINED_EQUIPMENT' | translate}}
+										</div>
+										<div class="panel-body" x-hjc-drop-target="true"
+											x-on-drop="pairCombinedEquipment(dragEl,dropEl)"
+											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}">
+											<div class="btn btn-primary btn-rounded btn-block"
+												title="{{spacecombinedequipment.name}}"
+												ng-repeat="spacecombinedequipment in spacecombinedequipments" x-hjc-draggable="true">
+												{{spacecombinedequipment.name}}</div>
+										</div>
+									</div>
+									<div class="panel panel-danger">
+										<div class="panel-heading">
+											{{'SETTING.TRASH' | translate}}
+										</div>
+										<div class="panel-body trash">
+											<img class="trashcan" src="img/trashcan.png" x-hjc-drop-target="true"
+												x-on-drop="deleteCombinedEquipmentPair(dragEl,dropEl)">
+										</div>
+
+									</div>
+								</div>
+
+								<div class="col-lg-3">
+									<!-- according panel-->
+									<div class="panel panel-primary">
+										<div class="panel-heading"> {{'SPACE.COMBINED_EQUIPMENT_LIST' | translate}} </div>
+										<div class="panel-body" uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}"
+											slim-scroll box-height="600px">
+											<div class="source btn btn-info btn-rounded btn-block"
+												ng-repeat="combinedequipment in combinedequipments" x-hjc-draggable="true">
+												{{combinedequipment.name}}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</uib-tab>
+
 					<uib-tab heading="{{'SETTING.BIND_POINT' | translate}}">
 						<div class="panel-body" ng-controller="SpacePointController">
 							<div class="row">
