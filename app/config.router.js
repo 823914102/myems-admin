@@ -637,13 +637,16 @@ app
                                                     'app/services/settings/combinedequipment/combinedequipment.service.js',
                                                     'app/services/settings/costcenter/costcenter.service.js',
                                                     'app/services/settings/datasource/point.service.js',
+                                                    'app/services/settings/equipment/equipment.service.js',
                                                     'app/services/settings/meter/meter.service.js',
                                                     'app/services/settings/meter/offline-meter.service.js',
                                                     'app/services/settings/meter/virtual-meter.service.js',
+                                                    'app/services/settings/combinedequipment/combinedequipmentequipment.service.js',
                                                     'app/services/settings/combinedequipment/combinedequipmentmeter.service.js',
                                                     'app/services/settings/combinedequipment/combinedequipmentparameter.service.js',
                                                     'app/controllers/settings/combinedequipment/combinedequipment.master.controller.js',
                                                     'app/controllers/settings/combinedequipment/combinedequipment.controller.js',
+                                                    'app/controllers/settings/combinedequipment/combinedequipmentequipment.controller.js',
                                                     'app/controllers/settings/combinedequipment/combinedequipmentmeter.controller.js',
                                                     'app/controllers/settings/combinedequipment/combinedequipmentparameter.controller.js'
                                                 ]

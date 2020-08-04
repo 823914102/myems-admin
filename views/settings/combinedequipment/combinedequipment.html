@@ -46,6 +46,76 @@
 							</table>
 						</div>
 					</uib-tab>
+					<uib-tab heading="{{'COMBINED_EQUIPMENT.BIND_EQUIPMENT' | translate}}">
+						<div class="panel-body" ng-controller="CombinedEquipmentEquipmentController">
+							<div class="row">
+								<div class="col-lg-3">
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											{{'COMMON.COMBINED_EQUIPMENT' | translate}}
+										</div>
+										<div class="panel-body">
+											<form role="form">
+												<div class="form-group no-margin">
+													<label>{{'COMBINED_EQUIPMENT.SELECT_COMBINED_EQUIPMENT' | translate}}</label>
+													<ui-select on-select="changeCombinedEquipment($item,$model)"
+														ng-model="currentCombinedEquipment.selected" theme="bootstrap">
+														<ui-select-match
+															placeholder="{{'COMMON.PLACEHOLDER' | translate}}">
+															{{$select.selected.name}}</ui-select-match>
+														<ui-select-choices
+															repeat="combinedequipment.id as combinedequipment in combinedequipments | filter: $select.search">
+															<div
+																ng-bind-html="combinedequipment.name | highlight: $select.search">
+															</div>
+														</ui-select-choices>
+													</ui-select>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											{{currentCombinedEquipment.name}}{{'COMBINED_EQUIPMENT.N_S_EQUIPMENT' | translate}}
+										</div>
+										<div class="panel-body"
+											x-hjc-drop-target="true"
+											x-on-drop="pairEquipment(dragEl,dropEl)"
+											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}" >
+											<div class="btn btn-primary btn-rounded btn-block"
+											title="{{combinedequipmentequipment.name}}"
+											ng-repeat="combinedequipmentequipment in combinedequipmentequipments"
+											x-hjc-draggable="true"> {{combinedequipmentequipment.name}}</div>
+									</div>
+									</div>
+									<div class="panel panel-danger">
+										<div class="panel-heading">
+											{{'SETTING.TRASH' | translate}}
+										</div>
+										<div class="panel-body trash">
+											<img class="trashcan" src="img/trashcan.png" x-hjc-drop-target="true"
+												x-on-drop="deleteEquipmentPair(dragEl,dropEl)">
+										</div>
+
+									</div>
+								</div>
+
+								<div class="col-lg-3">
+									<!-- according panel-->
+									<div class="panel panel-primary">
+										<div class="panel-heading"> {{'COMBINED_EQUIPMENT.EQUIPMENT_LIST' | translate}}	</div>
+										<div class="panel-body" uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}" slim-scroll box-height="600px">
+											<div class="source btn btn-info btn-rounded btn-block" 	ng-repeat="equipment in equipments" x-hjc-draggable="true">
+													 {{equipment.name}}
+										  </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</uib-tab>
 					<uib-tab heading="{{'SETTING.BIND_METER' | translate}}">
 						<div class="panel-body" ng-controller="CombinedEquipmentMeterController">
 							<div class="row">
