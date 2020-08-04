@@ -1609,6 +1609,9 @@ function config($translateProvider) {
                 BIND_STORE: '绑定门店',
                 N_S_STORE: '绑定的门店',
                 STORE_LIST: '门店列表',
+                BIND_SHOPFLOOR: '绑定车间',
+                N_S_SHOPFLOOR: '绑定的车间',
+                SHOPFLOOR_LIST: '车间列表',
             },
             TENANT: {
                 BUILDINGS: '建筑',
@@ -1697,6 +1700,8 @@ function config($translateProvider) {
                 UNBIND_TENANT_SUCCESS: '解绑租户成功',
                 BIND_STORE_SUCCESS: '绑定门店成功',
                 UNBIND_STORE_SUCCESS: '解绑门店成功',
+                BIND_SHOPFLOOR_SUCCESS: '绑定车间成功',
+                UNBIND_SHOPFLOOR_SUCCESS: '解绑车间成功',
             },
             SWEET: {
                 TITLE: '请确认是否删除?',
