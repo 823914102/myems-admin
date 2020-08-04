@@ -9,71 +9,76 @@
 						<div class="panel-body" ng-controller="SpaceController">
 							<div class="row">
 								<div class="col-lg-3">
-										<div class="panel panel-info">
-											<div class="panel-heading">
-												{{'SETTING.SELECT_SPACE' | translate}}
-											</div>
-											<div class="panel-body" style="overflow: auto; max-height: 700px;">
-												<div id="spacetree" ></div>
-											</div>
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											{{'SETTING.SELECT_SPACE' | translate}}
 										</div>
+										<div class="panel-body" style="overflow: auto; max-height: 700px;">
+											<div id="spacetree"></div>
 										</div>
-										<div class="col-lg-9">
-											<div class="panel panel-info">
-												<div class="panel-heading">
-													{{'SPACE.CHILD_SPACES' | translate}}
-												</div>
-												<div class="panel-body">
-													<a ng-click="addSpace()" class="btn btn-primary btn-rounded btn-outline" href=""><i
-															class="fa fa-plus-circle"></i> {{'SETTING.ADD_SPACE' | translate}}</a>
-													<table class="table table-bordered table-hover">
-														<thead>
-															<tr>
-																<th class="text-center">{{'SETTING.ID' | translate}}</th>
-																<th class="text-center">{{'SETTING.NAME' | translate}}</th>
-																<th class="text-center">{{'SPACE.PARENT_SPACE' | translate}}</th>
-																<th class="text-center">{{'SPACE.AREA' | translate}}</th>
-																<th class="text-center">{{'SETTING.CONTACT' | translate}}</th>
-																<th class="text-center">{{'SETTING.TIMEZONE' | translate}}</th>
-																<th class="text-center">{{'SETTING.IS_INPUT_COUNTED' | translate}}</th>
-																<th class="text-center">{{'SETTING.IS_OUTPUT_COUNTED' | translate}}</th>
-																<th class="text-center">{{'SETTING.COSTCENTER' | translate}}</th>
-																<th class="text-center">{{'SPACE.LOCATION' | translate}}</th>
-																<th class="text-center">{{'SPACE.DESCRIPTION' | translate}}</th>
-																<th class="text-center">{{'SETTING.ACTION' | translate}}</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr ng-repeat="space in currentSpaceChildren">
-																<td class="text-center">{{ space.id }}</td>
-																<td class="text-center">{{ space.name }}</td>
-																<td class="text-center">{{ space.parent_space.name }}</td>
-																<td class="text-center">{{ space.area }}</td>
-																<td class="text-center">{{ space.contact.name }}</td>
-																<td class="text-center">{{ space.timezone.name }}</td>
-																<td class="text-center">
-																	{{ space.is_counted==false?'SETTING.NO':'SETTING.YES' | translate }}
-																</td>
-																<td class="text-center">
-																	{{ space.is_output_counted==false?'SETTING.NO':'SETTING.YES' | translate }}
-																</td>
-																<td class="text-center">{{space.cost_center.name}}</td>
-																<td class="text-center">{{space.location}}</td>
-																<td class="text-center">{{space.description}}</td>
-																<td class="text-center">
-																	<a class="btn btn-primary btn-rounded btn-xs"
-																		ng-click="editSpace(space)">{{'SETTING.EDIT' | translate}}</a>
-																	<a ng-click="deleteSpace(space)"
-																		class="btn btn-danger btn-rounded btn-xs">{{'SETTING.DELETE' | translate}}</a>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-											</div>
+									</div>
+								</div>
+								<div class="col-lg-9">
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											{{'SPACE.CHILD_SPACES' | translate}}
 										</div>
-						 </div>
+										<div class="panel-body">
+											<a ng-click="addSpace()" class="btn btn-primary btn-rounded btn-outline"
+												href=""><i class="fa fa-plus-circle"></i>
+												{{'SETTING.ADD_SPACE' | translate}}</a>
+											<table class="table table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="text-center">{{'SETTING.ID' | translate}}</th>
+														<th class="text-center">{{'SETTING.NAME' | translate}}</th>
+														<th class="text-center">{{'SPACE.PARENT_SPACE' | translate}}
+														</th>
+														<th class="text-center">{{'SPACE.AREA' | translate}}</th>
+														<th class="text-center">{{'SETTING.CONTACT' | translate}}</th>
+														<th class="text-center">{{'SETTING.TIMEZONE' | translate}}</th>
+														<th class="text-center">
+															{{'SETTING.IS_INPUT_COUNTED' | translate}}</th>
+														<th class="text-center">
+															{{'SETTING.IS_OUTPUT_COUNTED' | translate}}</th>
+														<th class="text-center">{{'SETTING.COSTCENTER' | translate}}
+														</th>
+														<th class="text-center">{{'SPACE.LOCATION' | translate}}</th>
+														<th class="text-center">{{'SPACE.DESCRIPTION' | translate}}</th>
+														<th class="text-center">{{'SETTING.ACTION' | translate}}</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="space in currentSpaceChildren">
+														<td class="text-center">{{ space.id }}</td>
+														<td class="text-center">{{ space.name }}</td>
+														<td class="text-center">{{ space.parent_space.name }}</td>
+														<td class="text-center">{{ space.area }}</td>
+														<td class="text-center">{{ space.contact.name }}</td>
+														<td class="text-center">{{ space.timezone.name }}</td>
+														<td class="text-center">
+															{{ space.is_counted==false?'SETTING.NO':'SETTING.YES' | translate }}
+														</td>
+														<td class="text-center">
+															{{ space.is_output_counted==false?'SETTING.NO':'SETTING.YES' | translate }}
+														</td>
+														<td class="text-center">{{space.cost_center.name}}</td>
+														<td class="text-center">{{space.location}}</td>
+														<td class="text-center">{{space.description}}</td>
+														<td class="text-center">
+															<a class="btn btn-primary btn-rounded btn-xs"
+																ng-click="editSpace(space)">{{'SETTING.EDIT' | translate}}</a>
+															<a ng-click="deleteSpace(space)"
+																class="btn btn-danger btn-rounded btn-xs">{{'SETTING.DELETE' | translate}}</a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</uib-tab>
 
 					<uib-tab heading="{{'SETTING.BIND_METER' | translate}}">
@@ -174,15 +179,14 @@
 										<div class="panel-heading">
 											{{currentSpace.name}}{{'SPACE.N_S_EQUIPMENT' | translate}}
 										</div>
-										<div class="panel-body"
-											x-hjc-drop-target="true"
+										<div class="panel-body" x-hjc-drop-target="true"
 											x-on-drop="pairEquipment(dragEl,dropEl)"
-											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}" >
+											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}">
 											<div class="btn btn-primary btn-rounded btn-block"
-											title="{{spaceequipment.name}}"
-											ng-repeat="spaceequipment in spaceequipments"
-											x-hjc-draggable="true"> {{spaceequipment.name}}</div>
-									</div>
+												title="{{spaceequipment.name}}"
+												ng-repeat="spaceequipment in spaceequipments" x-hjc-draggable="true">
+												{{spaceequipment.name}}</div>
+										</div>
 									</div>
 									<div class="panel panel-danger">
 										<div class="panel-heading">
@@ -199,11 +203,13 @@
 								<div class="col-lg-3">
 									<!-- according panel-->
 									<div class="panel panel-primary">
-										<div class="panel-heading"> {{'SPACE.EQUIPMENT_LIST' | translate}}	</div>
-										<div class="panel-body" uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}" slim-scroll box-height="600px">
-											<div class="source btn btn-info btn-rounded btn-block" 	ng-repeat="equipment in equipments" x-hjc-draggable="true">
-													 {{equipment.name}}
-										  </div>
+										<div class="panel-heading"> {{'SPACE.EQUIPMENT_LIST' | translate}} </div>
+										<div class="panel-body" uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}"
+											slim-scroll box-height="600px">
+											<div class="source btn btn-info btn-rounded btn-block"
+												ng-repeat="equipment in equipments" x-hjc-draggable="true">
+												{{equipment.name}}
+											</div>
 										</div>
 									</div>
 								</div>
@@ -212,43 +218,40 @@
 					</uib-tab>
 
 					<uib-tab heading="{{'SETTING.BIND_POINT' | translate}}">
-							<div class="panel-body" ng-controller="SpacePointController">
-								<div class="row">
+						<div class="panel-body" ng-controller="SpacePointController">
+							<div class="row">
 								<div class="col-lg-3">
-										<div class="panel panel-info">
-											<div class="panel-heading">
-												{{'SETTING.SELECT_SPACE' | translate}}
-											</div>
-											<div class="panel-body" style="overflow: auto; max-height: 700px;">
-												<div id="spacetreewithpoint"></div>
-											</div>
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											{{'SETTING.SELECT_SPACE' | translate}}
+										</div>
+										<div class="panel-body" style="overflow: auto; max-height: 700px;">
+											<div id="spacetreewithpoint"></div>
 										</div>
 									</div>
-									<div class="col-lg-4">
-										<div class="panel panel-primary">
-											<div class="panel-heading">
-												{{currentSpace.name}}{{'SETTING.N_S_POINT' | translate}}
-											</div>
-											<div class="panel-body"
-											x-hjc-drop-target="true"
-											x-on-drop="pairPoint(dragEl,dropEl)"
-											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}" >
-											<div class="btn btn-primary btn-rounded btn-block"
-											title="{{'COMMON.SPACE' | translate}}:{{spacepoint.data_source.name}}"
-											ng-repeat="spacepoint in spacepoints"
-											x-hjc-draggable="true"> {{spacepoint.name}}
+								</div>
+								<div class="col-lg-4">
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											{{currentSpace.name}}{{'SETTING.N_S_POINT' | translate}}
 										</div>
+										<div class="panel-body" x-hjc-drop-target="true"
+											x-on-drop="pairPoint(dragEl,dropEl)"
+											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}">
+											<div class="btn btn-primary btn-rounded btn-block"
+												title="{{'COMMON.SPACE' | translate}}:{{spacepoint.data_source.name}}"
+												ng-repeat="spacepoint in spacepoints" x-hjc-draggable="true">
+												{{spacepoint.name}}
+											</div>
 										</div>
 									</div>
 									<div class="panel panel-danger">
 										<div class="panel-heading">
 											{{'SETTING.TRASH' | translate}}
 										</div>
-										<div class="panel-body trash" >
-											<img class="trashcan"
-											src="img/trashcan.png"
-											x-hjc-drop-target="true"
-											x-on-drop="deletePointPair(dragEl,dropEl)">
+										<div class="panel-body trash">
+											<img class="trashcan" src="img/trashcan.png" x-hjc-drop-target="true"
+												x-on-drop="deletePointPair(dragEl,dropEl)">
 										</div>
 									</div>
 								</div>
@@ -258,21 +261,27 @@
 											{{'SETTING.POINT_LIST' | translate}}
 										</div>
 										<div class="panel-body" slim-scroll box-height="600px"
-										uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}">
+											uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}">
 											<form role="form">
-												<div class="form-group no-margin"><label>{{'DATA_SOURCE.SELECT_DATA_SOURCE' | translate}}</label>
-														<ui-select on-select="changeDataSource($item, $model)" ng-model="currentDataSource" theme="bootstrap">
-																<ui-select-match placeholder="{{'COMMON.PLACEHOLDER' | translate}}">{{$select.selected.name}}</ui-select-match>
-																<ui-select-choices repeat="datasource.id as datasource in datasources | filter: $select.search">
-																		<div ng-bind-html="datasource.name | highlight: $select.search"></div>
-																</ui-select-choices>
-														</ui-select>
+												<div class="form-group no-margin">
+													<label>{{'DATA_SOURCE.SELECT_DATA_SOURCE' | translate}}</label>
+													<ui-select on-select="changeDataSource($item, $model)"
+														ng-model="currentDataSource" theme="bootstrap">
+														<ui-select-match
+															placeholder="{{'COMMON.PLACEHOLDER' | translate}}">
+															{{$select.selected.name}}</ui-select-match>
+														<ui-select-choices
+															repeat="datasource.id as datasource in datasources | filter: $select.search">
+															<div
+																ng-bind-html="datasource.name | highlight: $select.search">
+															</div>
+														</ui-select-choices>
+													</ui-select>
 												</div>
 											</form>
 											<h5>{{'SETTING.POINT_LIST' | translate}}</h5>
 											<div class="source btn btn-info btn-rounded btn-block"
-											ng-repeat="point in points"
-											x-hjc-draggable="true"> {{point.name}}</div>
+												ng-repeat="point in points" x-hjc-draggable="true"> {{point.name}}</div>
 										</div>
 									</div>
 								</div>
@@ -281,43 +290,40 @@
 					</uib-tab>
 
 					<uib-tab heading="{{'SETTING.BIND_SENSOR' | translate}}">
-							<div class="panel-body" ng-controller="SpaceSensorController">
-								<div class="row">
-									<div class="col-lg-3">
-										<div class="panel panel-info">
-											<div class="panel-heading">
-												{{'SETTING.SELECT_SPACE' | translate}}
-											</div>
-											<div class="panel-body" style="overflow: auto; max-height: 700px;">
-												<div id="spacetreewithsensor"></div>
-											</div>
+						<div class="panel-body" ng-controller="SpaceSensorController">
+							<div class="row">
+								<div class="col-lg-3">
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											{{'SETTING.SELECT_SPACE' | translate}}
+										</div>
+										<div class="panel-body" style="overflow: auto; max-height: 700px;">
+											<div id="spacetreewithsensor"></div>
 										</div>
 									</div>
-									<div class="col-lg-4">
-										<div class="panel panel-primary">
-											<div class="panel-heading">
-												{{currentSpace.name}}{{'SETTING.N_S_SENSOR' | translate}}
-											</div>
-											<div class="panel-body"
-											x-hjc-drop-target="true"
-											x-on-drop="pairSensor(dragEl,dropEl)"
-											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}" >
-											<div class="btn btn-primary btn-rounded btn-block"
-											title="{{'COMMON.' | translate}}:{{spacesensor.data_source.name}}"
-											ng-repeat="spacesensor in spacesensors"
-											x-hjc-draggable="true"> {{spacesensor.name}}
+								</div>
+								<div class="col-lg-4">
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											{{currentSpace.name}}{{'SETTING.N_S_SENSOR' | translate}}
 										</div>
+										<div class="panel-body" x-hjc-drop-target="true"
+											x-on-drop="pairSensor(dragEl,dropEl)"
+											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}">
+											<div class="btn btn-primary btn-rounded btn-block"
+												title="{{'COMMON.' | translate}}:{{spacesensor.data_source.name}}"
+												ng-repeat="spacesensor in spacesensors" x-hjc-draggable="true">
+												{{spacesensor.name}}
+											</div>
 										</div>
 									</div>
 									<div class="panel panel-danger">
 										<div class="panel-heading">
 											{{'SETTING.TRASH' | translate}}
 										</div>
-										<div class="panel-body trash" >
-											<img class="trashcan"
-											src="img/trashcan.png"
-											x-hjc-drop-target="true"
-											x-on-drop="deleteSensorPair(dragEl,dropEl)">
+										<div class="panel-body trash">
+											<img class="trashcan" src="img/trashcan.png" x-hjc-drop-target="true"
+												x-on-drop="deleteSensorPair(dragEl,dropEl)">
 										</div>
 									</div>
 								</div>
@@ -327,11 +333,11 @@
 											{{'SENSOR.SELECT_SENSOR' | translate}}
 										</div>
 										<div class="panel-body" slim-scroll box-height="600px"
-										uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}">
+											uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}">
 											<h5>{{'SETTING.SENSOR_LIST' | translate}}</h5>
 											<div class="source btn btn-info btn-rounded btn-block"
-											ng-repeat="sensor in sensors"
-											x-hjc-draggable="true"> {{sensor.name}}</div>
+												ng-repeat="sensor in sensors" x-hjc-draggable="true"> {{sensor.name}}
+											</div>
 										</div>
 									</div>
 								</div>
@@ -357,15 +363,13 @@
 										<div class="panel-heading">
 											{{currentSpace.name}}{{'SPACE.N_S_TENANT' | translate}}
 										</div>
-										<div class="panel-body"
-											x-hjc-drop-target="true"
+										<div class="panel-body" x-hjc-drop-target="true"
 											x-on-drop="pairTenant(dragEl,dropEl)"
-											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}" >
+											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}">
 											<div class="btn btn-primary btn-rounded btn-block"
-											title="{{spacetenant.name}}"
-											ng-repeat="spacetenant in spacetenants"
-											x-hjc-draggable="true"> {{spacetenant.name}}</div>
-									</div>
+												title="{{spacetenant.name}}" ng-repeat="spacetenant in spacetenants"
+												x-hjc-draggable="true"> {{spacetenant.name}}</div>
+										</div>
 									</div>
 									<div class="panel panel-danger">
 										<div class="panel-heading">
@@ -382,11 +386,13 @@
 								<div class="col-lg-3">
 									<!-- according panel-->
 									<div class="panel panel-primary">
-										<div class="panel-heading"> {{'SPACE.TENANT_LIST' | translate}}	</div>
-										<div class="panel-body" uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}" slim-scroll box-height="600px">
-											<div class="source btn btn-info btn-rounded btn-block" 	ng-repeat="tenant in tenants" x-hjc-draggable="true">
-													 {{tenant.name}}
-										  </div>
+										<div class="panel-heading"> {{'SPACE.TENANT_LIST' | translate}} </div>
+										<div class="panel-body" uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}"
+											slim-scroll box-height="600px">
+											<div class="source btn btn-info btn-rounded btn-block"
+												ng-repeat="tenant in tenants" x-hjc-draggable="true">
+												{{tenant.name}}
+											</div>
 										</div>
 									</div>
 								</div>
@@ -412,15 +418,13 @@
 										<div class="panel-heading">
 											{{currentSpace.name}}{{'SPACE.N_S_STORE' | translate}}
 										</div>
-										<div class="panel-body"
-											x-hjc-drop-target="true"
+										<div class="panel-body" x-hjc-drop-target="true"
 											x-on-drop="pairStore(dragEl,dropEl)"
-											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}" >
+											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}">
 											<div class="btn btn-primary btn-rounded btn-block"
-											title="{{spacestore.name}}"
-											ng-repeat="spacestore in spacestores"
-											x-hjc-draggable="true"> {{spacestore.name}}</div>
-									</div>
+												title="{{spacestore.name}}" ng-repeat="spacestore in spacestores"
+												x-hjc-draggable="true"> {{spacestore.name}}</div>
+										</div>
 									</div>
 									<div class="panel panel-danger">
 										<div class="panel-heading">
@@ -437,11 +441,13 @@
 								<div class="col-lg-3">
 									<!-- according panel-->
 									<div class="panel panel-primary">
-										<div class="panel-heading"> {{'SPACE.STORE_LIST' | translate}}	</div>
-										<div class="panel-body" uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}" slim-scroll box-height="600px">
-											<div class="source btn btn-info btn-rounded btn-block" 	ng-repeat="store in stores" x-hjc-draggable="true">
-													 {{store.name}}
-										  </div>
+										<div class="panel-heading"> {{'SPACE.STORE_LIST' | translate}} </div>
+										<div class="panel-body" uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}"
+											slim-scroll box-height="600px">
+											<div class="source btn btn-info btn-rounded btn-block"
+												ng-repeat="store in stores" x-hjc-draggable="true">
+												{{store.name}}
+											</div>
 										</div>
 									</div>
 								</div>
@@ -449,6 +455,60 @@
 						</div>
 					</uib-tab>
 
+					<uib-tab heading="{{'SPACE.BIND_SHOPFLOOR' | translate}}">
+						<div class="panel-body" ng-controller="SpaceShopfloorController">
+							<div class="row">
+								<div class="col-lg-3">
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											{{'SETTING.SELECT_SPACE' | translate}}
+										</div>
+										<div class="panel-body" style="overflow: auto; max-height: 700px;">
+											<div id="spacetreewithshopfloor"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											{{currentSpace.name}}{{'SPACE.N_S_SHOPFLOOR' | translate}}
+										</div>
+										<div class="panel-body" x-hjc-drop-target="true"
+											x-on-drop="pairShopfloor(dragEl,dropEl)"
+											uib-tooltip="{{'SETTING.DRAG_TO_UNBIND' | translate}}">
+											<div class="btn btn-primary btn-rounded btn-block"
+												title="{{spaceshopfloor.name}}" ng-repeat="spaceshopfloor in spaceshopfloors"
+												x-hjc-draggable="true"> {{spaceshopfloor.name}}</div>
+										</div>
+									</div>
+									<div class="panel panel-danger">
+										<div class="panel-heading">
+											{{'SETTING.TRASH' | translate}}
+										</div>
+										<div class="panel-body trash">
+											<img class="trashcan" src="img/trashcan.png" x-hjc-drop-target="true"
+												x-on-drop="deleteShopfloorPair(dragEl,dropEl)">
+										</div>
+
+									</div>
+								</div>
+
+								<div class="col-lg-3">
+									<!-- according panel-->
+									<div class="panel panel-primary">
+										<div class="panel-heading"> {{'SPACE.SHOPFLOOR_LIST' | translate}} </div>
+										<div class="panel-body" uib-tooltip="{{'SETTING.DRAG_TO_BIND' | translate}}"
+											slim-scroll box-height="600px">
+											<div class="source btn btn-info btn-rounded btn-block"
+												ng-repeat="shopfloor in shopfloors" x-hjc-draggable="true">
+												{{shopfloor.name}}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</uib-tab>
 				</uib-tabset>
 			</div>
 		</div>
