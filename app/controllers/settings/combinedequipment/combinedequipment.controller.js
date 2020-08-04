@@ -38,7 +38,7 @@ app.controller('CombinedEquipmentController', function ($scope, $common, $transl
 			combinedequipment.cost_center_id = combinedequipment.cost_center.id;
 			CombinedEquipmentService.addCombinedEquipment(combinedequipment, function (error, status) {
 				if (angular.isDefined(status) && status == 201) {
-					var templateName = "COMMON.COMBINEDEQUIPMENT";
+					var templateName = "COMMON.COMBINED_EQUIPMENT";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -58,7 +58,7 @@ app.controller('CombinedEquipmentController', function ($scope, $common, $transl
 					$scope.getAllCombinedEquipments();
 					$scope.$emit('handleEmitCombinedEquipmentChanged');
 				} else {
-					var templateName = "COMMON.COMBINEDEQUIPMENT";
+					var templateName = "COMMON.COMBINED_EQUIPMENT";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -101,7 +101,7 @@ app.controller('CombinedEquipmentController', function ($scope, $common, $transl
 			modifiedCombinedEquipment.cost_center_id = modifiedCombinedEquipment.cost_center.id;
 			CombinedEquipmentService.editCombinedEquipment(modifiedEquipment, function (error, status) {
 				if (angular.isDefined(status) && status == 200) {
-					var templateName = "COMMON.COMBINEDEQUIPMENT";
+					var templateName = "COMMON.COMBINED_EQUIPMENT";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -121,7 +121,7 @@ app.controller('CombinedEquipmentController', function ($scope, $common, $transl
 					$scope.getAllCombinedEquipments();
 					$scope.$emit('handleEmitCombinedEquipmentChanged');
 				} else {
-					var templateName = "COMMON.COMBINEDEQUIPMENT";
+					var templateName = "COMMON.COMBINED_EQUIPMENT";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -161,7 +161,7 @@ app.controller('CombinedEquipmentController', function ($scope, $common, $transl
 				if (isConfirm) {
 					CombinedEquipmentService.deleteCombinedEquipment(combinedequipment, function (error, status) {
 						if (angular.isDefined(status) && status == 204) {
-							var templateName = "COMMON.COMBINEDEQUIPMENT";
+							var templateName = "COMMON.COMBINED_EQUIPMENT";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.SUCCESS';
@@ -181,7 +181,7 @@ app.controller('CombinedEquipmentController', function ($scope, $common, $transl
 							$scope.getAllCombinedEquipments();
 							$scope.$emit('handleEmitCombinedEquipmentChanged');
 						} else {
-							var templateName = "COMMON.COMBINEDEQUIPMENT";
+							var templateName = "COMMON.COMBINED_EQUIPMENT";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.ERROR';
@@ -208,7 +208,7 @@ app.controller('CombinedEquipmentController', function ($scope, $common, $transl
 });
 
 app.controller("ModalAddCombinedEquipmentCtrl", function ($scope, $uibModalInstance, params) {
-	$scope.operation = "COMBINEDEQUIPMENT.ADD_COMBINEDEQUIPMENT";
+	$scope.operation = "COMBINED_EQUIPMENT.ADD_COMBINED_EQUIPMENT";
 	$scope.costcenters = params.costcenters;
 	$scope.disabled = false;
 	$scope.combinedequipment = {
@@ -225,7 +225,7 @@ app.controller("ModalAddCombinedEquipmentCtrl", function ($scope, $uibModalInsta
 });
 
 app.controller("ModalEditCombinedEquipmentCtrl", function ($scope, $uibModalInstance, params) {
-	$scope.operation = "COMBINEDEQUIPMENT.EDIT_COMBINEDEQUIPMENT";
+	$scope.operation = "COMBINED_EQUIPMENT.EDIT_COMBINED_EQUIPMENT";
 	$scope.costcenters = params.costcenters;
 	$scope.disabled = true;
 	$scope.combinedequipment = params.combinedequipment;

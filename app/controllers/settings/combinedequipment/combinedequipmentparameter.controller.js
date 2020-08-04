@@ -64,7 +64,7 @@ app.controller('CombinedEquipmentParameterController', function ($scope, $common
 
 			CombinedEquipmentParameterService.addCombinedEquipmentParameter(combinedequipmentid, combinedequipmentparameter, function (error, status) {
 				if (angular.isDefined(status) && status == 201) {
-					var templateName = "COMBINEDEQUIPMENT.PARAMETER";
+					var templateName = "COMBINED_EQUIPMENT.PARAMETER";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -83,7 +83,7 @@ app.controller('CombinedEquipmentParameterController', function ($scope, $common
 					});
 					$scope.getParametersByCombinedEquipmentID($scope.currentCombinedEquipment.id);
 				} else {
-					var templateName = "COMBINEDEQUIPMENT.PARAMETER";
+					var templateName = "COMBINED_EQUIPMENT.PARAMETER";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -135,7 +135,7 @@ app.controller('CombinedEquipmentParameterController', function ($scope, $common
 			}
 			CombinedEquipmentParameterService.editCombinedEquipmentParameter($scope.currentCombinedEquipment.id, modifiedCombinedEquipmentParameter, function (error, status) {
 				if (angular.isDefined(status) && status == 200) {
-					var templateName = "COMBINEDEQUIPMENT.PARAMETER";
+					var templateName = "COMBINED_EQUIPMENT.PARAMETER";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -154,7 +154,7 @@ app.controller('CombinedEquipmentParameterController', function ($scope, $common
 					});
 					$scope.getParametersByCombinedEquipmentID($scope.currentCombinedEquipment.id);
 				} else {
-					var templateName = "COMBINEDEQUIPMENT.PARAMETER";
+					var templateName = "COMBINED_EQUIPMENT.PARAMETER";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -194,7 +194,7 @@ app.controller('CombinedEquipmentParameterController', function ($scope, $common
 				if (isConfirm) {
 					CombinedEquipmentParameterService.deleteCombinedEquipmentParameter($scope.currentCombinedEquipment.id, combinedequipmentparameter.id, function (error, status) {
 						if (angular.isDefined(status) && status == 204) {
-							var templateName = "COMBINEDEQUIPMENT.PARAMETER";
+							var templateName = "COMBINED_EQUIPMENT.PARAMETER";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.SUCCESS';
@@ -228,7 +228,7 @@ app.controller('CombinedEquipmentParameterController', function ($scope, $common
 								showCloseButton: true,
 							});
 						} else {
-							var templateName = "COMBINEDEQUIPMENT.PARAMETER";
+							var templateName = "COMBINED_EQUIPMENT.PARAMETER";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.ERROR';
@@ -263,11 +263,11 @@ app.controller('CombinedEquipmentParameterController', function ($scope, $common
 
 	$scope.showCombinedEquipmentParameterType = function (type) {
 		if (type == 'constant') {
-			return 'COMBINEDEQUIPMENT.CONSTANT';
+			return 'COMBINED_EQUIPMENT.CONSTANT';
 		} else if (type == 'point') {
-			return 'COMBINEDEQUIPMENT.POINT';
+			return 'COMBINED_EQUIPMENT.POINT';
 		} else if (type == 'fraction') {
-			return 'COMBINEDEQUIPMENT.FRACTION';
+			return 'COMBINED_EQUIPMENT.FRACTION';
 		}
 	};
 
@@ -364,7 +364,7 @@ app.controller('CombinedEquipmentParameterController', function ($scope, $common
 
 app.controller('ModalAddCombinedEquipmentParameterCtrl', function ($scope, $uibModalInstance, params) {
 
-	$scope.operation = "COMBINEDEQUIPMENT.ADD_PARAMETER";
+	$scope.operation = "COMBINED_EQUIPMENT.ADD_PARAMETER";
 	$scope.combinedequipmentparameter = {
 		parameter_type: "constant",
 	};
@@ -382,7 +382,7 @@ app.controller('ModalAddCombinedEquipmentParameterCtrl', function ($scope, $uibM
 });
 
 app.controller('ModalEditCombinedEquipmentParameterCtrl', function ($scope, $uibModalInstance, params) {
-	$scope.operation = "COMBINEDEQUIPMENT.EDIT_PARAMETER";
+	$scope.operation = "COMBINED_EQUIPMENT.EDIT_PARAMETER";
 	$scope.combinedequipmentparameter = params.combinedequipmentparameter;
 	$scope.points = params.points;
 	$scope.mergedmeters = params.mergedmeters;

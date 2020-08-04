@@ -617,7 +617,7 @@ app
                         url: "/combinedequipment",
                         templateUrl: "views/settings/combinedequipment/combinedequipment.html",
                         data: {
-                            pageTitle: 'MENU.SETTINGS.COMBINEDEQUIPMENT'
+                            pageTitle: 'MENU.SETTINGS.COMBINED_EQUIPMENT'
                         },
                         resolve: {
                             deps: [
