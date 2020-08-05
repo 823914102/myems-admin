@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('TenantController', function ($scope, $common, $translate, $uibModal, CostCenterService, ContactService, TenantService, TenantTypeService, toaster, SweetAlert) {
+app.controller('ShopfloorController', function ($scope, $common, $translate, $uibModal, CostCenterService, ContactService, ShopfloorService, toaster, SweetAlert) {
 
 	$scope.getAllCostCenters = function () {
 		CostCenterService.getAllCostCenters(function (error, data) {
@@ -22,58 +22,41 @@ app.controller('TenantController', function ($scope, $common, $translate, $uibMo
 		});
 	};
 
-	$scope.getAllTenants = function () {
-		TenantService.getAllTenants(function (error, data) {
+	$scope.getAllShopfloors = function () {
+		ShopfloorService.getAllShopfloors(function (error, data) {
 			if (!error) {
-				$scope.tenants = data;
+				$scope.shopfloors = data;
 			} else {
-				$scope.tenants = [];
+				$scope.shopfloors = [];
 			}
 		});
 	};
 
-	$scope.getAllTenantTypes = function () {
-		TenantTypeService.getAllTenantTypes(function (error, data) {
-			if (!error) {
-				$scope.tenanttypes = data;
-			} else {
-				$scope.tenanttypes = [];
-			}
-		});
-	};
-	$scope.addTenant = function () {
+	$scope.addShopfloor = function () {
 		var modalInstance = $uibModal.open({
-			templateUrl: 'views/settings/tenant/tenant.model.html',
-			controller: 'ModalAddTenantCtrl',
+			templateUrl: 'views/settings/shopfloor/shopfloor.model.html',
+			controller: 'ModalAddShopfloorCtrl',
 			windowClass: "animated fadeIn",
 			resolve: {
 				params: function () {
 					return {
-						tenants: angular.copy($scope.tenants),
-						tenanttypes: angular.copy($scope.tenanttypes),
+						shopfloors: angular.copy($scope.shopfloors),
 						costcenters: angular.copy($scope.costcenters),
 						contacts: angular.copy($scope.contacts),
 					};
 				}
 			}
 		});
-		modalInstance.result.then(function (tenant) {
-			tenant.tenant_type_id = tenant.tenant_type.id;
-			tenant.cost_center_id = tenant.cost_center.id;
-			tenant.contact_id = tenant.contact.id;
-			if (angular.isDefined(tenant.is_input_counted) == false) {
-				tenant.is_input_counted = false;
+		modalInstance.result.then(function (shopfloor) {
+			shopfloor.cost_center_id = shopfloor.cost_center.id;
+			shopfloor.contact_id = shopfloor.contact.id;
+			if (angular.isDefined(shopfloor.is_input_counted) == false) {
+				shopfloor.is_input_counted = false;
 			}
-			if (angular.isDefined(tenant.is_key_tenant) == false) {
-				tenant.is_key_tenant = false;
-			}
-			if (angular.isDefined(tenant.is_in_lease) == false) {
-				tenant.is_in_lease = false;
-			}
-			TenantService.addTenant(tenant, function (error, status) {
+			ShopfloorService.addShopfloor(shopfloor, function (error, status) {
 				if (angular.isDefined(status) && status == 201) {
 
-					var templateName = "COMMON.TENANT";
+					var templateName = "COMMON.SHOPFLOOR";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -90,9 +73,9 @@ app.controller('TenantController', function ($scope, $common, $translate, $uibMo
 						showCloseButton: true,
 					});
 
-					$scope.$emit('handleEmitTenantChanged');
+					$scope.$emit('handleEmitShopfloorChanged');
 				} else {
-					var templateName = "COMMON.TENANT";
+					var templateName = "COMMON.SHOPFLOOR";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -116,16 +99,15 @@ app.controller('TenantController', function ($scope, $common, $translate, $uibMo
 		});
 	};
 
-	$scope.editTenant = function (tenant) {
+	$scope.editShopfloor = function (shopfloor) {
 		var modalInstance = $uibModal.open({
 			windowClass: "animated fadeIn",
-			templateUrl: 'views/settings/tenant/tenant.model.html',
-			controller: 'ModalEditTenantCtrl',
+			templateUrl: 'views/settings/shopfloor/shopfloor.model.html',
+			controller: 'ModalEditShopfloorCtrl',
 			resolve: {
 				params: function () {
 					return {
-						tenant: angular.copy(tenant),
-						tenanttypes: angular.copy($scope.tenanttypes),
+						shopfloor: angular.copy(shopfloor),
 						costcenters: angular.copy($scope.costcenters),
 						contacts: angular.copy($scope.contacts)
 					};
@@ -133,22 +115,15 @@ app.controller('TenantController', function ($scope, $common, $translate, $uibMo
 			}
 		});
 
-		modalInstance.result.then(function (modifiedTenant) {
-			modifiedTenant.tenant_type_id = modifiedTenant.tenant_type.id;
-			modifiedTenant.cost_center_id = modifiedTenant.cost_center.id;
-			modifiedTenant.contact_id = modifiedTenant.contact.id;
-			if (angular.isDefined(tenant.is_input_counted) == false) {
-				tenant.is_input_counted = false;
+		modalInstance.result.then(function (modifiedShopfloor) {
+			modifiedShopfloor.cost_center_id = modifiedShopfloor.cost_center.id;
+			modifiedShopfloor.contact_id = modifiedShopfloor.contact.id;
+			if (angular.isDefined(shopfloor.is_input_counted) == false) {
+				shopfloor.is_input_counted = false;
 			}
-			if (angular.isDefined(tenant.is_key_tenant) == false) {
-				tenant.is_key_tenant = false;
-			}
-			if (angular.isDefined(tenant.is_in_lease) == false) {
-				tenant.is_in_lease = false;
-			}
-			TenantService.editTenant(modifiedTenant, function (error, status) {
+			ShopfloorService.editShopfloor(modifiedShopfloor, function (error, status) {
 				if (angular.isDefined(status) && status == 200) {
-					var templateName = "COMMON.TENANT";
+					var templateName = "COMMON.SHOPFLOOR";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -165,9 +140,9 @@ app.controller('TenantController', function ($scope, $common, $translate, $uibMo
 						body: popBody,
 						showCloseButton: true,
 					});
-					$scope.$emit('handleEmitTenantChanged');
+					$scope.$emit('handleEmitShopfloorChanged');
 				} else {
-					var templateName = "COMMON.TENANT";
+					var templateName = "COMMON.SHOPFLOOR";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -191,7 +166,7 @@ app.controller('TenantController', function ($scope, $common, $translate, $uibMo
 		});
 	};
 
-	$scope.deleteTenant = function (tenant) {
+	$scope.deleteShopfloor = function (shopfloor) {
 		SweetAlert.swal({
 			title: $translate.instant($common.sweet.title),
 			text: $translate.instant($common.sweet.text),
@@ -205,9 +180,9 @@ app.controller('TenantController', function ($scope, $common, $translate, $uibMo
 		},
 			function (isConfirm) {
 				if (isConfirm) {
-					TenantService.deleteTenant(tenant, function (error, status) {
+					ShopfloorService.deleteShopfloor(shopfloor, function (error, status) {
 						if (angular.isDefined(status) && status == 204) {
-							var templateName = "COMMON.TENANT";
+							var templateName = "COMMON.SHOPFLOOR";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.SUCCESS';
@@ -224,7 +199,7 @@ app.controller('TenantController', function ($scope, $common, $translate, $uibMo
 								body: popBody,
 								showCloseButton: true,
 							});
-							$scope.$emit('handleEmitTenantChanged');
+							$scope.$emit('handleEmitShopfloorChanged');
 						} else if (angular.isDefined(status) && status == 400) {
 							var popType = 'TOASTER.ERROR';
 							var popTitle = error.title;
@@ -241,7 +216,7 @@ app.controller('TenantController', function ($scope, $common, $translate, $uibMo
 								showCloseButton: true,
 							});
 						} else {
-							var templateName = "COMMON.TENANT";
+							var templateName = "COMMON.SHOPFLOOR";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.ERROR';
@@ -263,41 +238,21 @@ app.controller('TenantController', function ($scope, $common, $translate, $uibMo
 				}
 			});
 	};
-	$scope.getAllTenants();
-	$scope.getAllTenantTypes();
+	$scope.getAllShopfloors();
 	$scope.getAllCostCenters();
 	$scope.getAllContacts();
-	$scope.$on('handleBroadcastTenantChanged', function (event) {
-		$scope.getAllTenants();
+	$scope.$on('handleBroadcastShopfloorChanged', function (event) {
+		$scope.getAllShopfloors();
 	});
 });
 
-app.controller('ModalAddTenantCtrl', function ($scope, $uibModalInstance, params) {
+app.controller('ModalAddShopfloorCtrl', function ($scope, $uibModalInstance, params) {
 
-	$scope.operation = "SETTING.ADD_TENANT";
-	$scope.tenanttypes = params.tenanttypes;
+	$scope.operation = "SHOPFLOOR.ADD_SHOPFLOOR";
 	$scope.costcenters = params.costcenters;
 	$scope.contacts = params.contacts;
-	$scope.tenant = {
-		lease_start_datetime_utc: moment(),
-		lease_end_datetime_utc: moment(),
-	};
-	$scope.dtOptions = {
-		locale: {
-			format: 'YYYY-MM-DD HH:mm:ss',
-			applyLabel: "确定",
-			cancelLabel: "取消",
-			customRangeLabel: "自定义",
-		},
-		timePicker: true,
-		timePicker24Hour: true,
-		timePickerIncrement: 15,
-		singleDatePicker: true,
-	};
 	$scope.ok = function () {
-		$scope.tenant.lease_start_datetime_utc = moment($scope.tenant.lease_start_datetime_utc).format().slice(0, 19);
-		$scope.tenant.lease_end_datetime_utc = moment($scope.tenant.lease_end_datetime_utc).format().slice(0, 19);
-		$uibModalInstance.close($scope.tenant);
+		$uibModalInstance.close($scope.shopfloor);
 	};
 
 	$scope.cancel = function () {
@@ -305,27 +260,13 @@ app.controller('ModalAddTenantCtrl', function ($scope, $uibModalInstance, params
 	};
 });
 
-app.controller('ModalEditTenantCtrl', function ($scope, $uibModalInstance, params) {
-	$scope.operation = "SETTING.EDIT_TENANT";
-	$scope.tenant = params.tenant;
-	$scope.tenanttypes = params.tenanttypes;
+app.controller('ModalEditShopfloorCtrl', function ($scope, $uibModalInstance, params) {
+	$scope.operation = "SHOPFLOOR.EDIT_SHOPFLOOR";
+	$scope.shopfloor = params.shopfloor;
 	$scope.costcenters = params.costcenters;
 	$scope.contacts = params.contacts;
-	$scope.dtOptions = {
-		locale: {
-			format: 'YYYY-MM-DD HH:mm:ss',
-			applyLabel: "确定",
-			cancelLabel: "取消",
-			customRangeLabel: "自定义",
-		},
-		timePicker: true,
-		timePicker24Hour: true,
-		timePickerIncrement: 15,
-		singleDatePicker: true,
-	};
+	
 	$scope.ok = function () {
-		$scope.tenant.lease_start_datetime_utc = moment($scope.tenant.lease_start_datetime_utc).format().slice(0, 19);
-		$scope.tenant.lease_end_datetime_utc = moment($scope.tenant.lease_end_datetime_utc).format().slice(0, 19);
 		$uibModalInstance.close($scope.tenant);
 	};
 

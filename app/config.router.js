@@ -577,6 +577,64 @@ app
                         }
 
                     })
+                    .state('settings.shopfloor', {
+                        url: "/shopfloor",
+                        templateUrl: "views/settings/shopfloor/shopfloor.html",
+                        data: {
+                            pageTitle: 'MENU.SETTINGS.SHOPFLOOR',
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ui.select', 'ui.checkbox', 'toaster']).then(
+                                        function () {
+                                            return $ocLazyLoad.load([{
+                                                serie: true,
+                                                files: ['js/daterangepicker/daterangepicker.min.js', 'js/daterangepicker/daterangepicker.min.css']
+                                            }, {
+                                                name: 'daterangepicker',
+                                                files: ['js/daterangepicker/angular-daterangepicker.min.js']
+                                            }, {
+                                                files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
+                                            }, {
+                                                name: 'oitozero.ngSweetAlert',
+                                                files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
+                                            }, {
+                                                name: 'daterangepicker',
+                                                files: ['js/daterangepicker/angular-daterangepicker.min.js']
+                                            }, {
+                                                serie: true,
+                                                files: [
+                                                    'app/services/settings/shopfloor/shopfloor.service.js',
+                                                    'app/services/settings/meter/meter.service.js',
+                                                    'app/services/settings/meter/virtual-meter.service.js',
+                                                    'app/services/settings/meter/offline-meter.service.js',
+                                                    'app/services/settings/costcenter/costcenter.service.js',
+                                                    'app/services/settings/contact/contact.service.js',
+                                                    'app/services/settings/shopfloor/shopfloorequipment.service.js',
+                                                    'app/services/settings/shopfloor/shopfloormeter.service.js',
+                                                    'app/services/settings/shopfloor/shopfloorpoint.service.js',
+                                                    'app/services/settings/shopfloor/shopfloorsensor.service.js',
+                                                    'app/services/settings/datasource/datasource.service.js',
+                                                    'app/services/settings/datasource/point.service.js',
+                                                    'app/services/settings/equipment/equipment.service.js',
+                                                    'app/services/settings/sensor/sensor.service.js',
+                                                    'app/controllers/settings/shopfloor/shopfloor.master.controller.js',
+                                                    'app/controllers/settings/shopfloor/shopfloor.controller.js',
+                                                    'app/controllers/settings/shopfloor/shopfloorequipment.controller.js',
+                                                    'app/controllers/settings/shopfloor/shopfloormeter.controller.js',
+                                                    'app/controllers/settings/shopfloor/shopfloorpoint.controller.js',
+                                                    'app/controllers/settings/shopfloor/shopfloorsensor.controller.js',
+                                                ]
+                                            }]);
+                                        }
+                                    );
+                                }
+                            ]
+                        }
+
+                    })
                     .state('settings.equipment', {
                         url: "/equipment",
                         templateUrl: "views/settings/equipment/equipment.html",
