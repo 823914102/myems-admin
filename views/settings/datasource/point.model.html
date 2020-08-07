@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
-            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.OBJECT_TYPE' | translate}}</label>
+            <div class="form-group"><label class="col-sm-4 control-label">{{'POINT.OBJECT_TYPE' | translate}}</label>
 
                 <div class="col-sm-8">
                     <select name="pointobject_type"  ng-model="point.object_type" class="form-control m-b">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
-            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.UNIT' | translate}}</label>
+            <div class="form-group"><label class="col-sm-4 control-label">{{'POINT.UNIT' | translate}}</label>
 
                 <div class="col-sm-8"><input ng-model="point.units" type="text" name="pointunits" class="form-control" required="">
                     <div class="m-t-xs" ng-show="form_point.pointunits.$invalid && form_point.pointunits.$dirty">
@@ -37,56 +37,56 @@
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
-            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.HIGH_LIMIT' | translate}}</label>
+            <div class="form-group"><label class="col-sm-4 control-label">{{'POINT.HIGH_LIMIT' | translate}}</label>
 
                 <div class="col-sm-8"><input ng-model="point.high_limit" type="number" name="pointhigh_limit" class="form-control" required="">
                     <div class="m-t-xs" ng-show="form_point.pointhigh_limit.$invalid && form_point.pointhigh_limit.$dirty">
-                        <small class="text-danger" ng-show="form_point.pointhigh_limit.$error.required">{{'SETTING.INPUT_HIGH_LIMIT' | translate}}</small>
+                        <small class="text-danger" ng-show="form_point.pointhigh_limit.$error.required">{{'POINT.INPUT_HIGH_LIMIT' | translate}}</small>
                     </div>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
-            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.LOW_LIMIT' | translate}}</label>
+            <div class="form-group"><label class="col-sm-4 control-label">{{'POINT.LOW_LIMIT' | translate}}</label>
 
                 <div class="col-sm-8"><input ng-model="point.low_limit" type="number" name="pointlow_limit" class="form-control" required="">
                     <div class="m-t-xs" ng-show="form_point.pointlow_limit.$invalid && form_point.pointlow_limit.$dirty">
-                        <small class="text-danger" ng-show="form_point.pointlow_limit.$error.required">{{'SETTING.INPUT_LOW_LIMIT' | translate}}</small>
+                        <small class="text-danger" ng-show="form_point.pointlow_limit.$error.required">{{'POINT.INPUT_LOW_LIMIT' | translate}}</small>
                     </div>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
-            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.RATIO' | translate}}</label>
+            <div class="form-group"><label class="col-sm-4 control-label">{{'POINT.RATIO' | translate}}</label>
 
                 <div class="col-sm-8"><input ng-model="point.ratio" type="number" name="pointratio" class="form-control"  required="">
                   <div class="m-t-xs" ng-show="form_point.pointratio.$invalid && form_point.pointratio.$dirty">
-                      <small class="text-danger" ng-show="form_point.pointratio.$error.required">{{'SETTING.INPUT_RATIO' | translate}}</small>
+                      <small class="text-danger" ng-show="form_point.pointratio.$error.required">{{'POINT.INPUT_RATIO' | translate}}</small>
                   </div>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
-            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.IS_TREND' | translate}}</label>
+            <div class="form-group"><label class="col-sm-4 control-label">{{'POINT.IS_TREND' | translate}}</label>
 
                 <div class="col-sm-8">
                     <div class="checkbox checkbox-success">
                         <input id="chk_point_istrend" type="checkbox" ng-model="point.is_trend" ng-checked="point.is_trend">
-                        <label for="chk_point_istrend">{{'SETTING.IS_TREND' | translate}}</label>
+                        <label for="chk_point_istrend">{{'POINT.IS_TREND' | translate}}</label>
                     </div>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
-            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.ADDRESS' | translate}}</label>
+            <div class="form-group"><label class="col-sm-4 control-label">{{'POINT.ADDRESS' | translate}}</label>
 
                 <div class="col-sm-8"><textarea rows="3" ng-model="point.address" type="text" name="pointaddress" class="form-control" required=""></textarea>
                     <div class="m-t-xs" ng-show="form_point.pointaddress.$invalid && form_point.pointaddress.$dirty">
-                        <small class="text-danger" ng-show="form_point.pointaddress.$error.required">{{'SETTING.INPUT_ADDRESS' | translate}}</small>
+                        <small class="text-danger" ng-show="form_point.pointaddress.$error.required">{{'POINT.INPUT_ADDRESS' | translate}}</small>
                     </div>
                 </div>
             </div>
-            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.DESCRIPTION' | translate}}</label>
+            <div class="form-group"><label class="col-sm-4 control-label">{{'POINT.DESCRIPTION' | translate}}</label>
                 <div class="col-sm-8">
                     <input ng-model="point.description" type="text" name="pointdescription" class="form-control">
                     <div class="m-t-xs" ng-show="form_point.pointdescription.$invalid && form_point.pointdescription.$dirty">
-                        <small class="text-danger" ng-show="form_point.pointdescription.$error.required">{{'SETTING.INPUT_DESCRIPTION' | translate}}</small>
+                        <small class="text-danger" ng-show="form_point.pointdescription.$error.required">{{'POINT.INPUT_DESCRIPTION' | translate}}</small>
                     </div>
                 </div>
             </div>
