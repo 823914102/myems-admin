@@ -105,6 +105,7 @@ app.controller('PointController', function($scope, $common, $uibModal, $timeout,
 		});
 
 		modalInstance.result.then(function(modifiedPoint) {
+			modifiedPoint.data_source_id = $scope.currentDataSource;
 			if(modifiedPoint.ratio==""){
 				modifiedPoint.ratio = undefined;
 			}

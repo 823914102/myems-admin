@@ -64,6 +64,16 @@
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
+            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.IS_TREND' | translate}}</label>
+
+                <div class="col-sm-8">
+                    <div class="checkbox checkbox-success">
+                        <input id="chk_point_istrend" type="checkbox" ng-model="point.is_trend" ng-checked="point.is_trend">
+                        <label for="chk_point_istrend">{{'SETTING.IS_TREND' | translate}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
             <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.ADDRESS' | translate}}</label>
 
                 <div class="col-sm-8"><textarea rows="3" ng-model="point.address" type="text" name="pointaddress" class="form-control" required=""></textarea>
@@ -72,15 +82,12 @@
                     </div>
                 </div>
             </div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.IS_TREND' | translate}}</label>
-
+            <div class="form-group"><label class="col-sm-4 control-label">{{'SETTING.DESCRIPTION' | translate}}</label>
                 <div class="col-sm-8">
-                    <div class="checkbox checkbox-success">
-                        <input id="chk_point_istrend" type="checkbox" ng-model="point.is_trend" ng-checked="point.is_trend">
-                        <label for="chk_point_istrend">{{'SETTING.IS_TREND' | translate}}</label>
+                    <input ng-model="point.description" type="text" name="pointdescription" class="form-control">
+                    <div class="m-t-xs" ng-show="form_point.pointdescription.$invalid && form_point.pointdescription.$dirty">
+                        <small class="text-danger" ng-show="form_point.pointdescription.$error.required">{{'SETTING.INPUT_DESCRIPTION' | translate}}</small>
                     </div>
-
                 </div>
             </div>
         </form>
