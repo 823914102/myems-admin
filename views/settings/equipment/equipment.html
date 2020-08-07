@@ -15,7 +15,6 @@
 										<th class="text-center">{{'SETTING.IS_INPUT_COUNTED' | translate}}</th>
 										<th class="text-center">{{'SETTING.IS_OUTPUT_COUNTED' | translate}}</th>
 										<th class="text-center">{{'EQUIPMENT.COST_CENTER' | translate}}</th>
-										<th class="text-center">{{'EQUIPMENT.LOCATION' | translate}}</th>
 										<th class="text-center">{{'EQUIPMENT.DESCRIPTION' | translate}}</th>
 										<th class="text-center">{{'SETTING.ACTION' | translate}}</th>
 									</tr>
@@ -27,7 +26,6 @@
 										<td class="text-center">{{ equipment.is_input_counted==false?'SETTING.NO':'SETTING.YES' | translate }}</td>
 										<td class="text-center">{{ equipment.is_output_counted==false?'SETTING.NO':'SETTING.YES' | translate }}</td>
 										<td class="text-center">{{ equipment.cost_center.name }}</td>
-										<td class="text-center">{{ equipment.location }}</td>
 										<td class="text-center">{{ equipment.description }}</td>
 										<td class="text-center">
 											<a ng-click="editEquipment(equipment)" class="btn btn-primary btn-rounded btn-xs" >{{'SETTING.EDIT' | translate}}</a>
