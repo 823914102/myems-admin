@@ -20,7 +20,6 @@
 											<th class="text-center">{{'METER.HOURLY_HIGH_LIMIT' | translate}}</th>
 											<th class="text-center">{{'SETTING.COSTCENTER' | translate}}</th>
 											<th class="text-center">{{'METER.PARENT_METER' | translate}}</th>
-											<th class="text-center">{{'METER.LOCATION' | translate}}</th>
 											<th class="text-center">{{'METER.DESCRIPTION' | translate}}</th>
 											<th class="text-center">{{'SETTING.ACTION' | translate}}</th>
 
@@ -37,7 +36,6 @@
 											<td class="text-center">{{ meter.hourly_high_limit }}</td>
 											<td class="text-center">{{meter.cost_center.name}}</td>
 											<td class="text-center">{{meter.parent_meter.name}}</td>
-											<td class="text-center">{{meter.location}}</td>
 											<td class="text-center">{{meter.description}}</td>
 											<td class="text-center">
 												<a class="btn btn-primary btn-rounded btn-xs" ng-click="editMeter(meter)" >{{'SETTING.EDIT' | translate}}</a>
@@ -162,7 +160,6 @@
 																			<th class="text-center">{{'METER.HOURLY_HIGH_LIMIT' | translate}}</th>
 																			<th class="text-center">{{'SETTING.COSTCENTER' | translate}}</th>
 																			<th class="text-center">{{'METER.PARENT_METER' | translate}}</th>
-																			<th class="text-center">{{'METER.LOCATION' | translate}}</th>
 																			<th class="text-center">{{'METER.DESCRIPTION' | translate}}</th>
 																		</tr>
 																	</thead>
@@ -177,7 +174,6 @@
 																			<td class="text-center">{{ meter.hourly_high_limit }}</td>
 																			<td class="text-center">{{meter.cost_center.name}}</td>
 																			<td class="text-center">{{meter.parent_meter.name}}</td>
-																			<td class="text-center">{{meter.location}}</td>
 																			<td class="text-center">{{meter.description}}</td>
 																		</tr>
 																	</tbody>
@@ -203,7 +199,6 @@
 												<th class="text-center">{{'SETTING.ENERGY_ITEM' | translate}}</th>
 												<th class="text-center">{{'SETTING.IS_INPUT_COUNTED' | translate}}</th>
 												<th class="text-center">{{'SETTING.COSTCENTER' | translate}}</th>
-												<th class="text-center">{{'METER.LOCATION' | translate}}</th>
 												<th class="text-center">{{'METER.DESCRIPTION' | translate}}</th>
 												<th class="text-center">{{'SETTING.ACTION' | translate}}</th>
 											</tr>
@@ -216,7 +211,6 @@
 												<td class="text-center">{{ virtualmeter.energy_item.name }}</td>
 												<td class="text-center">{{ virtualmeter.is_counted==false?'SETTING.NO':'SETTING.YES' | translate }}</td>
 												<td class="text-center">{{ virtualmeter.cost_center.name }}</td>
-												<td class="text-center">{{ virtualmeter.location }}</td>
 												<td class="text-center">{{ virtualmeter.description }}</td>
 												<td class="text-center">
 													<a ng-click="editVirtualMeter(virtualmeter)" class="btn btn-primary btn-rounded btn-xs" >{{'SETTING.EDIT' | translate}}</a>
@@ -243,7 +237,6 @@
 												<th class="text-center">{{'METER.HOURLY_LOW_LIMIT' | translate}}</th>
 												<th class="text-center">{{'METER.HOURLY_HIGH_LIMIT' | translate}}</th>
 												<th class="text-center">{{'SETTING.COSTCENTER' | translate}}</th>
-												<th class="text-center">{{'METER.LOCATION' | translate}}</th>
 												<th class="text-center">{{'METER.DESCRIPTION' | translate}}</th>
 												<th class="text-center">{{'SETTING.ACTION' | translate}}</th>
 											</tr>
@@ -258,7 +251,6 @@
 												<td class="text-center">{{ offlinemeter.hourly_low_limit }}</td>
 												<td class="text-center">{{ offlinemeter.hourly_high_limit }}</td>
 												<td class="text-center">{{ offlinemeter.cost_center.name }}</td>
-												<td class="text-center">{{ offlinemeter.location }}</td>
 												<td class="text-center">{{ offlinemeter.description }}</td>
 												<td class="text-center">
 													<a ng-click="editOfflineMeter(offlinemeter)" class="btn btn-primary btn-rounded btn-xs" >{{'SETTING.EDIT' | translate}}</a>

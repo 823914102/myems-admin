@@ -117,7 +117,7 @@ td.action{
 	width: 100% !important;
 }
 .panel-body.trash{
-	padding: 40px !important;
+	padding: 0px !important;
 }
 .panel-body.maxheight{
 	max-height: 500px;
