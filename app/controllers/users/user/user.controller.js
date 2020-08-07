@@ -1,45 +1,45 @@
 'use strict';
 
-app.controller('UserController', function($scope,$common,$uibModal, UserService, PrivilegeService, toaster, $translate, SweetAlert) {
-	
-	
-	$scope.getAllUsers = function() {
-		UserService.getAllUsers(function(error, data) {
+app.controller('UserController', function ($scope, $common, $uibModal, UserService, PrivilegeService, toaster, $translate, SweetAlert) {
+
+
+	$scope.getAllUsers = function () {
+		UserService.getAllUsers(function (error, data) {
 			if (!error) {
 				$scope.users = data;
 			} else {
 				$scope.users = [];
 			}
 		});
-		
+
 	};
 
-	$scope.getAllPrivileges = function() {
-		PrivilegeService.getAllPrivileges(function(error, data) {
+	$scope.getAllPrivileges = function () {
+		PrivilegeService.getAllPrivileges(function (error, data) {
 			if (!error) {
 				$scope.privileges = data;
 			} else {
 				$scope.privileges = [];
 			}
 		});
-		
+
 	};
 
-	$scope.addUser = function() {
+	$scope.addUser = function () {
 		var modalInstance = $uibModal.open({
 			templateUrl: 'views/users/user/user.model.html',
 			controller: 'ModalAddUserCtrl',
 			windowClass: "animated fadeIn",
 			resolve: {
-		        params:function(){
-                    return {
+				params: function () {
+					return {
 						privileges: angular.copy($scope.privileges)
-                    };
-                }
-		    }
+					};
+				}
+			}
 		});
-		modalInstance.result.then(function(user) {
-			UserService.addUser(user, function(error, status) {
+		modalInstance.result.then(function (user) {
+			UserService.addUser(user, function (error, status) {
 				if (angular.isDefined(status) && status == 201) {
 					var templateName = "SETTING.USER";
 					templateName = $translate.instant(templateName);
@@ -50,7 +50,7 @@ app.controller('UserController', function($scope,$common,$uibModal, UserService,
 
 					popType = $translate.instant(popType);
 					popTitle = $translate.instant(popTitle);
-					popBody = $translate.instant(popBody,{template: templateName});
+					popBody = $translate.instant(popBody, { template: templateName });
 
 					toaster.pop({
 						type: popType,
@@ -69,7 +69,7 @@ app.controller('UserController', function($scope,$common,$uibModal, UserService,
 
 					popType = $translate.instant(popType);
 					popTitle = $translate.instant(popTitle);
-					popBody = $translate.instant(popBody,{template: templateName});
+					popBody = $translate.instant(popBody, { template: templateName });
 
 					toaster.pop({
 						type: popType,
@@ -79,30 +79,30 @@ app.controller('UserController', function($scope,$common,$uibModal, UserService,
 					});
 				}
 			});
-		}, function() {
+		}, function () {
 
 		});
 	};
 
-	$scope.editUser=function(user){
+	$scope.editUser = function (user) {
 		var modalInstance = $uibModal.open({
-		    windowClass: "animated fadeIn",
-		    templateUrl: 'views/users/user/user.model.html',
-		    controller: 'ModalEditUserCtrl',
-		    resolve: {
-		        params:function(){
-                    return {
-						user:angular.copy(user),
+			windowClass: "animated fadeIn",
+			templateUrl: 'views/users/user/user.model.html',
+			controller: 'ModalEditUserCtrl',
+			resolve: {
+				params: function () {
+					return {
+						user: angular.copy(user),
 						privileges: angular.copy($scope.privileges)
-                    };
-                }
-		    }
+					};
+				}
+			}
 		});
 
 		modalInstance.result.then(function (modifiedUser) {
-	        UserService.editUser(modifiedUser,function(error,status){
-	            if(angular.isDefined(status) && status==200){
-	                var templateName = "SETTING.USER";
+			UserService.editUser(modifiedUser, function (error, status) {
+				if (angular.isDefined(status) && status == 200) {
+					var templateName = "SETTING.USER";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -111,7 +111,7 @@ app.controller('UserController', function($scope,$common,$uibModal, UserService,
 
 					popType = $translate.instant(popType);
 					popTitle = $translate.instant(popTitle);
-					popBody = $translate.instant(popBody,{template: templateName});
+					popBody = $translate.instant(popBody, { template: templateName });
 
 					toaster.pop({
 						type: popType,
@@ -119,9 +119,9 @@ app.controller('UserController', function($scope,$common,$uibModal, UserService,
 						body: popBody,
 						showCloseButton: true,
 					});
-	                $scope.getAllUsers();
-	            }else{
-	                var templateName = "SETTING.USER";
+					$scope.getAllUsers();
+				} else {
+					var templateName = "SETTING.USER";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -130,7 +130,7 @@ app.controller('UserController', function($scope,$common,$uibModal, UserService,
 
 					popType = $translate.instant(popType);
 					popTitle = $translate.instant(popTitle);
-					popBody = $translate.instant(popBody,{template: templateName});
+					popBody = $translate.instant(popBody, { template: templateName });
 
 					toaster.pop({
 						type: popType,
@@ -138,176 +138,177 @@ app.controller('UserController', function($scope,$common,$uibModal, UserService,
 						body: popBody,
 						showCloseButton: true,
 					});
-	            }
-	        });
+				}
+			});
 		}, function () {
-	        //do nothing;
+			//do nothing;
 		});
 	};
 
-	$scope.resetPassword=function(user){
+	$scope.resetPassword = function (user) {
 		var modalInstance = $uibModal.open({
-		    windowClass: "animated fadeIn",
-		    templateUrl: 'views/users/user/reset-password.model.html',
-		    controller: 'ModalResetPasswordCtrl',
-		    resolve: {
-		        params:function(){
-                    return {
-                        user:angular.copy(user),
-                    };
-                }
-		    }
+			windowClass: "animated fadeIn",
+			templateUrl: 'views/users/user/reset-password.model.html',
+			controller: 'ModalResetPasswordCtrl',
+			resolve: {
+				params: function () {
+					return {
+						user: angular.copy(user),
+					};
+				}
+			}
 		});
 
 		modalInstance.result.then(function (modifiedUser) {
-	        UserService.resetPassword(modifiedUser,function(error,status){
-	            if(angular.isDefined(status) && status==200){
-	                toaster.pop({
+			UserService.resetPassword(modifiedUser, function (error, status) {
+				if (angular.isDefined(status) && status == 200) {
+					toaster.pop({
 						type: 'success',
 						title: $common.toaster.success_title,
 						body: $common.toaster.success_update_body.format('user'),
 						showCloseButton: true,
 					});
-	                $scope.getAllUsers();
-	            }else{
-	                toaster.pop({
+					$scope.getAllUsers();
+				} else {
+					toaster.pop({
 						type: 'error',
 						title: $common.toaster.error_title,
 						body: $common.toaster.error_update_body.format('user'),
 						showCloseButton: true,
 					});
-	            }
-	        });
+				}
+			});
 		}, function () {
-	        //do nothing;
+			//do nothing;
 		});
 	};
 
-	$scope.deleteUser=function(user){
+	$scope.deleteUser = function (user) {
 		SweetAlert.swal({
-		        title: $translate.instant($common.sweet.title),
-		        text: $translate.instant($common.sweet.text),
-		        type: "warning",
-		        showCancelButton: true,
-		        confirmButtonColor: "#DD6B55",
-		        confirmButtonText: $translate.instant($common.sweet.confirmButtonText),
-		        cancelButtonText: $translate.instant($common.sweet.cancelButtonText),
-		        closeOnConfirm: true,
-		        closeOnCancel: true },
-		    function (isConfirm) {
-		        if (isConfirm) {
-		            UserService.deleteUser(user, function(error, status) {
-		            	if (angular.isDefined(status) && status == 204) {
-		            		var templateName = "SETTING.USER";
-                            templateName = $translate.instant(templateName);
+			title: $translate.instant($common.sweet.title),
+			text: $translate.instant($common.sweet.text),
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: $translate.instant($common.sweet.confirmButtonText),
+			cancelButtonText: $translate.instant($common.sweet.cancelButtonText),
+			closeOnConfirm: true,
+			closeOnCancel: true
+		},
+			function (isConfirm) {
+				if (isConfirm) {
+					UserService.deleteUser(user, function (error, status) {
+						if (angular.isDefined(status) && status == 204) {
+							var templateName = "SETTING.USER";
+							templateName = $translate.instant(templateName);
 
-                            var popType = 'TOASTER.SUCCESS';
-                            var popTitle = $common.toaster.success_title;
-                            var popBody = $common.toaster.success_delete_body;
+							var popType = 'TOASTER.SUCCESS';
+							var popTitle = $common.toaster.success_title;
+							var popBody = $common.toaster.success_delete_body;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody, {template: templateName});
+							popType = $translate.instant(popType);
+							popTitle = $translate.instant(popTitle);
+							popBody = $translate.instant(popBody, { template: templateName });
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
-		            		$scope.getAllUsers();
-		            	} else {
-		            		var templateName = "SETTING.USER";
-                            templateName = $translate.instant(templateName);
+							toaster.pop({
+								type: popType,
+								title: popTitle,
+								body: popBody,
+								showCloseButton: true,
+							});
+							$scope.getAllUsers();
+						} else {
+							var templateName = "SETTING.USER";
+							templateName = $translate.instant(templateName);
 
-                            var popType = 'TOASTER.ERROR';
-                            var popTitle = $common.toaster.error_title;
-                            var popBody = $common.toaster.error_delete_body;
+							var popType = 'TOASTER.ERROR';
+							var popTitle = $common.toaster.error_title;
+							var popBody = $common.toaster.error_delete_body;
 
-                            popType = $translate.instant(popType);
-                            popTitle = $translate.instant(popTitle);
-                            popBody = $translate.instant(popBody, {template: templateName});
+							popType = $translate.instant(popType);
+							popTitle = $translate.instant(popTitle);
+							popBody = $translate.instant(popBody, { template: templateName });
 
-                            toaster.pop({
-                                type: popType,
-                                title: popTitle,
-                                body: popBody,
-                                showCloseButton: true,
-                            });
-		            	}
-		            });
-		        } 
-		    });
+							toaster.pop({
+								type: popType,
+								title: popTitle,
+								body: popBody,
+								showCloseButton: true,
+							});
+						}
+					});
+				}
+			});
 	};
-	
+
 	$scope.getAllUsers();
 	$scope.getAllPrivileges();
-	
+
 
 });
 
 app.controller('ModalAddUserCtrl', function ($scope, $uibModalInstance, params) {
 
-	$scope.operation="add";
-	$scope.title="SETTING.ADD_USER";
+	$scope.operation = "add";
+	$scope.title = "USER.ADD_USER";
 	$scope.privileges = params.privileges;
 	$scope.user = {
 		is_admin: false
 	};
-    $scope.ok = function () {
+	$scope.ok = function () {
 		if ($scope.user.is_admin) {
 			$scope.user.privilege_id = undefined;
 		}
-        $uibModalInstance.close($scope.user);
-    };
+		$uibModalInstance.close($scope.user);
+	};
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
 });
 
 app.controller('ModalEditUserCtrl', function ($scope, $uibModalInstance, params) {
-    $scope.operation="edit";
-    $scope.title="SETTING.EDIT_USER";
+	$scope.operation = "edit";
+	$scope.title = "USER.EDIT_USER";
 	$scope.user = params.user;
 	$scope.privileges = params.privileges;
-	if($scope.user.privilege!=null){
-		$scope.user.privilege_id=$scope.user.privilege.id ;
-	}else{
-		$scope.user.privilege_id=undefined;
+	if ($scope.user.privilege != null) {
+		$scope.user.privilege_id = $scope.user.privilege.id;
+	} else {
+		$scope.user.privilege_id = undefined;
 	}
-    $scope.ok = function () {
+	$scope.ok = function () {
 		if ($scope.user.is_admin) {
 			$scope.user.privilege_id = undefined;
 		}
-        $uibModalInstance.close($scope.user);
-    };
+		$uibModalInstance.close($scope.user);
+	};
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
 });
 
 app.controller('ModalResetPasswordCtrl', function ($scope, $uibModalInstance, params) {
-    $scope.user = params.user;
+	$scope.user = params.user;
 
-    $scope.ok = function () {
-        $uibModalInstance.close($scope.user);
-    };
+	$scope.ok = function () {
+		$uibModalInstance.close($scope.user);
+	};
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
 });
 
 app.controller('ModalChangePasswordCtrl', function ($scope, $uibModalInstance, params) {
-    $scope.user = params.user;
+	$scope.user = params.user;
 
-    $scope.ok = function () {
-        $uibModalInstance.close($scope.user);
-    };
+	$scope.ok = function () {
+		$uibModalInstance.close($scope.user);
+	};
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
 });
