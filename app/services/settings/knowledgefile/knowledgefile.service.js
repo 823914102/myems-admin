@@ -1,45 +1,43 @@
 'use strict';
-app.factory('KnowledgeFileService', function($http) {
+app.factory('KnowledgeFileService', function ($http) {
     return {
-        getAllKnowledgeFiles:function(callback){
-            $http.get(getAPI()+'knowledgefiles')
+        getAllKnowledgeFiles: function (callback) {
+            $http.get(getAPI() + 'knowledgefiles')
                 .success(function (response, status, headers, config) {
                     callback(null, response);
                 })
-                .error(function (e,status) {
-                    callback(e,status);
+                .error(function (e, status) {
+                    callback(e, status);
                 });
         },
 
-        addKnowledgeFile: function(knowledgefile, callback) {
-            $http.post(getAPI()+'knowledgefiles',{data:knowledgefile})
+        addKnowledgeFile: function (knowledgefile, callback) {
+            $http.post(getAPI() + 'knowledgefiles', { data: knowledgefile })
                 .success(function (response, status, headers, config) {
                     callback(null, status);
                 })
-                .error(function (e,status) {
-                    callback(e,status);
+                .error(function (e, status) {
+                    callback(e, status);
                 });
         },
 
-        downloadReport: function(id, callback) {
-            var url="knowledgefiles/"+id+"/download";
-
-            $http.get(getAPI()+url)
+        restoreKnowledgeFile: function (knowledgefile, callback) {
+            $http.get(getAPI() + 'knowledgefiles/' + knowledgefile.id + '/restore')
                 .success(function (response, status, headers, config) {
                     callback(null, response);
                 })
-                .error(function (e) {
-                    callback(e);
+                .error(function (e, status) {
+                    callback(e, status);
                 });
         },
 
-        deleteKnowledgeFile: function(knowledgefile, callback) {
-            $http.delete(getAPI()+'knowledgefiles/'+knowledgefile.id)
+        deleteKnowledgeFile: function (knowledgefile, callback) {
+            $http.delete(getAPI() + 'knowledgefiles/' + knowledgefile.id)
                 .success(function (response, status, headers, config) {
                     callback(null, status);
                 })
-                .error(function (e,status) {
-                    callback(e,status);
+                .error(function (e, status) {
+                    callback(e, status);
                 });
         }
     };

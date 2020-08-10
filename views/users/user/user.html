@@ -5,18 +5,18 @@
 				<div class="tabs-container">
 
 					<uib-tabset>
-						<uib-tab heading="{{'SETTING.USER_LIST' | translate}}" >
+						<uib-tab heading="{{'USER.USER_LIST' | translate}}" >
 							<div class="panel-body" ng-controller="UserController">
-								<a ng-click="addUser()" class="btn btn-primary btn-rounded btn-outline" href=""><i class="fa fa-plus-circle"></i> {{'SETTING.ADD_USER' | translate}}</a>
+								<a ng-click="addUser()" class="btn btn-primary btn-rounded btn-outline" href=""><i class="fa fa-plus-circle"></i> {{'USER.ADD_USER' | translate}}</a>
 								<table class="table table-bordered table-hover" >
 									<thead>
 										<tr>
 											<th class="text-center">{{'SETTING.ID' | translate}}</th>
-											<th class="text-center">{{'SETTING.USERNAME' | translate}}</th>
-											<th class="text-center">{{'SETTING.DISPLAY_NAME' | translate}}</th>
-											<th class="text-center">{{'SETTING.EMAIL' | translate}}</th>
-											<th class="text-center">{{'SETTING.IS_ADMIN' | translate}}</th>
-											<th class="text-center">{{'SETTING.PRIVILEGE' | translate}}</th>
+											<th class="text-center">{{'USER.USERNAME' | translate}}</th>
+											<th class="text-center">{{'USER.DISPLAY_NAME' | translate}}</th>
+											<th class="text-center">{{'USER.EMAIL' | translate}}</th>
+											<th class="text-center">{{'USER.IS_ADMIN' | translate}}</th>
+											<th class="text-center">{{'USER.PRIVILEGE' | translate}}</th>
 											<th class="text-center">{{'SETTING.ACTION' | translate}}</th>
 
 										</tr>
@@ -31,9 +31,8 @@
 											<td class="text-center">{{ user.privilege.name }}</td>
 											<td class="text-center">
 												<a class="btn btn-primary btn-rounded btn-xs" ng-click="editUser(user)" >{{'SETTING.EDIT' | translate}}</a>
-												<a ng-hide="user.name=='administrator'" class="btn btn-info btn-rounded btn-xs" ng-click="resetPassword(user)" >{{'SETTING.RESET_PASSWORD' | translate}}</a>
+												<a ng-hide="user.name=='administrator'" class="btn btn-info btn-rounded btn-xs" ng-click="resetPassword(user)" >{{'USER.RESET_PASSWORD' | translate}}</a>
 												<a ng-hide="user.name=='administrator'" ng-click="deleteUser(user)" class="btn btn-danger btn-rounded btn-xs" >{{'SETTING.DELETE' | translate}}</a>
-
 											</td>
 										</tr>
 									</tbody>

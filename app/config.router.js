@@ -1141,7 +1141,6 @@ app
                                             }, {
                                                 serie: true,
                                                 files: [
-                                                    //'app/directives/mathjax.directive.js',
                                                     'app/services/settings/knowledgefile/knowledgefile.service.js',
                                                     'app/controllers/settings/knowledgefile/knowledgefile.controller.js'
                                                 ]
