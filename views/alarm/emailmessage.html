@@ -4,8 +4,9 @@
             <form role="form">
                 <div class="form-group no-margin">
                     <label>{{'COMMON.DATE' | translate}}</label>
-                    <textarea rows="1" date-range-picker class="form-control date-picker" type="text" ng-model="daterange" options="dtOptions" readonly="" placeholder="请选择日期" />
-                </div>
+                    <textarea rows="1" date-range-picker class="form-control date-picker" type="text"
+                        ng-model="daterange" options="dtOptions" readonly="" placeholder="请选择日期" />
+                    </div>
             </form>
         </div>
         <div class="m-t-md">
@@ -26,7 +27,7 @@
                                 <input type="text" class="form-control m-b-xs" id="emailmessagefilter"
                                     placeholder="{{'SETTING.SEARCH' | translate}}">
                                 <table id="emailmessageTable" class="footable table table-bordered table-hover" data-sort="true"
-                                    data-empty="There are no rows" data-page-size="20" data-filter="#emailmessagefilter">
+                                    data-empty="There is no data" data-page-size="20" data-filter="#emailmessagefilter">
                                     <thead>
                                     <tr>
                                         <th class="text-center">{{'FDD.ID' | translate}}</th>
@@ -52,7 +53,9 @@
                                             <td class="text-center sm">{{ row.created_datetime | date:'yyyy-MM-ddTHH:mm:ss'}}</td>
                                             <td class="text-center sm">{{ row.scheduled_datetime | date:'yyyy-MM-ddTHH:mm:ss'}}</td>
                                             <td class="text-center sm">{{ row.status }}</td>
-                                            <td class="text-center"> <a ng-click="deleteEmailMessage(row)" class="btn btn-danger btn-rounded btn-xs">{{'SETTING.DELETE' | translate}}</a> </td>
+                                            <td class="text-center"> 
+                                                <a ng-click="deleteEmailMessage(row)" 
+                                                    class="btn btn-danger btn-rounded btn-xs">{{'SETTING.DELETE' | translate}}</a> </td>
                                         </tr>
                                     </tbody>
                                     <tfoot class="hide-if-no-paging">

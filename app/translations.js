@@ -363,8 +363,6 @@ function config($translateProvider) {
                 BAUD_RATE: 'Baud Rate',
                 FROM_ADDR: 'From Address',
                 HOST: 'Host',
-                KNOWLEDGE_FILE_LIST: 'Knowledge File List',
-                UPLOAD_USER: 'Upload User',
                 USER_NAME: 'User Name',
 
                 SUSPENDED: 'Suspended',
@@ -647,6 +645,15 @@ function config($translateProvider) {
                 INPUT_EMAIL: 'Please Input Email',
                 INVALID_EMAIL: 'Invalid Email Format(xxx@xxx.xx)',
             },
+            KNOWLEDGEFILE: {
+                KNOWLEDGE_FILE_LIST: 'Knowledge File List',
+                UPLOAD_USER: 'Upload User',
+                UPLOAD_TIME: 'Upload Time',
+                RESTORE: 'Restore',
+                DELETE: 'Delete',
+                RESTORE_SUCCESS: 'Restore Success',
+                RESTORE_FAILED: 'Restore Failed'
+            },
             TOASTER: {
                 FAILURE_TITLE: 'Error',
                 FAILURE: 'Failure',
@@ -686,8 +693,8 @@ function config($translateProvider) {
             SWEET: {
                 TITLE: 'Please confirm whether to delete?',
                 TEXT: 'Deleting this bar will also delete all related data!',
-                CONFIRM_BUTTON_TEXT: 'Confirm, delete it!',
-                CANCEL_BUTTON_TEXT: 'Cancel!',
+                CONFIRM_BUTTON_TEXT: 'Confirm delete',
+                CANCEL_BUTTON_TEXT: 'Cancel',
             },
             API: {
                 POINT_TREND: 'Point Trend',
@@ -1405,8 +1412,6 @@ function config($translateProvider) {
                 BAUD_RATE: '波特率',
                 FROM_ADDR: '发件人地址',
                 HOST: '服务器',
-                KNOWLEDGE_FILE_LIST: '知识文件列表',
-                UPLOAD_USER: '上传人',
                 USER_NAME: '用户名',
 
                 SUSPENDED: '待机',
@@ -1701,6 +1706,15 @@ function config($translateProvider) {
                 INPUT_EMAIL: '请输入邮箱',
                 INVALID_EMAIL: '邮箱格式不正确(xxx@xxx.xx)',
             },
+            KNOWLEDGEFILE: {
+                KNOWLEDGE_FILE_LIST: '知识文件列表',
+                UPLOAD_USER: '上传者',
+                UPLOAD_TIME: '上传时间',
+                RESTORE: '恢复',
+                DELETE: '删除',
+                RESTORE_SUCCESS: '恢复成功',
+                RESTORE_FAILED: '恢复失败'
+            },
             TOASTER: {
                 FAILURE: '失败',
                 FAILURE_TITLE: '错误',
@@ -1742,8 +1756,8 @@ function config($translateProvider) {
             SWEET: {
                 TITLE: '请确认是否删除?',
                 TEXT: '删除该条也会删除所有与其相关数据!',
-                CONFIRM_BUTTON_TEXT: '确认,删除!',
-                CANCEL_BUTTON_TEXT: '取消!',
+                CONFIRM_BUTTON_TEXT: '确认删除',
+                CANCEL_BUTTON_TEXT: '取消',
             },
             API: {
                 POINT_TREND: '点位趋势',
