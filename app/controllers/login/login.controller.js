@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('LoginController', function($rootScope,
+app.controller('LoginController', function ($rootScope,
 	$translate,
 	$timeout,
 	$location,
@@ -15,120 +15,120 @@ app.controller('LoginController', function($rootScope,
 	WebMessageAnalysisService,
 	toaster) {
 
-	$scope.dataLoading=false;
-	$scope.isFullScreen=false;
+	$scope.dataLoading = false;
+	$scope.isFullScreen = false;
 	$scope.language = $window.localStorage.getItem("language") || 'cn';
-	$scope.fullScreenTitle="FULLSCREEN";
+	$scope.fullScreenTitle = "FULLSCREEN";
 	$scope.cur_user = JSON.parse($window.localStorage.getItem("currentUser"));
 	// login section start
-	$scope.login = function(user) {
-		$scope.dataLoading=true;
-		LoginService.login(user, function(response,error,status,headers) {
+	$scope.login = function (user) {
+		$scope.dataLoading = true;
+		LoginService.login(user, function (response, error, status, headers) {
 			if (angular.isDefined(status) && status == 200) {
 
-                var popType = 'TOASTER.SUCCESS';
-                var popTitle = $common.toaster.success_title;
-                var popBody = 'TOASTER.LOGIN_SUCCESS';
+				var popType = 'TOASTER.SUCCESS';
+				var popTitle = $common.toaster.success_title;
+				var popBody = 'TOASTER.LOGIN_SUCCESS';
 
-                popType = $translate.instant(popType);
-                popTitle = $translate.instant(popTitle);
-                popBody = $translate.instant(popBody);
+				popType = $translate.instant(popType);
+				popTitle = $translate.instant(popTitle);
+				popBody = $translate.instant(popBody);
 
-                toaster.pop({
-                    type: popType,
-                    title: popTitle,
-                    body: popBody,
-                    showCloseButton: true,
-                });
+				toaster.pop({
+					type: popType,
+					title: popTitle,
+					body: popBody,
+					showCloseButton: true,
+				});
 
 				$window.localStorage.setItem("currentUser", JSON.stringify(response));
 				// $rootScope.cookie=$cookies.get('user_uuid');
 				$location.path('/settings/space');
 				$scope.cur_user = JSON.parse($window.localStorage.getItem("currentUser"));
-            } else if (angular.isDefined(status) && status == 400 || status == 404) {
+			} else if (angular.isDefined(status) && status == 400 || status == 404) {
 
-                var popType = 'TOASTER.ERROR';
-                var popTitle = error.title;
-                var popBody = error.description;
+				var popType = 'TOASTER.ERROR';
+				var popTitle = error.title;
+				var popBody = error.description;
 
-                popType = $translate.instant(popType);
-                popTitle = $translate.instant(popTitle);
-                popBody = $translate.instant(popBody);
+				popType = $translate.instant(popType);
+				popTitle = $translate.instant(popTitle);
+				popBody = $translate.instant(popBody);
 
-                toaster.pop({
-                    type: popType,
-                    title: popTitle,
-                    body: popBody,
-                    showCloseButton: true,
-                });
+				toaster.pop({
+					type: popType,
+					title: popTitle,
+					body: popBody,
+					showCloseButton: true,
+				});
 
 			} else {
 
 				var popType = 'TOASTER.ERROR';
-                var popTitle = $common.toaster.error_title;
-                var popBody = 'TOASTER.LOGIN_FAILURE';
+				var popTitle = $common.toaster.error_title;
+				var popBody = 'TOASTER.LOGIN_FAILURE';
 
-                popType = $translate.instant(popType);
-                popTitle = $translate.instant(popTitle);
-                popBody = $translate.instant(popBody);
+				popType = $translate.instant(popType);
+				popTitle = $translate.instant(popTitle);
+				popBody = $translate.instant(popBody);
 
-                toaster.pop({
-                    type: popType,
-                    title: popTitle,
-                    body: popBody,
-                    showCloseButton: true,
-                });
+				toaster.pop({
+					type: popType,
+					title: popTitle,
+					body: popBody,
+					showCloseButton: true,
+				});
 			}
-			$scope.dataLoading=false;
+			$scope.dataLoading = false;
 		});
 	};
 
-	$scope.logout = function() {
-		let user = {user_uuid: $scope.cur_user.uuid, token: $scope.cur_user.token };
-		LoginService.logout( user, function(error,status,headers) {
+	$scope.logout = function () {
+		let user = { user_uuid: $scope.cur_user.uuid, token: $scope.cur_user.token };
+		LoginService.logout(user, function (error, status, headers) {
 			if (angular.isDefined(status) && status == 200) {
 				var popType = 'TOASTER.SUCCESS';
-                var popTitle = $common.toaster.success_title;
-                var popBody = 'TOASTER.LOGIN_SUCCESS';
+				var popTitle = $common.toaster.success_title;
+				var popBody = 'TOASTER.LOGIN_SUCCESS';
 
-                popType = $translate.instant(popType);
-                popTitle = $translate.instant(popTitle);
-                popBody = $translate.instant(popBody);
+				popType = $translate.instant(popType);
+				popTitle = $translate.instant(popTitle);
+				popBody = $translate.instant(popBody);
 
-                toaster.pop({
-                    type: popType,
-                    title: popTitle,
-                    body: popBody,
-                    showCloseButton: true,
-                });
+				toaster.pop({
+					type: popType,
+					title: popTitle,
+					body: popBody,
+					showCloseButton: true,
+				});
 
 				$window.localStorage.removeItem("currentUser");
 				$location.path('/login');
 			} else {
 				var popType = 'TOASTER.ERROR';
-                var popTitle = $common.toaster.error_title;
-                var popBody = error.description;
+				var popTitle = $common.toaster.error_title;
+				var popBody = error.description;
 
-                popType = $translate.instant(popType);
-                popTitle = $translate.instant(popTitle);
-                popBody = $translate.instant(popBody);
+				popType = $translate.instant(popType);
+				popTitle = $translate.instant(popTitle);
+				popBody = $translate.instant(popBody);
 
-                toaster.pop({
-                    type: popType,
-                    title: popTitle,
-                    body: popBody,
-                    showCloseButton: true,
-                });
+				toaster.pop({
+					type: popType,
+					title: popTitle,
+					body: popBody,
+					showCloseButton: true,
+				});
 				$window.localStorage.removeItem("currentUser");
 				$location.path('/login');
 			}
 		});
 	};
 
-	$scope.onKeypress=function($event){
-		if($event.charCode==13){
+	$scope.onKeypress = function ($event) {
+		if ($event.charCode == 13) {
 			$scope.login($scope.user);
-		}else{
+		} else {
 			return;
 		}
 	};
@@ -136,13 +136,13 @@ app.controller('LoginController', function($rootScope,
 	// login section end
 
 	// change pwd section start
-	$scope.changePwd = function() {
+	$scope.changePwd = function () {
 		var modalInstance = $uibModal.open({
 			windowClass: "animated fadeIn",
 			templateUrl: 'views/users/user/change-password.model.html',
 			controller: 'ModalChangePasswordCtrl',
 			resolve: {
-				params: function() {
+				params: function () {
 					return {
 						user: angular.copy($scope.cur_user)
 					};
@@ -150,8 +150,13 @@ app.controller('LoginController', function($rootScope,
 			}
 		});
 
-		modalInstance.result.then(function(modifiedUser) {
-			UserService.changePassword(modifiedUser, function(error, status) {
+		modalInstance.result.then(function (user) {
+			let new_user = { 
+				user_uuid: $scope.cur_user.uuid, 
+				token: $scope.cur_user.token,
+				old_password: user.old_password, 
+				new_password: user.new_password };
+			UserService.changePassword(new_user, function (error, status) {
 				if (angular.isDefined(status) && status == 200) {
 					var templateName = "TOASTER.USER_PASSWORD";
 					templateName = $translate.instant(templateName);
@@ -162,7 +167,7 @@ app.controller('LoginController', function($rootScope,
 
 					popType = $translate.instant(popType);
 					popTitle = $translate.instant(popTitle);
-					popBody = $translate.instant(popBody,{template: templateName});
+					popBody = $translate.instant(popBody, { template: templateName });
 
 					toaster.pop({
 						type: popType,
@@ -185,8 +190,8 @@ app.controller('LoginController', function($rootScope,
 					popType = $translate.instant(popType);
 					popTitleOne = $translate.instant(popTitleOne);
 					popTitleTwo = $translate.instant(popTitleTwo);
-					popBodyOne = $translate.instant(popBodyOne,{template: templateName});
-					popBodyTwo = $translate.instant(popBodyTwo,{template: templateName});
+					popBodyOne = $translate.instant(popBodyOne, { template: templateName });
+					popBodyTwo = $translate.instant(popBodyTwo, { template: templateName });
 
 					toaster.pop({
 						type: popType,
@@ -203,49 +208,49 @@ app.controller('LoginController', function($rootScope,
 					// });
 				}
 			});
-		}, function() {
+		}, function () {
 			//do nothing;
 		});
 	};
 	// change pwd section end
 
 	// full screen section start
-    document.onwebkitfullscreenchange=function(e){
-    	$scope.fullscreenChangeHandle();
-    };
+	document.onwebkitfullscreenchange = function (e) {
+		$scope.fullscreenChangeHandle();
+	};
 
-    document.onmozfullscreenchange=function(e){
-    	$scope.fullscreenChangeHandle();
-    };
+	document.onmozfullscreenchange = function (e) {
+		$scope.fullscreenChangeHandle();
+	};
 
-    document.MSFullscreenChange=function(e){
-    	$scope.fullscreenChangeHandle();
-    };
+	document.MSFullscreenChange = function (e) {
+		$scope.fullscreenChangeHandle();
+	};
 
-    document.onfullscreenchange=function(e){
-    	$scope.fullscreenChangeHandle();
-    };
+	document.onfullscreenchange = function (e) {
+		$scope.fullscreenChangeHandle();
+	};
 
-    $scope.fullscreenChangeHandle=function(){
-    	$scope.isFullScreen = document.fullScreen ||
-		                   document.mozFullScreen ||
-		                   document.webkitIsFullScreen;
-    	if ($scope.isFullScreen) {
-    		$timeout(function(){
-    			$scope.fullScreenTitle="EXITFULLSCREEN";
-    		},0)
-    	} else {
-    		$timeout(function(){
-    			$scope.fullScreenTitle="FULLSCREEN";
-    		},0)
-    	}
-    };
+	$scope.fullscreenChangeHandle = function () {
+		$scope.isFullScreen = document.fullScreen ||
+			document.mozFullScreen ||
+			document.webkitIsFullScreen;
+		if ($scope.isFullScreen) {
+			$timeout(function () {
+				$scope.fullScreenTitle = "EXITFULLSCREEN";
+			}, 0)
+		} else {
+			$timeout(function () {
+				$scope.fullScreenTitle = "FULLSCREEN";
+			}, 0)
+		}
+	};
 
-	$scope.fullscreen = function() {
+	$scope.fullscreen = function () {
 		var docElm = document.documentElement;
 		$scope.isFullScreen = document.fullScreen ||
-		                   document.mozFullScreen ||
-		                   document.webkitIsFullScreen;
+			document.mozFullScreen ||
+			document.webkitIsFullScreen;
 		if ($scope.isFullScreen) {
 			if (document.exitFullscreen) {
 				document.exitFullscreen();
@@ -274,17 +279,17 @@ app.controller('LoginController', function($rootScope,
 	// full screen section end.
 
 	$scope.changeLanguage = function (langKey) {
-        $translate.use(langKey);
+		$translate.use(langKey);
 		$scope.language = langKey;
 		$window.localStorage.setItem("language", langKey);
-    };
+	};
 
 	// web message alarm section start
 	$scope.webmessages = [];
-	$scope.getWebMessage=function(){
-		WebMessageAnalysisService.getStatusNewResult(function(error, data) {
+	$scope.getWebMessage = function () {
+		WebMessageAnalysisService.getStatusNewResult(function (error, data) {
 			if (!error) {
-				$scope.webmessages=data;
+				$scope.webmessages = data;
 			}
 		});
 	};
@@ -295,18 +300,18 @@ app.controller('LoginController', function($rootScope,
 	$scope.getWebMessage();
 	$interval.cancel();
 
-	if($location.$$path.indexOf('login')==-1 && $location.$$path.indexOf('dashboard')==-1){
-		$scope.refresh=$interval($scope.getWebMessage,1000*60*1);
+	if ($location.$$path.indexOf('login') == -1 && $location.$$path.indexOf('dashboard') == -1) {
+		$scope.refresh = $interval($scope.getWebMessage, 1000 * 60 * 1);
 	};
 
-	$scope.$on('$destroy', function() {
+	$scope.$on('$destroy', function () {
 		if (angular.isDefined($scope.refresh)) {
 			$interval.cancel($scope.refresh);
 			$scope.refresh = undefined;
 		}
-   });
+	});
 
-	$scope.$on('BroadcastResetWebMessage', function(event) {
+	$scope.$on('BroadcastResetWebMessage', function (event) {
 		$scope.getWebMessage();
 	});
 
