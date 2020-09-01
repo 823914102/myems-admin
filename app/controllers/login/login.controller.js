@@ -84,7 +84,8 @@ app.controller('LoginController', function($rootScope,
 	};
 
 	$scope.logout = function() {
-		LoginService.logout( function(error,status,headers) {
+		let user = {user_uuid: $scope.cur_user.uuid, token: $scope.cur_user.token };
+		LoginService.logout( user, function(error,status,headers) {
 			if (angular.isDefined(status) && status == 200) {
 				var popType = 'TOASTER.SUCCESS';
                 var popTitle = $common.toaster.success_title;
