@@ -5,44 +5,10 @@ app.controller('PrivilegeController', function ($scope,
 	$uibModal,
 	PrivilegeService,
 	UserService,
+	SpaceService,
 	toaster,
 	$translate,
 	SweetAlert) {
-
-	$scope.getSpaceTree = function () {
-		PrivilegeService.getSpaceTree(function (error, data) {
-			if (!error) {
-				$scope.spacetree = $scope.formatSpaceTree(data);
-				// console.log($scope.spacetree);
-			} else {
-				$scope.spacetree = [];
-			}
-		});
-	};
-
-	$scope.formatSpaceTree = function (data) {
-		data.forEach(function (item) {
-			item.expanded = true;
-		});
-		return $scope.loopItems(data, undefined);
-	};
-
-	$scope.loopItems = function (data, pid) {
-		data.forEach(function (item) {
-			if (pid !== undefined) {
-				item.pid = pid;
-			}
-			item.text = item.name;
-			item.spaceid = item.id;
-			item.id = Math.floor(Math.random() * (100000 - 100 + 1)) + 100;
-			delete item.name;
-			if (item.hasOwnProperty('items')) {
-				$scope.loopItems(item.items, item.id);
-			}
-		});
-		return data;
-	};
-
 	$scope.getAllPrivileges = function () {
 		PrivilegeService.getAllPrivileges(function (error, data) {
 			if (!error) {
@@ -70,7 +36,7 @@ app.controller('PrivilegeController', function ($scope,
 		modalInstance.result.then(function (privilege) {
 			PrivilegeService.addPrivilege(privilege, function (error, status) {
 				if (angular.isDefined(status) && status == 201) {
-					var templateName = "SETTING.PRIVILEGE";
+					var templateName = "USER.PRIVILEGE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -89,7 +55,7 @@ app.controller('PrivilegeController', function ($scope,
 					});
 					$scope.getAllPrivileges();
 				} else {
-					var templateName = "SETTING.PRIVILEGE";
+					var templateName = "USER.PRIVILEGE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -131,7 +97,7 @@ app.controller('PrivilegeController', function ($scope,
 		modalInstance.result.then(function (modifiedPrivilege) {
 			PrivilegeService.editPrivilege(modifiedPrivilege, function (error, status) {
 				if (angular.isDefined(status) && status == 200) {
-					var templateName = "SETTING.PRIVILEGE";
+					var templateName = "USER.PRIVILEGE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -150,7 +116,7 @@ app.controller('PrivilegeController', function ($scope,
 					});
 					$scope.getAllPrivileges();
 				} else {
-					var templateName = "SETTING.PRIVILEGE";
+					var templateName = "USER.PRIVILEGE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -190,7 +156,7 @@ app.controller('PrivilegeController', function ($scope,
 				if (isConfirm) {
 					PrivilegeService.deletePrivilege(privilege, function (error, status) {
 						if (angular.isDefined(status) && status == 204) {
-							var templateName = "SETTING.PRIVILEGE";
+							var templateName = "USER.PRIVILEGE";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.SUCCESS';
@@ -217,7 +183,6 @@ app.controller('PrivilegeController', function ($scope,
 							popTitle = $translate.instant(popTitle);
 							popBody = $translate.instant(popBody);
 
-
 							toaster.pop({
 								type: popType,
 								title: popTitle,
@@ -225,7 +190,7 @@ app.controller('PrivilegeController', function ($scope,
 								showCloseButton: true,
 							});
 						} else {
-							var templateName = "SETTING.PRIVILEGE";
+							var templateName = "USER.PRIVILEGE";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.ERROR';
@@ -249,136 +214,123 @@ app.controller('PrivilegeController', function ($scope,
 	};
 
 	$scope.getAllPrivileges();
-	$scope.getSpaceTree();
-
 
 });
 
-app.controller('ModalAddPrivilegeCtrl', function ($scope, $uibModalInstance, $timeout, IntegralUITreeViewService, params) {
+app.controller('ModalAddPrivilegeCtrl', function ($scope, 
+	$uibModalInstance, 
+	SpaceService,
+	$timeout, 
+	params) {
 
 	$scope.operation = "USER.ADD_PRIVILEGE";
-	$scope.treeName = "treeSample";
-	$scope.itemIcon = "icons-medium empty-doc";
-	$scope.checkStates = ['checked', 'indeterminate', 'unchecked'];
-	$scope.currentState = 'checked';
-	$scope.checkList = [];
+	
+	$scope.spaces = [];
+	$scope.currentSpaceID = 1;
 	$scope.privilege = {};
-	$scope.checkBoxSettings = {
-		autoCheck: true,
-		threeState: true
-	}
-	$scope.items = params.spacetree;
 
-	$scope.showCheckList = function () {
-		$scope.checkList = IntegralUITreeViewService.getCheckList($scope.treeName, $scope.currentState);
-		var privilege_data = {
-			"spaces": [],
-			"tenants": [],
-		}
-		$scope.checkList.forEach(function (item) {
-			switch (item.space) {
-				case "space":
-					privilege_data.spaces.push(item.spaceid);
-					break;
-				case "tenant":
-					privilege_data.tenants.push(item.spaceid);
-					break;
+	$scope.getAllSpaces = function () {
+		SpaceService.getAllSpaces(function (error, data) {
+			if (!error) {
+				$scope.spaces = data;
+			} else {
+				$scope.spaces = [];
 			}
-		});
-		return privilege_data;
-	}
+			//create space tree
+			var treedata = { 'core': { 'data': [], "multiple": false, }, "plugins": ["wholerow"] };
+			for (var i = 0; i < $scope.spaces.length; i++) {
+				if ($scope.spaces[i].id == 1) {
+					var node = {
+						"id": $scope.spaces[i].id.toString(),
+						"parent": '#',
+						"text": $scope.spaces[i].name,
+						"state": { 'opened': true, 'selected': true },
+					};
+				} else {
+					var node = {
+						"id": $scope.spaces[i].id.toString(),
+						"parent": $scope.spaces[i].parent_space.id.toString(),
+						"text": $scope.spaces[i].name,
+					};
+				};
+				treedata['core']['data'].push(node);
+			}
 
-	$scope.itemCheckStateChanging = function (e) {
-		if (e.value == 'unchecked') {
-			e.item.checkState = 'checked';
-		}
-	}
+			angular.element(spacetree).jstree(treedata);
+			//space tree selected changed event handler
+			angular.element(spacetree).on("changed.jstree", function (e, data) {
+				$scope.currentSpaceID = parseInt(data.selected[0]);
+			});
+		});
+	};
 
 	$scope.ok = function () {
-		$scope.privilege.data = JSON.stringify($scope.showCheckList());
+		$scope.privilege.data = JSON.stringify({"spaces": [$scope.currentSpaceID, ]});
 		$uibModalInstance.close($scope.privilege);
 	};
 
 	$scope.cancel = function () {
 		$uibModalInstance.dismiss('cancel');
 	};
+	$scope.getAllSpaces();
 });
 
-app.controller('ModalEditPrivilegeCtrl', function ($scope, $uibModalInstance, $timeout, IntegralUITreeViewService, params) {
-	$scope.operation = "SETTING.EDIT_PRIVILEGE";
+app.controller('ModalEditPrivilegeCtrl', function ($scope, 
+	$uibModalInstance, 
+	SpaceService,
+	$timeout, 
+	params) {
+	$scope.operation = "USER.EDIT_PRIVILEGE";
 	$scope.privilege = params.privilege;
+
+	$scope.spaces = [];
 	var privilege_data = JSON.parse(params.privilege.data);
-
-	$scope.checkNode = function (data) {
-		data.forEach(function (item) {
-			switch (item.space) {
-				case "space":
-					if (privilege_data.factories.indexOf(item.spaceid) > -1) {
-						item.checkState = "checked";
-					}
-					break;
-				case "tenant":
-					if (privilege_data.tenants.indexOf(item.spaceid) > -1) {
-						item.checkState = "checked";
-					}
-					break;
+	$scope.currentSpaceID = privilege_data['spaces'][0];
+	console.log($scope.currentSpaceID)
+	
+	$scope.getAllSpaces = function () {
+		SpaceService.getAllSpaces(function (error, data) {
+			if (!error) {
+				$scope.spaces = data;
+			} else {
+				$scope.spaces = [];
 			}
-			if (item.hasOwnProperty("items")) {
-				$scope.checkNode(item.items);
+			//create space tree
+			var treedata = { 'core': { 'data': [], "multiple": false, }, "plugins": ["wholerow"] };
+			for (var i = 0; i < $scope.spaces.length; i++) {
+				if ($scope.spaces[i].id == $scope.currentSpaceID) {
+					var node = {
+						"id": $scope.spaces[i].id.toString(),
+						"parent": ($scope.spaces[i].id == 1)? '#': $scope.spaces[i].parent_space.id.toString(),
+						"text": $scope.spaces[i].name,
+						"state": { 'opened': true, 'selected': true },
+					};
+				} else {
+					var node = {
+						"id": $scope.spaces[i].id.toString(),
+						"parent": ($scope.spaces[i].id == 1)? '#': $scope.spaces[i].parent_space.id.toString(),
+						"text": $scope.spaces[i].name,
+					};
+				};
+				treedata['core']['data'].push(node);
 			}
+
+			angular.element(spacetree).jstree(treedata);
+			//space tree selected changed event handler
+			angular.element(spacetree).on("changed.jstree", function (e, data) {
+				$scope.currentSpaceID = parseInt(data.selected[0]);
+			});
 		});
-		return data;
-	}
-
-	$scope.expandFirstNode = function (data) {
-		data.forEach(function (item) {
-			item.expanded = true;
-		});
-		return $scope.checkNode(data);
-	}
-
-	$scope.items = $scope.expandFirstNode(params.spacetree);
-	$scope.treeName = "treeSample1";
-	$scope.itemIcon = "icons-medium empty-doc";
-	$scope.checkStates = ['checked', 'indeterminate', 'unchecked'];
-	$scope.currentState = 'checked';
-	$scope.checkList = [];
-
-	$scope.checkBoxSettings = {
-		autoCheck: true,
-		threeState: true
-	}
-	$scope.showCheckList = function () {
-		$scope.checkList = IntegralUITreeViewService.getCheckList($scope.treeName, $scope.currentState);
-		var privilege_data_edit = {
-			"spaces": [],
-			"tenants": [],
-		}
-		$scope.checkList.forEach(function (item) {
-			switch (item.space) {
-				case "space":
-					privilege_data_edit.spaces.push(item.spaceid);
-					break;
-				case "tenant":
-					privilege_data_edit.tenants.push(item.spaceid);
-					break;
-			}
-		});
-		return privilege_data_edit;
-	}
-
-	$scope.itemCheckStateChanging = function (e) {
-		if (e.value == 'unchecked') {
-			e.item.checkState = 'checked';
-		}
-	}
+	};
 
 	$scope.ok = function () {
-		$scope.privilege.data = JSON.stringify($scope.showCheckList());
+		$scope.privilege.data = JSON.stringify({"spaces": [$scope.currentSpaceID, ]});
 		$uibModalInstance.close($scope.privilege);
 	};
 
 	$scope.cancel = function () {
 		$uibModalInstance.dismiss('cancel');
 	};
+
+	$scope.getAllSpaces();
 });

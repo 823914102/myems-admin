@@ -1259,7 +1259,6 @@ app
                         templateUrl: "views/users/privilege/privilege.html",
                         data: {
                             pageTitle: 'MENU.USERSETTING.PRIVILEGE'
-
                         },
 
                         resolve: {
@@ -1278,6 +1277,7 @@ app
                                                 files: [
                                                     'app/services/users/user/user.service.js',
                                                     'app/services/users/privilege/privilege.service.js',
+                                                    'app/services/settings/space/space.service.js',
                                                     'app/controllers/users/privilege/privilege.controller.js'
                                                 ]
                                             }]);

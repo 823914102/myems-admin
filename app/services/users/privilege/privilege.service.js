@@ -1,15 +1,6 @@
 'use strict';
 app.factory('PrivilegeService', function($http) {
     return {
-        getSpaceTree:function(callback){
-            $http.get(getAPI()+'spacetree')
-                .success(function (response, status, headers, config) {
-                    callback(null, response);
-                })
-                .error(function (e) {
-                    callback(e);
-                });
-        },
         getAllPrivileges:function(callback){
             $http.get(getAPI()+'privileges')
                 .success(function (response, status, headers, config) {
