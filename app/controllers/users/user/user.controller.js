@@ -249,8 +249,7 @@ app.controller('UserController', function ($scope, $common, $uibModal, UserServi
 
 app.controller('ModalAddUserCtrl', function ($scope, $uibModalInstance, params) {
 
-	$scope.operation = "add";
-	$scope.title = "USER.ADD_USER";
+	$scope.operation = "USER.ADD_USER";
 	$scope.privileges = params.privileges;
 	$scope.user = {
 		is_admin: false
@@ -268,8 +267,8 @@ app.controller('ModalAddUserCtrl', function ($scope, $uibModalInstance, params) 
 });
 
 app.controller('ModalEditUserCtrl', function ($scope, $uibModalInstance, params) {
-	$scope.operation = "edit";
-	$scope.title = "USER.EDIT_USER";
+	
+	$scope.operation = "USER.EDIT_USER";
 	$scope.user = params.user;
 	$scope.privileges = params.privileges;
 	if ($scope.user.privilege != null) {

@@ -36,7 +36,7 @@ app.controller('PrivilegeController', function ($scope,
 		modalInstance.result.then(function (privilege) {
 			PrivilegeService.addPrivilege(privilege, function (error, status) {
 				if (angular.isDefined(status) && status == 201) {
-					var templateName = "SETTING.PRIVILEGE";
+					var templateName = "USER.PRIVILEGE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -55,7 +55,7 @@ app.controller('PrivilegeController', function ($scope,
 					});
 					$scope.getAllPrivileges();
 				} else {
-					var templateName = "SETTING.PRIVILEGE";
+					var templateName = "USER.PRIVILEGE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -97,7 +97,7 @@ app.controller('PrivilegeController', function ($scope,
 		modalInstance.result.then(function (modifiedPrivilege) {
 			PrivilegeService.editPrivilege(modifiedPrivilege, function (error, status) {
 				if (angular.isDefined(status) && status == 200) {
-					var templateName = "SETTING.PRIVILEGE";
+					var templateName = "USER.PRIVILEGE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.SUCCESS';
@@ -116,7 +116,7 @@ app.controller('PrivilegeController', function ($scope,
 					});
 					$scope.getAllPrivileges();
 				} else {
-					var templateName = "SETTING.PRIVILEGE";
+					var templateName = "USER.PRIVILEGE";
 					templateName = $translate.instant(templateName);
 
 					var popType = 'TOASTER.ERROR';
@@ -156,7 +156,7 @@ app.controller('PrivilegeController', function ($scope,
 				if (isConfirm) {
 					PrivilegeService.deletePrivilege(privilege, function (error, status) {
 						if (angular.isDefined(status) && status == 204) {
-							var templateName = "SETTING.PRIVILEGE";
+							var templateName = "USER.PRIVILEGE";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.SUCCESS';
@@ -190,7 +190,7 @@ app.controller('PrivilegeController', function ($scope,
 								showCloseButton: true,
 							});
 						} else {
-							var templateName = "SETTING.PRIVILEGE";
+							var templateName = "USER.PRIVILEGE";
 							templateName = $translate.instant(templateName);
 
 							var popType = 'TOASTER.ERROR';
@@ -217,33 +217,120 @@ app.controller('PrivilegeController', function ($scope,
 
 });
 
-app.controller('ModalAddPrivilegeCtrl', function ($scope, $uibModalInstance, $timeout, params) {
+app.controller('ModalAddPrivilegeCtrl', function ($scope, 
+	$uibModalInstance, 
+	SpaceService,
+	$timeout, 
+	params) {
 
 	$scope.operation = "USER.ADD_PRIVILEGE";
 	
+	$scope.spaces = [];
+	$scope.currentSpaceID = 1;
 	$scope.privilege = {};
-	
+
+	$scope.getAllSpaces = function () {
+		SpaceService.getAllSpaces(function (error, data) {
+			if (!error) {
+				$scope.spaces = data;
+			} else {
+				$scope.spaces = [];
+			}
+			//create space tree
+			var treedata = { 'core': { 'data': [], "multiple": false, }, "plugins": ["wholerow"] };
+			for (var i = 0; i < $scope.spaces.length; i++) {
+				if ($scope.spaces[i].id == 1) {
+					var node = {
+						"id": $scope.spaces[i].id.toString(),
+						"parent": '#',
+						"text": $scope.spaces[i].name,
+						"state": { 'opened': true, 'selected': true },
+					};
+				} else {
+					var node = {
+						"id": $scope.spaces[i].id.toString(),
+						"parent": $scope.spaces[i].parent_space.id.toString(),
+						"text": $scope.spaces[i].name,
+					};
+				};
+				treedata['core']['data'].push(node);
+			}
+
+			angular.element(spacetree).jstree(treedata);
+			//space tree selected changed event handler
+			angular.element(spacetree).on("changed.jstree", function (e, data) {
+				$scope.currentSpaceID = parseInt(data.selected[0]);
+			});
+		});
+	};
+
 	$scope.ok = function () {
-		$scope.privilege.data = JSON.stringify({});
+		$scope.privilege.data = JSON.stringify({"spaces": [$scope.currentSpaceID, ]});
 		$uibModalInstance.close($scope.privilege);
 	};
 
 	$scope.cancel = function () {
 		$uibModalInstance.dismiss('cancel');
 	};
+	$scope.getAllSpaces();
 });
 
-app.controller('ModalEditPrivilegeCtrl', function ($scope, $uibModalInstance, $timeout, params) {
+app.controller('ModalEditPrivilegeCtrl', function ($scope, 
+	$uibModalInstance, 
+	SpaceService,
+	$timeout, 
+	params) {
 	$scope.operation = "USER.EDIT_PRIVILEGE";
 	$scope.privilege = params.privilege;
+
+	$scope.spaces = [];
 	var privilege_data = JSON.parse(params.privilege.data);
+	$scope.currentSpaceID = privilege_data['spaces'][0];
+	console.log($scope.currentSpaceID)
+	
+	$scope.getAllSpaces = function () {
+		SpaceService.getAllSpaces(function (error, data) {
+			if (!error) {
+				$scope.spaces = data;
+			} else {
+				$scope.spaces = [];
+			}
+			//create space tree
+			var treedata = { 'core': { 'data': [], "multiple": false, }, "plugins": ["wholerow"] };
+			for (var i = 0; i < $scope.spaces.length; i++) {
+				if ($scope.spaces[i].id == $scope.currentSpaceID) {
+					var node = {
+						"id": $scope.spaces[i].id.toString(),
+						"parent": ($scope.spaces[i].id == 1)? '#': $scope.spaces[i].parent_space.id.toString(),
+						"text": $scope.spaces[i].name,
+						"state": { 'opened': true, 'selected': true },
+					};
+				} else {
+					var node = {
+						"id": $scope.spaces[i].id.toString(),
+						"parent": ($scope.spaces[i].id == 1)? '#': $scope.spaces[i].parent_space.id.toString(),
+						"text": $scope.spaces[i].name,
+					};
+				};
+				treedata['core']['data'].push(node);
+			}
+
+			angular.element(spacetree).jstree(treedata);
+			//space tree selected changed event handler
+			angular.element(spacetree).on("changed.jstree", function (e, data) {
+				$scope.currentSpaceID = parseInt(data.selected[0]);
+			});
+		});
+	};
 
 	$scope.ok = function () {
-		$scope.privilege.data = JSON.stringify({});
+		$scope.privilege.data = JSON.stringify({"spaces": [$scope.currentSpaceID, ]});
 		$uibModalInstance.close($scope.privilege);
 	};
 
 	$scope.cancel = function () {
 		$uibModalInstance.dismiss('cancel');
 	};
+
+	$scope.getAllSpaces();
 });
