@@ -84,8 +84,11 @@ app.controller('LoginController', function ($rootScope,
 	};
 
 	$scope.logout = function () {
-		let user = { user_uuid: $scope.cur_user.uuid, token: $scope.cur_user.token };
-		LoginService.logout(user, function (error, status, headers) {
+		let data = null;
+		let headers = {
+			user_uuid: $scope.cur_user.uuid, 
+			token: $scope.cur_user.token };
+		LoginService.logout(data, headers, function (error, status, headers) {
 			if (angular.isDefined(status) && status == 200) {
 				var popType = 'TOASTER.SUCCESS';
 				var popTitle = $common.toaster.success_title;
@@ -151,12 +154,15 @@ app.controller('LoginController', function ($rootScope,
 		});
 
 		modalInstance.result.then(function (user) {
-			let new_user = { 
-				user_uuid: $scope.cur_user.uuid, 
-				token: $scope.cur_user.token,
+			let data = {
 				old_password: user.old_password, 
 				new_password: user.new_password };
-			UserService.changePassword(new_user, function (error, status) {
+
+			let headers = {
+				user_uuid: $scope.cur_user.uuid, 
+				token: $scope.cur_user.token };
+			
+			UserService.changePassword(data, headers, function (error, status) {
 				if (angular.isDefined(status) && status == 200) {
 					var templateName = "TOASTER.USER_PASSWORD";
 					templateName = $translate.instant(templateName);

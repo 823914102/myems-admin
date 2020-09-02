@@ -11,9 +11,10 @@ app.factory('LoginService', function($http) {
                     callback(e,status);  
                 });  
         },
-        logout: function(user, callback) {  
-            $http.put(getAPI()+'users/logout', {data:user})
-            //$http.put(getAPI()+'users/logout',{},{headers:{'cookie': 'token=06b4849be0710487fa08561d0303699821b23e75; user_uuid=dfa793a3-1a1d-49be-ad46-99f4196079de;'}})
+        logout: function(data, headers, callback) {  
+            console.log(data);
+            console.log(headers);
+            $http.put(getAPI()+'users/logout', {data}, {headers})
                 .success(function (response, status, headers, config) {  
                     callback(null,status,headers);  
                 })  

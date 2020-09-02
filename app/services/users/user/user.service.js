@@ -46,8 +46,8 @@ app.factory('UserService', function($http) {
                     callback(e);  
                 });  
         },
-        changePassword: function(user, callback) {  
-            $http.put(getAPI()+'users/changepassword',{data:user})  
+        changePassword: function(data, headers, callback) { 
+            $http.put(getAPI()+'users/changepassword', {data}, {headers})  
                 .success(function (response, status, headers, config) {  
                     callback(null, status);  
                 })  
