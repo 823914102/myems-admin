@@ -37,8 +37,8 @@ app.factory('UserService', function($http) {
                     callback(e);  
                 });  
         },
-        resetPassword: function(user, callback) {  
-            $http.put(getAPI()+'users/resetpassword',{data:user})  
+        resetPassword: function(data, headers, callback) {  
+            $http.put(getAPI()+'users/resetpassword',{data}, {headers})  
                 .success(function (response, status, headers, config) {  
                     callback(null, status);  
                 })  

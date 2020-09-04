@@ -1,8 +1,16 @@
 'use strict';
 
-app.controller('UserController', function ($scope, $common, $uibModal, UserService, PrivilegeService, toaster, $translate, SweetAlert) {
+app.controller('UserController', function ($scope, 
+	$window,
+	$common, 
+	$uibModal, 
+	UserService, 
+	PrivilegeService, 
+	toaster, 
+	$translate, 
+	SweetAlert) {
 
-
+	$scope.cur_user = JSON.parse($window.localStorage.getItem("currentUser"));
 	$scope.getAllUsers = function () {
 		UserService.getAllUsers(function (error, data) {
 			if (!error) {
@@ -160,20 +168,50 @@ app.controller('UserController', function ($scope, $common, $uibModal, UserServi
 		});
 
 		modalInstance.result.then(function (modifiedUser) {
-			UserService.resetPassword(modifiedUser, function (error, status) {
+			let data = {
+				name: modifiedUser.name, 
+				password: modifiedUser.password };
+
+			let headers = {
+				User_UUID: $scope.cur_user.uuid, 
+				Token: $scope.cur_user.token };
+
+			UserService.resetPassword(data, headers, function (error, status) {
 				if (angular.isDefined(status) && status == 200) {
+					var templateName = "SETTING.USER";
+					templateName = $translate.instant(templateName);
+
+					var popType = 'TOASTER.SUCCESS';
+					var popTitle = $common.toaster.success_title;
+					var popBody = $common.toaster.success_update_body;
+
+					popType = $translate.instant(popType);
+					popTitle = $translate.instant(popTitle);
+					popBody = $translate.instant(popBody, { template: templateName });
+
 					toaster.pop({
-						type: 'success',
-						title: $common.toaster.success_title,
-						body: $common.toaster.success_update_body.format('user'),
+						type: popType,
+						title: popTitle,
+						body: popBody,
 						showCloseButton: true,
 					});
 					$scope.getAllUsers();
 				} else {
+					var templateName = "SETTING.USER";
+					templateName = $translate.instant(templateName);
+
+					var popType = 'TOASTER.ERROR';
+					var popTitle = $common.toaster.error_title;
+					var popBody = $common.toaster.error_update_body;
+
+					popType = $translate.instant(popType);
+					popTitle = $translate.instant(popTitle);
+					popBody = $translate.instant(popBody, { template: templateName });
+
 					toaster.pop({
-						type: 'error',
-						title: $common.toaster.error_title,
-						body: $common.toaster.error_update_body.format('user'),
+						type: popType,
+						title: popTitle,
+						body: popBody,
 						showCloseButton: true,
 					});
 				}
