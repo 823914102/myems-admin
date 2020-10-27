@@ -112,6 +112,7 @@ function config($translateProvider) {
                 ACKNOWLEDGE_CODE: 'Acknowledge Code',
 
                 EMAIL_ALARM_LIST: 'Email Alarm List',
+                EMAIL: 'Email',
                 TOPIC: 'Subject',
                 ATTACHMENT_NAME: 'Attachment',
                 ACKNOWLEDGE_MESSAGE: 'Acknowledge Message',
@@ -1159,6 +1160,7 @@ function config($translateProvider) {
                 ACKNOWLEDGE_CODE: '确认代码',
 
                 EMAIL_ALARM_LIST: '邮件报警列表',
+                EMAIL: '邮箱',
                 TOPIC: '主题',
                 ATTACHMENT_NAME: '附件名称',
                 ACKNOWLEDGE_MESSAGE: '确认消息',
