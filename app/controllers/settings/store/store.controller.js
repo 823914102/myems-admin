@@ -58,7 +58,7 @@ $scope.getAllStoreTypes = function() {
 			}
 		});
 		modalInstance.result.then(function(store) {
-	    store.store_type_id=store.store_type.id;
+	    	store.store_type_id=store.store_type.id;
 			store.cost_center_id=store.cost_center.id;
 			store.contact_id=store.contact.id;
 			if (angular.isDefined(store.is_input_counted) == false) {

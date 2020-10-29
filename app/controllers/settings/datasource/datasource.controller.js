@@ -60,7 +60,6 @@ app.controller('DataSourceController', function($scope, $uibModal, $timeout, $co
 						showCloseButton: true,
 					});
 
-
 					$scope.$emit("handleEmitDataSourceChanged");
 				} else {
 					var templateName = "DATA_SOURCE.DATA_SOURCE";
