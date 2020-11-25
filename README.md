@@ -4,6 +4,7 @@
 MyEMS 系统管理面板，用于项目配置和系统管理
 Providing admin panel  for MyEMS system administration and configuration
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/myems/myems-admin/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/myems/myems-admin/?branch=master)
 
 ## Prerequisites
 nginx-1.18.0 or later
