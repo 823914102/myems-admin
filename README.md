@@ -6,6 +6,7 @@ Providing admin panel  for MyEMS system administration and configuration
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f4c68eda47ba45948809f3f42ce8d82e)](https://app.codacy.com/gh/myems/myems-admin?utm_source=github.com&utm_medium=referral&utm_content=myems/myems-admin&utm_campaign=Badge_Grade)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/myems/myems-admin/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/myems/myems-admin/?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4ece07b4f1e10b578277/maintainability)](https://codeclimate.com/github/myems/myems-admin/maintainability)
 
 ## Prerequisites
 nginx-1.18.0 or later
