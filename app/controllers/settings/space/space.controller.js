@@ -3,6 +3,7 @@
 app.controller('SpaceController', function ($scope, $common, $uibModal, SpaceService, CostCenterService, ContactService, toaster, $translate, SweetAlert) {
 	$scope.spaces = [];
 	$scope.currentSpaceID = 1;
+	$scope.currentSpace = {};
 	$scope.currentSpaceChildren = [];
 
 	$scope.getAllCostCenters = function () {
@@ -96,8 +97,10 @@ app.controller('SpaceController', function ($scope, $common, $uibModal, SpaceSer
 	$scope.getSpaceChildren = function (spaceid) {
 		SpaceService.getSpaceChildren(spaceid, function (error, data) {
 			if (!error) {
-				$scope.currentSpaceChildren = data;
+				$scope.currentSpace = data["current"];
+				$scope.currentSpaceChildren = data["children"];
 			} else {
+				$scope.currentSpace = {};
 				$scope.currentSpaceChildren = [];
 			}
 		});
