@@ -4,21 +4,15 @@ app.controller('RuleController', function($scope, $common, $uibModal, $translate
 
 	$scope.initExpression = [{
 		"spaceid": 1,
-		"spacename": "name",
+		"limit": 1000.000,
 		"recipients": [{
-			"name": "albert",
-			"recipient": "13888888888",
-			"level": 0
+			"user_id": "1"
 		}, {
-			"name": "johnson",
-			"recipient": "13666666666",
-			"level": 0
-		}, {
-			"name": "mike",
-			"recipient": "13777777777",
-			"level": 0
+			"user_id": "2"
 		}]
 	}];
+
+	$scope.initMessageTemplate = 'This a sample template. Use %s for substitution. You can use multiple %s s in the template.';
 
 	$scope.getAllRules = function() {
 		RuleService.getAllRules(function(error, data) {
@@ -41,7 +35,8 @@ app.controller('RuleController', function($scope, $common, $uibModal, $translate
 				params: function() {
 					return {
 						rules: angular.copy($scope.rules),
-						expression:angular.copy($scope.initExpression)
+						expression:angular.copy($scope.initExpression),
+						message_template:angular.copy($scope.initMessageTemplate)
 					};
 				}
 			}
@@ -239,10 +234,9 @@ app.controller('ModalAddRuleCtrl', function($scope, $uibModalInstance, params) {
 	$scope.operation = "FDD.ADD_RULE";
 	$scope.rule={};
 	$scope.rule.is_enabled=true;
-	$scope.rule.channel='email';
-	$scope.rule = {mute_start_datetime:moment(), mute_end_datetime:moment()};
-
+	$scope.rule.channel='WEB';
 	$scope.rule.expression=JSON.stringify(params.expression);
+	$scope.rule.message_template=params.message_template;
 
 	$scope.ok = function() {
 		$uibModalInstance.close($scope.rule);
