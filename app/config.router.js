@@ -38,7 +38,7 @@ app
                                                 serie: true,
                                                 files: [
                                                     'app/services/login/login.service.js',
-                                                    'app/services/alarm/webmessageanalysis.service.js',
+                                                    'app/services/fdd/webmessageanalysis.service.js',
                                                     'app/services/users/user/user.service.js',
                                                     'app/controllers/users/user/user.controller.js',
                                                     'app/controllers/login/login.controller.js'
@@ -50,9 +50,9 @@ app
                             ]
                         }
                     })
-                    .state('alarm', {
+                    .state('fdd', {
                         abstract: true,
-                        url: "/alarm",
+                        url: "/fdd",
                         templateUrl: "views/common/content.html",
                         resolve: {
                             deps: [
@@ -64,7 +64,7 @@ app
                                                 serie: true,
                                                 files: [
                                                     'app/services/login/login.service.js',
-                                                    'app/services/alarm/webmessageanalysis.service.js',
+                                                    'app/services/fdd/webmessageanalysis.service.js',
                                                     'app/services/users/user/user.service.js',
                                                     'app/controllers/users/user/user.controller.js',
                                                     'app/controllers/login/login.controller.js'
@@ -76,9 +76,9 @@ app
                             ]
                         }
                     })
-                    .state('alarm.rule', {
+                    .state('fdd.rule', {
                         url: "/rule",
-                        templateUrl: "views/alarm/rule.html",
+                        templateUrl: "views/fdd/rule.html",
                         data: {
                             pageTitle: 'MENU.FDD.RULE'
                         },
@@ -114,8 +114,8 @@ app
                                                         'app/services/settings/equipment/equipment.service.js',
                                                         'app/services/settings/combinedequipment/combinedequipment.service.js',
                                                         'app/services/settings/meter/meter.service.js',
-                                                        'app/services/alarm/rule.service.js',
-                                                        'app/controllers/alarm/rule/rule.controller.js'
+                                                        'app/services/fdd/rule.service.js',
+                                                        'app/controllers/fdd/rule/rule.controller.js'
                                                     ]
                                                 }]);
                                         }
@@ -124,9 +124,9 @@ app
                             ]
                         }
                     })
-                    .state('alarm.textmessage', {
+                    .state('fdd.textmessage', {
                         url: "/textmessage",
-                        templateUrl: "views/alarm/textmessage.html",
+                        templateUrl: "views/fdd/textmessage.html",
                         data: {
                             pageTitle: 'MENU.FDD.MESSAGEALARM'
                         },
@@ -156,10 +156,10 @@ app
                                                 }, {
                                                     serie: true,
                                                     files: [
-                                                        'app/services/alarm/textmessageanalysis.service.js',
-                                                        'app/controllers/alarm/textmessage/textmessage.controller.js',
-                                                        'app/controllers/alarm/textmessage/textmessagemaster.controller.js',
-                                                        'app/controllers/alarm/textmessage/textmessageoption.controller.js'
+                                                        'app/services/fdd/textmessageanalysis.service.js',
+                                                        'app/controllers/fdd/textmessage/textmessage.controller.js',
+                                                        'app/controllers/fdd/textmessage/textmessagemaster.controller.js',
+                                                        'app/controllers/fdd/textmessage/textmessageoption.controller.js'
                                                     ]
                                                 }]);
                                         }
@@ -168,9 +168,9 @@ app
                             ]
                         }
                     })
-                    .state('alarm.emailmessage', {
+                    .state('fdd.emailmessage', {
                         url: "/emailmessage",
-                        templateUrl: "views/alarm/emailmessage.html",
+                        templateUrl: "views/fdd/emailmessage.html",
                         data: {
                             pageTitle: 'MENU.FDD.EMAILALARM'
                         },
@@ -200,10 +200,10 @@ app
                                                 }, {
                                                     serie: true,
                                                     files: [
-                                                        'app/services/alarm/emailmessageanalysis.service.js',
-                                                        'app/controllers/alarm/emailmessage/emailmessage.controller.js',
-                                                        'app/controllers/alarm/emailmessage/emailmessagemaster.controller.js',
-                                                        'app/controllers/alarm/emailmessage/emailmessageoption.controller.js'
+                                                        'app/services/fdd/emailmessageanalysis.service.js',
+                                                        'app/controllers/fdd/emailmessage/emailmessage.controller.js',
+                                                        'app/controllers/fdd/emailmessage/emailmessagemaster.controller.js',
+                                                        'app/controllers/fdd/emailmessage/emailmessageoption.controller.js'
                                                     ]
                                                 }]);
                                         }
@@ -212,9 +212,9 @@ app
                             ]
                         }
                     })
-                    .state('alarm.webmessage', {
+                    .state('fdd.webmessage', {
                         url: "/webmessage",
-                        templateUrl: "views/alarm/webmessage.html",
+                        templateUrl: "views/fdd/webmessage.html",
                         data: {
                             pageTitle: 'MENU.FDD.WEBALARM'
                         },
@@ -244,10 +244,10 @@ app
                                                 }, {
                                                     serie: true,
                                                     files: [
-                                                        'app/services/alarm/webmessageanalysis.service.js',
-                                                        'app/controllers/alarm/webmessage/webmessage.controller.js',
-                                                        'app/controllers/alarm/webmessage/webmessagemaster.controller.js',
-                                                        'app/controllers/alarm/webmessage/webmessageoption.controller.js'
+                                                        'app/services/fdd/webmessageanalysis.service.js',
+                                                        'app/controllers/fdd/webmessage/webmessage.controller.js',
+                                                        'app/controllers/fdd/webmessage/webmessagemaster.controller.js',
+                                                        'app/controllers/fdd/webmessage/webmessageoption.controller.js'
                                                     ]
                                                 }]);
                                         }
@@ -256,9 +256,9 @@ app
                             ]
                         }
                     })
-                    .state('alarm.wechatmessage', {
+                    .state('fdd.wechatmessage', {
                         url: "/wechatmessage",
-                        templateUrl: "views/alarm/wechatmessage.html",
+                        templateUrl: "views/fdd/wechatmessage.html",
                         data: {
                             pageTitle: 'MENU.FDD.WECHATALARM'
                         },
@@ -288,10 +288,10 @@ app
                                                 }, {
                                                     serie: true,
                                                     files: [
-                                                        'app/services/alarm/wechatmessageanalysis.service.js',
-                                                        'app/controllers/alarm/wechatmessage/wechatmessage.controller.js',
-                                                        'app/controllers/alarm/wechatmessage/wechatmessagemaster.controller.js',
-                                                        'app/controllers/alarm/wechatmessage/wechatmessageoption.controller.js'
+                                                        'app/services/fdd/wechatmessageanalysis.service.js',
+                                                        'app/controllers/fdd/wechatmessage/wechatmessage.controller.js',
+                                                        'app/controllers/fdd/wechatmessage/wechatmessagemaster.controller.js',
+                                                        'app/controllers/fdd/wechatmessage/wechatmessageoption.controller.js'
                                                     ]
                                                 }]);
                                         }
@@ -314,7 +314,7 @@ app
                                                 serie: true,
                                                 files: [
                                                     'app/services/login/login.service.js',
-                                                    'app/services/alarm/webmessageanalysis.service.js',
+                                                    'app/services/fdd/webmessageanalysis.service.js',
                                                     'app/services/users/user/user.service.js',
                                                     'app/controllers/users/user/user.controller.js',
                                                     'app/controllers/login/login.controller.js'
@@ -340,7 +340,7 @@ app
                                                 serie: true,
                                                 files: [
                                                     'app/services/login/login.service.js',
-                                                    'app/services/alarm/webmessageanalysis.service.js',
+                                                    'app/services/fdd/webmessageanalysis.service.js',
                                                     'app/services/users/user/user.service.js',
                                                     'app/controllers/users/user/user.controller.js',
                                                     'app/controllers/login/login.controller.js'
@@ -366,7 +366,7 @@ app
                                                 serie: true,
                                                 files: [
                                                     'app/services/login/login.service.js',
-                                                    'app/services/alarm/webmessageanalysis.service.js',
+                                                    'app/services/fdd/webmessageanalysis.service.js',
                                                     'app/services/users/user/user.service.js',
                                                     'app/controllers/users/user/user.controller.js',
                                                     'app/controllers/login/login.controller.js'
@@ -392,7 +392,7 @@ app
                                                 serie: true,
                                                 files: [
                                                     'app/services/login/login.service.js',
-                                                    'app/services/alarm/webmessageanalysis.service.js',
+                                                    'app/services/fdd/webmessageanalysis.service.js',
                                                     'app/services/users/user/user.service.js',
                                                     'app/controllers/users/user/user.controller.js',
                                                     'app/controllers/login/login.controller.js'
@@ -1209,7 +1209,7 @@ app
                                                 serie: true,
                                                 files: [
                                                     'app/services/login/login.service.js',
-                                                    'app/services/alarm/webmessageanalysis.service.js',
+                                                    'app/services/fdd/webmessageanalysis.service.js',
                                                     'app/services/users/user/user.service.js',
                                                     'app/controllers/users/user/user.controller.js',
                                                     'app/controllers/login/login.controller.js'
@@ -1308,7 +1308,7 @@ app
                                                 serie: true,
                                                 files: [
                                                     'app/services/login/login.service.js',
-                                                    'app/services/alarm/webmessageanalysis.service.js',
+                                                    'app/services/fdd/webmessageanalysis.service.js',
                                                     'app/services/users/user/user.service.js',
                                                     'app/controllers/users/user/user.controller.js',
                                                     'app/controllers/login/login.controller.js'
