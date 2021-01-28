@@ -35,14 +35,14 @@
                     <li ui-sref-active="active"><a ui-sref="settings.knowledgefile">{{ 'MENU.SETTINGS.KNOWLEDGEFILE' | translate }}</a></li>
                 </ul>
             </li>
-            <li ng-show="isAdminCookie()" ng-class="{active: $state.includes('alarm')}">
+            <li ng-show="isAdminCookie()" ng-class="{active: $state.includes('fdd')}">
                 <a href=""><i class="fa fa-bell-o"></i> <span class="nav-label">{{ 'MENU.FDD.FDD' | translate }} </span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('alarm')}">
-                    <li ui-sref-active="active"><a ui-sref="alarm.rule">{{ 'MENU.FDD.RULE' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="alarm.textmessage">{{ 'MENU.FDD.MESSAGEALARM' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="alarm.emailmessage">{{ 'MENU.FDD.EMAILALARM' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="alarm.webmessage">{{ 'MENU.FDD.WEBALARM' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="alarm.wechatmessage">{{ 'MENU.FDD.WECHATALARM' | translate }}</a></li>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('fdd')}">
+                    <li ui-sref-active="active"><a ui-sref="fdd.rule">{{ 'MENU.FDD.RULE' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="fdd.textmessage">{{ 'MENU.FDD.MESSAGEALARM' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="fdd.emailmessage">{{ 'MENU.FDD.EMAILALARM' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="fdd.webmessage">{{ 'MENU.FDD.WEBALARM' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="fdd.wechatmessage">{{ 'MENU.FDD.WECHATALARM' | translate }}</a></li>
                 </ul>
             </li>
             <li ng-show="isAdminCookie()" ng-class="{active: $state.includes('users')}">

@@ -19,7 +19,7 @@ app.controller('WebMessageController', function($scope, $timeout, $translate, $c
 	$scope.editWebMessage = function(webmessage) {
 		var modalInstance = $uibModal.open({
 			windowClass: "animated fadeIn",
-			templateUrl: 'views/alarm/webmessage.model.html',
+			templateUrl: 'views/fdd/webmessage.model.html',
 			controller: 'ModalEditWebMessageCtrl',
 			resolve: {
 				params: function() {

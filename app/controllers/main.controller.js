@@ -5,7 +5,7 @@ app.controller('MainController', [
         $rootScope.$on("handleStateChange",function(event,args){
             var cur_path = $location.$$path;
             if (cur_path.indexOf('login')==-1) {
-                var admin_path = ["settings", "users",  "alarm/rule"];
+                var admin_path = ["settings", "users",  "fdd/rule"];
                 var req_admin = false;
                 admin_path.forEach(function(elm){
                     if (cur_path.indexOf(elm) !=-1) {

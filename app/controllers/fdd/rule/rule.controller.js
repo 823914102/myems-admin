@@ -33,7 +33,7 @@ app.controller('RuleController', function($scope, $common, $uibModal, $translate
 
 	$scope.addRule = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl: 'views/alarm/rule.model.html',
+			templateUrl: 'views/fdd/rule.model.html',
 			controller: 'ModalAddRuleCtrl',
 			windowClass: "animated fadeIn",
 			size: 'lg',
@@ -95,7 +95,7 @@ app.controller('RuleController', function($scope, $common, $uibModal, $translate
 	$scope.editRule = function(rule) {
 		var modalInstance = $uibModal.open({
 			windowClass: "animated fadeIn",
-			templateUrl: 'views/alarm/rule.model.html',
+			templateUrl: 'views/fdd/rule.model.html',
 			controller: 'ModalEditRuleCtrl',
 			size: 'lg',
 			resolve: {
