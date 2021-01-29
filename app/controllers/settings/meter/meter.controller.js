@@ -45,7 +45,7 @@ app.controller('MeterController', function($scope,  $translate,$common, $uibModa
 			//create meter tree
 			var treedata = {'core': {'data': [], "multiple" : false,}, "plugins" : [ "wholerow" ]};
 			for(var i=0; i < $scope.meters.length; i++) {
-					if ($scope.meters[i].parent_meter == null) {
+					if ($scope.meters[i].master_meter == null) {
 						var node = {"id": $scope.meters[i].id.toString(),
 																"parent": '#',
 																"text": $scope.meters[i].name,
@@ -53,7 +53,7 @@ app.controller('MeterController', function($scope,  $translate,$common, $uibModa
 															 };
 					} else {
 							var node = {"id": $scope.meters[i].id.toString(),
-																	"parent": $scope.meters[i].parent_meter.id.toString(),
+																	"parent": $scope.meters[i].master_meter.id.toString(),
 																	"text": $scope.meters[i].name,
 																 };
 					};
@@ -82,7 +82,7 @@ app.controller('MeterController', function($scope,  $translate,$common, $uibModa
 			//create meter tree
 			var treedata = {'core': {'data': [], "multiple" : false,}, "plugins" : [ "wholerow" ]};
 			for(var i=0; i < $scope.meters.length; i++) {
-				if ($scope.meters[i].parent_meter == null) {
+				if ($scope.meters[i].master_meter == null) {
 					var node = {"id": $scope.meters[i].id.toString(),
 								"parent": '#',
 								"text": $scope.meters[i].name,
@@ -90,7 +90,7 @@ app.controller('MeterController', function($scope,  $translate,$common, $uibModa
 								};
 				} else {
 					var node = {"id": $scope.meters[i].id.toString(),
-								"parent": $scope.meters[i].parent_meter.id.toString(),
+								"parent": $scope.meters[i].master_meter.id.toString(),
 								"text": $scope.meters[i].name,
 								};
 				};
@@ -137,10 +137,10 @@ app.controller('MeterController', function($scope,  $translate,$common, $uibModa
 			} else {
 				meter.energy_item_id = undefined;
 			}
-			if(angular.isDefined(meter.parent_meter)) {
-				meter.parent_meter_id = meter.parent_meter.id;
+			if(angular.isDefined(meter.master_meter)) {
+				meter.master_meter_id = meter.master_meter.id;
 			} else {
-				meter.parent_meter_id = undefined;
+				meter.master_meter_id = undefined;
 			}
 			MeterService.addMeter(meter, function(error, status) {
 				if (angular.isDefined(status) && status == 201) {
@@ -215,10 +215,10 @@ app.controller('MeterController', function($scope,  $translate,$common, $uibModa
 			} else {
 				modifiedMeter.energy_item_id = undefined;
 			}
-			if (modifiedMeter.parent_meter != null && modifiedMeter.parent_meter.id != null ) {
-				modifiedMeter.parent_meter_id = modifiedMeter.parent_meter.id;
+			if (modifiedMeter.master_meter != null && modifiedMeter.master_meter.id != null ) {
+				modifiedMeter.master_meter_id = modifiedMeter.master_meter.id;
 			} else {
-				modifiedMeter.parent_meter_id = undefined;
+				modifiedMeter.master_meter_id = undefined;
 			}
 			MeterService.editMeter(modifiedMeter, function(error, status) {
 				if (angular.isDefined(status) && status == 200) {
