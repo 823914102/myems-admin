@@ -23,7 +23,8 @@ refer to http://nginx.org/en/docs/install.html
 ```
     $ sudo nano /etc/nginx/nginx.conf
 ```
--- Add another new 'server' section, add values as below:
+Add another new 'server' section, add values as below:
+```
     server {
         listen                 8001;
         server_name     myems-admin;
@@ -31,8 +32,8 @@ refer to http://nginx.org/en/docs/install.html
             root    /var/www/html/admin;
             index index.html index.htm;
         }
-        -- to avoid CORS issue, use Nginx to proxy myems-api to path /api with the same ip and port as myems-web
-        -- Add another location /api in 'server ' to proxy requests to myems-api, replace the example address http://127.0.0.1:8000/ with actual url  of myems-api:
+        -- To avoid CORS issue, use Nginx to proxy myems-api to path /api 
+        -- Add another location /api in 'server ', replace demo address http://127.0.0.1:8000/ with actual url
         location /api {
             proxy_pass http://127.0.0.1:8000/;
             proxy_connect_timeout 75;
@@ -40,8 +41,10 @@ refer to http://nginx.org/en/docs/install.html
             send_timeout 600;
         }
     }
+```
 
 * Install myems-admin :
+  Before running the below commands, please compress the myems-admin folder, upload it to the server and extract it to the home.
 ```
   $ cd ~/myems-admin
   $ sudo cp -r .  /var/www/html/admin
