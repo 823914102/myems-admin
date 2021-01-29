@@ -10,8 +10,8 @@ app.factory('MeterService', function($http) {
                     callback(e,status);
                 });
         },
-        getMeterChildren:function(meterid, callback){
-            $http.get(getAPI()+'meters/'+meterid+'/children')
+        getMeterSubmeters:function(meterid, callback){
+            $http.get(getAPI()+'meters/'+meterid+'/submeters')
                 .success(function (response, status, headers, config) {
                     callback(null, response);
                 })

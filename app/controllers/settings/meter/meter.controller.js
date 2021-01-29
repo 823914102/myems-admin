@@ -61,53 +61,53 @@ app.controller('MeterController', function($scope,  $translate,$common, $uibModa
 			}
 
 			angular.element(metertree).jstree(treedata);
-      //meter tree selected changed event handler
-    	angular.element(metertree).on("changed.jstree", function (e, data) {
-    	  $scope.currentMeterID = parseInt(data.selected[0]);
-        $scope.getMeterChildren($scope.currentMeterID);
-    	});
+			//meter tree selected changed event handler
+			angular.element(metertree).on("changed.jstree", function (e, data) {
+				$scope.currentMeterID = parseInt(data.selected[0]);
+				$scope.getMeterSubmeters($scope.currentMeterID);
+			});
 		});
 
 	};
 
 	$scope.refreshMeterTree = function() {
-			MeterService.getAllMeters(function(error, data) {
-				if (!error) {
-					$scope.meters = data;
-					$scope.parentmeters = data;
-				} else {
-					$scope.meters = [];
-					$scope.parentmeters = [];
-				}
-		//create meter tree
-		var treedata = {'core': {'data': [], "multiple" : false,}, "plugins" : [ "wholerow" ]};
-		for(var i=0; i < $scope.meters.length; i++) {
-			if ($scope.meters[i].parent_meter == null) {
-				var node = {"id": $scope.meters[i].id.toString(),
-									"parent": '#',
-									"text": $scope.meters[i].name,
-									"state": {  'opened' : true,  'selected' : false },
-								};
+		MeterService.getAllMeters(function(error, data) {
+			if (!error) {
+				$scope.meters = data;
+				$scope.parentmeters = data;
 			} else {
-				var node = {"id": $scope.meters[i].id.toString(),
-									"parent": $scope.meters[i].parent_meter.id.toString(),
-									"text": $scope.meters[i].name,
-									};
-			};
-			treedata['core']['data'].push(node);
-		}
-		var metertree = document.getElementById("metertree");
-		angular.element(metertree).jstree(true).settings.core.data = treedata['core']['data'];
-		angular.element(metertree).jstree(true).refresh();
+				$scope.meters = [];
+				$scope.parentmeters = [];
+			}
+			//create meter tree
+			var treedata = {'core': {'data': [], "multiple" : false,}, "plugins" : [ "wholerow" ]};
+			for(var i=0; i < $scope.meters.length; i++) {
+				if ($scope.meters[i].parent_meter == null) {
+					var node = {"id": $scope.meters[i].id.toString(),
+								"parent": '#',
+								"text": $scope.meters[i].name,
+								"state": {  'opened' : true,  'selected' : false },
+								};
+				} else {
+					var node = {"id": $scope.meters[i].id.toString(),
+								"parent": $scope.meters[i].parent_meter.id.toString(),
+								"text": $scope.meters[i].name,
+								};
+				};
+				treedata['core']['data'].push(node);
+			}
+			var metertree = document.getElementById("metertree");
+			angular.element(metertree).jstree(true).settings.core.data = treedata['core']['data'];
+			angular.element(metertree).jstree(true).refresh();
 		});
 	};
 
-	$scope.getMeterChildren = function(meterid) {
-		MeterService.getMeterChildren(meterid, function(error, data) {
+	$scope.getMeterSubmeters = function(meterid) {
+		MeterService.getMeterSubmeters(meterid, function(error, data) {
 		if (!error) {
-			$scope.currentMeterChildren = data;
+			$scope.currentMeterSubmeters = data;
 		} else {
-			$scope.currentMeterChildren = [];
+			$scope.currentMeterSubmeters = [];
 		}
 		});
 	};
